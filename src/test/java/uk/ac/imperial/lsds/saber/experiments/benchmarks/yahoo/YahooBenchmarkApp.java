@@ -5,6 +5,12 @@ import uk.ac.imperial.lsds.saber.SystemConf;
 import uk.ac.imperial.lsds.saber.experiments.benchmarks.yahoo.utils.GeneratedBuffer;
 import uk.ac.imperial.lsds.saber.experiments.benchmarks.yahoo.utils.Generator;
 import uk.ac.imperial.lsds.saber.hardware.papi.PAPIHardwareSampler;
+import uk.ac.imperial.lsds.saber.processors.ThreadMap;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Set;
+import java.util.Iterator;
 
 public class YahooBenchmarkApp {
 	public static final String usage = "usage: YahooBenchmarkApp with in-memory generation";
@@ -91,7 +97,7 @@ public class YahooBenchmarkApp {
 		/* Initialize the Operators of the Benchmark */
         PAPIHardwareSampler [] papiSamplers = null;
         if (usePAPI) {
-            papiSamplers = new PAPIHardwareSampler[SystemConf.THREADS];
+            papiSamplers = new PAPIHardwareSampler[SystemConf.THREADS + 2];
             for (int i = 0; i < papiSamplers.length; i ++) {
                 papiSamplers[i] = new PAPIHardwareSampler(SystemConf.HW_PERF_COUNTERS);
             }
@@ -109,29 +115,62 @@ public class YahooBenchmarkApp {
 
 
 		Generator generator = new Generator (bufferSize, numberOfGeneratorThreads, adsPerCampaign, ads, coreToBind, isV2);
-		// long timeLimit = System.currentTimeMillis() + 10 * 10000;
-        long timeLimit = System.currentTimeMillis() + 50000;
-		while (true) {
+        long timeLimit = System.currentTimeMillis() + 10 * 10000;
 
+		while (true) {
 			if (timeLimit <= System.currentTimeMillis() ||
                 generator.totalGeneratedTuples >= 40*1000000) {
+                System.out.println("Total Generated Tuples is: " + generator.totalGeneratedTuples);
+
                 if (papiSamplers != null) {
                     try {
                         for (int i = 0; i < papiSamplers.length; i ++) {
                             papiSamplers[i].stopSampling("PAPI");
                         }
+
+                        boolean once = true;
+                        String [] keys = null;
+                        long [] overall = null;
+                        for (int i = 0; i < papiSamplers.length; i ++) {
+                            HashMap<String, Long> result = papiSamplers[i].getResults();
+                            if (once) {
+                                keys = result.keySet().toArray(new String[result.keySet().size()]);
+                                overall = new long[keys.length];
+
+                                System.out.print("|  ");
+                                for (int j = 0; j < keys.length; j ++) {
+                                    System.out.print("| " + keys[j]);
+                                    overall[j] = 0;
+                                }
+                                System.out.println("|");
+                                once = false;
+                            }
+
+                            System.out.print("|  " + i);
+                            for (int j = 0; j < keys.length; j ++) {
+                                long value = result.get(keys[j]);
+                                overall[j] += value;
+                                System.out.print(" | " + value);
+                            }
+                            System.out.println("|");
+                        }
+                        System.out.print("| overall ");
+
+                        for (int i = 0; i < overall.length; i ++) {
+                            System.out.print(" |  " + overall[i]);
+                        }
+                        System.out.println("|");
                     } catch (Exception ex) {
 
                     }
                 }
-                System.out.println("Total Generated Tuples is: " + generator.totalGeneratedTuples);
 				System.out.println("Terminating execution...");
 
 				System.exit(0);
 			}
-
 			GeneratedBuffer b = generator.getNext();
-			benchmarkQuery.getApplication().processData (b.getBuffer().array());
+            benchmarkQuery.getApplication().processData (b.getBuffer().array());
+
 			b.unlock();
 		}
 	}

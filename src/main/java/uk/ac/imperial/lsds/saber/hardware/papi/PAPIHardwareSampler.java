@@ -6,8 +6,10 @@ import papi.Papi;
 import papi.Constants;
 import papi.PapiException;
 
-import java.io.Serializable;
-import java.util.function.Supplier;
+// import java.io.Serializable;
+// import java.util.function.Supplier;
+import java.util.HashMap;
+
 
 public class PAPIHardwareSampler implements AbstractHardwareSampler {
 
@@ -20,6 +22,7 @@ public class PAPIHardwareSampler implements AbstractHardwareSampler {
 
     private String hwPerfCountersCfg;
 
+    private HashMap<String, Long> results;
 
     public PAPIHardwareSampler(String hwPerfCounters) {
         this.hwPerfCountersCfg = hwPerfCounters;
@@ -82,16 +85,18 @@ public class PAPIHardwareSampler implements AbstractHardwareSampler {
         eventSet.stop();
 
         long[] counters = eventSet.getCounters();
-
+        results = new HashMap<String, Long>();
         for (int i = 0; i < counters.length; i++) {
             System.out.println("GREPTHIS :: " + prefix + " PID: " + Thread.currentThread().getId() + " :: counter[" +
-                               countersDescription[i] + "] = [" + counters[i] + "]");
+                               countersDescription[i] + "] = " + counters[i]);
             // LOG.info("GREPTHIS :: {} :: counter [{}]=[{}]",
             //         prefix, countersDescription[i], counters[i]);
+            this.results.put(countersDescription[i], counters[i]);
         }
 
         eventSet.destroy();
     }
-
-
+    public HashMap<String, Long> getResults() {
+        return this.results;
+    }
 }

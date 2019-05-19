@@ -39,6 +39,9 @@ public class YahooBenchmark extends InputStream {
 	private int adsPerCampaign;
 	private boolean isV2 = false;
     private PAPIHardwareSampler [] papiSamplers;
+    private PAPIHardwareSampler [] taskWorkerPapiSamplers;
+    private PAPIHardwareSampler [] circularWorkerPapiSamplers;
+    // private PAPIHardwareSampler [] circularWorkerPapiSamplers2;
 
 	public YahooBenchmark (QueryConf queryConf, boolean isExecuted) {
 		this(queryConf, isExecuted, null, false);
@@ -51,7 +54,16 @@ public class YahooBenchmark extends InputStream {
 	public YahooBenchmark (QueryConf queryConf, boolean isExecuted, ByteBuffer campaigns, boolean isV2, PAPIHardwareSampler [] papiSamplers) {
 		adsPerCampaign = 10;
 		this.isV2 = isV2;
-        this.papiSamplers = papiSamplers;
+        this.taskWorkerPapiSamplers = new PAPIHardwareSampler[SystemConf.THREADS];
+        this.circularWorkerPapiSamplers = new PAPIHardwareSampler[SystemConf.NUMBER_OF_CICULAR_WORKERS];
+
+        this.circularWorkerPapiSamplers[0] = papiSamplers[0];
+        this.circularWorkerPapiSamplers[1] = papiSamplers[1];
+
+        for (int i = 0; i < this.taskWorkerPapiSamplers.length; i ++) {
+            this.taskWorkerPapiSamplers[i] = papiSamplers[i+2];
+        }
+
 		if (this.isV2)
 			createSchemaV2();
 		else
@@ -157,7 +169,7 @@ public class YahooBenchmark extends InputStream {
 		Set<QueryOperator> operators = new HashSet<QueryOperator>();
 		operators.add(operator);
 
-		Query query1 = new Query (0, operators, inputSchema, windowDefinition, null, null, queryConf, timestampReference);
+        Query query1 = new Query (0, operators, inputSchema, windowDefinition, null, null, queryConf, timestampReference, this.circularWorkerPapiSamplers);
 
 		Set<Query> queries = new HashSet<Query>();
 		queries.add(query1);
@@ -180,7 +192,7 @@ public class YahooBenchmark extends InputStream {
 		query1.connectTo(query2);
 
 		if (isExecuted) {
-            application = new QueryApplication(queries, this.papiSamplers);
+            application = new QueryApplication(queries, this.taskWorkerPapiSamplers);
 
 			application.setup();
 

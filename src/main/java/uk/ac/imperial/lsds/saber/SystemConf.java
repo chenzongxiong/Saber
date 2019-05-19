@@ -55,6 +55,7 @@ public class SystemConf {
 	public static long DURATION = 0;
 
     public static String HW_PERF_COUNTERS = null;
+    public static int NUMBER_OF_CICULAR_WORKERS = 2;
 
 	public static boolean parse (String opt, String arg) {
 		/*
