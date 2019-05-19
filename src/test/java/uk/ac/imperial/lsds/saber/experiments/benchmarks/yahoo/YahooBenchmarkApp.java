@@ -72,35 +72,22 @@ public class YahooBenchmarkApp {
         long timeLimit = System.currentTimeMillis() + 50000;
 		while (true) {
 
-			if (timeLimit <= System.currentTimeMillis()) {
-                try {
-                    for (int i = 0; i < papiSamplers.length; i ++) {
-                        papiSamplers[i].stopSampling("PAPI");
-                    }
-                } catch (Exception ex) {
+			if (timeLimit <= System.currentTimeMillis() ||
+                generator.totalGeneratedTuples >= 40*1000000) {
+                if (papiSamplers != null) {
+                    try {
+                        for (int i = 0; i < papiSamplers.length; i ++) {
+                            papiSamplers[i].stopSampling("PAPI");
+                        }
+                    } catch (Exception ex) {
 
+                    }
                 }
+                System.out.println("Total Generated Tuples is: " + generator.totalGeneratedTuples);
 				System.out.println("Terminating execution...");
+
 				System.exit(0);
 			}
-
-
-            // if (generator.total_consumed_tuples >= 40 * 1000000) {
-            //     try {
-
-            //         for (int i = 0; i < generator_papi_samplers.length; i ++) {
-            //             generator_papi_samplers[i].stopSampling("Generator Workers:");
-            //         }
-
-            //         for (int i = 0; i < operators_papi_samplers.length; i ++) {
-            //             operators_papi_samplers[i].stopSampling("Operator Workers:");
-            //         }
-            //         for (int i = 0; i < query_papi_samplers.length; i ++) {
-            //             query_papi_samplers[i].stopSampling("Circular Buffer Workers: ");
-            //         }
-            //     } catch (Exception ex){
-
-            //     }
 
 			GeneratedBuffer b = generator.getNext();
 			benchmarkQuery.getApplication().processData (b.getBuffer().array());
