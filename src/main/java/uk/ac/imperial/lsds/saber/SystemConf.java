@@ -54,7 +54,7 @@ public class SystemConf {
 
 	public static long DURATION = 0;
 
-    public static String HW_PERF_COUNTERS = "PAPI_L1_DCM,PAPI_L2_DCM,PAPI_L3_TCM";
+    public static String HW_PERF_COUNTERS = null;
 
 	public static boolean parse (String opt, String arg) {
 		/*

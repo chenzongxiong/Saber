@@ -23,9 +23,52 @@ public class YahooBenchmarkApp {
 
 		boolean isV2 = false; // change the tuple size to half if set true
 
+        boolean usePAPI = false;
+        String ICACHE_MISS_PRESET = "PAPI_L1_ICM,PAPI_L2_ICM";
+        String DCACHE_MISS_PRESET = "PAPI_L1_DCM,PAPI_L2_DCM";
+        String TCACHE_MISS_PRESET = "PAPI_L1_TCM,PAPI_L2_TCM,PAPI_L3_TCM";
+        String TLB_PRESET = "PAPI_TLB_DM,PAPI_TLB_IM";
+        String BRANCH_PRESET = "PAPI_BR_MSP,PAPI_BR_INS,PAPI_BR_TKN,PAPI_BR_NTK";
+        String TOTAL_INSTR_CYCLE_PRESET = "PAPI_TOT_INS,PAPI_TOT_CYC";
 		/* Parse command line arguments */
-		if (args.length!=0)
+		if (args.length == 1) {
 			numberOfThreads = Integer.parseInt(args[0]);
+        } else if (args.length == 2) {
+            usePAPI = true;
+            numberOfThreads = Integer.parseInt(args[0]);
+            if (args[1].equals("ICACHE_MISS") || args[1].equals("icache_miss") ||
+                args[1].equals("icache-miss")) {
+                SystemConf.HW_PERF_COUNTERS = ICACHE_MISS_PRESET;
+            }
+
+            if (args[1].equals("DCACHE_MISS") || args[1].equals("dcache_miss") ||
+                args[1].equals("dcache-miss")) {
+                System.out.println("Hello world");
+                SystemConf.HW_PERF_COUNTERS = DCACHE_MISS_PRESET;
+            }
+
+            if (args[1].equals("tcache-miss") || args[1].equals("tcache_miss") ||
+                args[1].equals("TCACHE_MISS")) {
+                SystemConf.HW_PERF_COUNTERS = TCACHE_MISS_PRESET;
+            }
+
+            if (args[1].equals("BRANCH") ||
+                args[1].equals("branch")) {
+                SystemConf.HW_PERF_COUNTERS = BRANCH_PRESET;
+            }
+
+            if (args[1].equals("TLB") || args[1].equals("tlb")) {
+                SystemConf.HW_PERF_COUNTERS = TLB_PRESET;
+            }
+
+            if (args[1].equals("instr-cycle") || args[1].equals("INSTR_CYCLE")) {
+                SystemConf.HW_PERF_COUNTERS = TOTAL_INSTR_CYCLE_PRESET;
+            }
+        } else {
+            System.out.println("./run.sh uk.ac.imperial.lsds.saber.experiments.benchmarks.yahoo.YahooBenchmarkApp <number-of-threads> <papi-preset>");
+            System.out.println("papi-preset can be the following values: icache-miss, dcache-miss, tcache-miss, tlb, branch, instr-cycle");
+            System.exit(0);
+        }
 
 		// Set SABER's configuration
 		QueryConf queryConf = new QueryConf (batchSize);
@@ -45,9 +88,7 @@ public class YahooBenchmarkApp {
 		SystemConf.THREADS = numberOfThreads;
 		SystemConf.LATENCY_ON = false;
 
-
 		/* Initialize the Operators of the Benchmark */
-        boolean usePAPI = true;
         PAPIHardwareSampler [] papiSamplers = null;
         if (usePAPI) {
             papiSamplers = new PAPIHardwareSampler[SystemConf.THREADS];

@@ -4,7 +4,7 @@
  * make afterwards.
  */
 
- package papi;
+package papi;
 //package uk.ac.imperial.lsds.saber.hardware.papi;
 public class Constants {
     public static final int PAPI_VER_CURRENT = 84213760;
@@ -59,20 +59,30 @@ public class Constants {
 	public static final String PAPI_L1_DCM_name = "PAPI_L1_DCM";
 	public static final int PAPI_L2_DCM = -2147483646;
 	public static final String PAPI_L2_DCM_name = "PAPI_L2_DCM";
+    public static final int PAPI_L1_TCM = -2147483642;
+    public static final String PAPI_L1_TCM_name = "PAPI_L1_TCM";
+    public static final int PAPI_L2_TCM = -2147483641;
+    public static final String PAPI_L2_TCM_name = "PAPI_L2_TCM";
 	public static final int PAPI_L3_TCM = -2147483640;
 	public static final String PAPI_L3_TCM_name = "PAPI_L3_TCM";
 	public static final int PAPI_L1_ICM = -2147483647;
 	public static final String PAPI_L1_ICM_name = "PAPI_L1_ICM";
 	public static final int PAPI_L2_ICM = -2147483645;
 	public static final String PAPI_L2_ICM_name = "PAPI_L2_ICM";
+	public static final int PAPI_TLB_IM = -2147483627;
+	public static final String PAPI_TLB_IM_name = "PAPI_TLB_IM";
 	public static final int PAPI_TLB_DM = -2147483628;
 	public static final String PAPI_TLB_DM_name = "PAPI_TLB_DM";
+
+    public static final int PAPI_BR_INS = -2147483593;
+    public static final String PAPI_BR_INS_name = "PAPI_BR_INS";
 	public static final int PAPI_BR_MSP = -2147483602;
 	public static final String PAPI_BR_MSP_name = "PAPI_BR_MSP";
 	public static final int PAPI_BR_TKN = -2147483604;
 	public static final String PAPI_BR_TKN_name = "PAPI_BR_TKN";
 	public static final int PAPI_BR_NTK = -2147483603;
 	public static final String PAPI_BR_NTK_name = "PAPI_BR_NTK";
+
 	public static final int PAPI_MEM_WCY = -2147483612;
 	public static final String PAPI_MEM_WCY_name = "PAPI_MEM_WCY";
 	public static final int PAPI_STL_ICY = -2147483611;
@@ -83,12 +93,16 @@ public class Constants {
 	public static final String PAPI_STL_CCY_name = "PAPI_STL_CCY";
 	public static final int PAPI_FUL_CCY = -2147483608;
 	public static final String PAPI_FUL_CCY_name = "PAPI_FUL_CCY";
+
+    public static final int PAPI_TOT_INS = -2147483598;
+    public static final String PAPI_TOT_INS_name = "PAPI_TOT_INS";
 	public static final int PAPI_TOT_CYC = -2147483589;
 	public static final String PAPI_TOT_CYC_name = "PAPI_TOT_CYC";
+
 	public static final int CYCLE_ACTIVITY_STALLS_TOTAL = 1073741894;
 	public static final String CYCLE_ACTIVITY_STALLS_TOTAL_name = "CYCLE_ACTIVITY:STALLS_TOTAL";
-	public static final int PAPI_TLB_IM = -2147483627;
-	public static final String PAPI_TLB_IM_name = "PAPI_TLB_IM";
+
 	public static final int perf_PERF_COUNT_HW_CACHE_NODE_READ = 1073741895;
 	public static final String perf_PERF_COUNT_HW_CACHE_NODE_READ_name = "perf::PERF_COUNT_HW_CACHE_NODE:READ";
+
 }
