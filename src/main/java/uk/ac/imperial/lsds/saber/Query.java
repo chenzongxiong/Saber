@@ -90,7 +90,7 @@ public class Query {
 			QueryConf queryConf,
 			long timestampReference) {
 
-		this(id, operators, firstSchema, firstWindow, secondSchema, secondWindow, queryConf, 0L, null);
+		this(id, operators, firstSchema, firstWindow, secondSchema, secondWindow, queryConf, timestampReference, null);
     }
 
 	public Query (

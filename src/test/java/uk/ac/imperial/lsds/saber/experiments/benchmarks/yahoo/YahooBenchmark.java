@@ -31,6 +31,7 @@ import uk.ac.imperial.lsds.saber.cql.predicates.LongLongComparisonPredicate;
 import uk.ac.imperial.lsds.saber.experiments.benchmarks.yahoo.utils.CampaignGenerator;
 import uk.ac.imperial.lsds.saber.processors.HashMap;
 import uk.ac.imperial.lsds.saber.hardware.papi.PAPIHardwareSampler;
+import uk.ac.imperial.lsds.saber.LatencyMonitor;
 
 
 public class YahooBenchmark extends InputStream {
@@ -42,6 +43,8 @@ public class YahooBenchmark extends InputStream {
     private PAPIHardwareSampler [] taskWorkerPapiSamplers;
     private PAPIHardwareSampler [] circularWorkerPapiSamplers;
     // private PAPIHardwareSampler [] circularWorkerPapiSamplers2;
+    private LatencyMonitor latencyMonitor1;
+    private LatencyMonitor latencyMonitor2;
 
 	public YahooBenchmark (QueryConf queryConf, boolean isExecuted) {
 		this(queryConf, isExecuted, null, false);
@@ -54,14 +57,15 @@ public class YahooBenchmark extends InputStream {
 	public YahooBenchmark (QueryConf queryConf, boolean isExecuted, ByteBuffer campaigns, boolean isV2, PAPIHardwareSampler [] papiSamplers) {
 		adsPerCampaign = 10;
 		this.isV2 = isV2;
-        this.taskWorkerPapiSamplers = new PAPIHardwareSampler[SystemConf.THREADS];
-        this.circularWorkerPapiSamplers = new PAPIHardwareSampler[SystemConf.NUMBER_OF_CICULAR_WORKERS];
+        if (papiSamplers != null) {
+            this.taskWorkerPapiSamplers = new PAPIHardwareSampler[SystemConf.THREADS];
+            this.circularWorkerPapiSamplers = new PAPIHardwareSampler[SystemConf.NUMBER_OF_CICULAR_WORKERS];
 
-        this.circularWorkerPapiSamplers[0] = papiSamplers[0];
-        this.circularWorkerPapiSamplers[1] = papiSamplers[1];
-
-        for (int i = 0; i < this.taskWorkerPapiSamplers.length; i ++) {
-            this.taskWorkerPapiSamplers[i] = papiSamplers[i+2];
+            this.circularWorkerPapiSamplers[0] = papiSamplers[0];
+            this.circularWorkerPapiSamplers[1] = papiSamplers[1];
+            for (int i = 0; i < this.taskWorkerPapiSamplers.length; i ++) {
+                this.taskWorkerPapiSamplers[i] = papiSamplers[i+2];
+            }
         }
 
 		if (this.isV2)
@@ -79,7 +83,7 @@ public class YahooBenchmark extends InputStream {
 		/* Set execution parameters */
 		long timestampReference = System.nanoTime();
 		boolean realtime = true;
-		int windowSize = 10000;//realtime? 10000 : 10000000;
+		int windowSize = 10000; //realtime? 10000 : 10000000;
 
 
 		/* Create Input Schema */
@@ -184,8 +188,8 @@ public class YahooBenchmark extends InputStream {
 		operator = new QueryOperator (cpuCode, gpuCode);
 		operators = new HashSet<QueryOperator>();
 		operators.add(operator);
-		Query query2 = new Query (1, operators, joinSchema, windowDefinition, null, null, queryConf, timestampReference);
 
+		Query query2 = new Query (1, operators, joinSchema, windowDefinition, null, null, queryConf, timestampReference);
 
 		// Connect the two queries
 		queries.add(query2);
@@ -201,6 +205,9 @@ public class YahooBenchmark extends InputStream {
 				query2.setAggregateOperator((IAggregateOperator) cpuCode);
 			else
 				query2.setAggregateOperator((IAggregateOperator) gpuCode);
+
+            this.latencyMonitor1 = query1.getLatencyMonitor();
+            this.latencyMonitor2 = query2.getLatencyMonitor();
 		}
 
 		return;
@@ -213,4 +220,9 @@ public class YahooBenchmark extends InputStream {
 	public int getAdsPerCampaign () {
 		return this.adsPerCampaign;
 	}
+
+    public void stopLatencyMonitor() {
+        this.latencyMonitor1.stop();
+        this.latencyMonitor2.stop();
+    }
 }

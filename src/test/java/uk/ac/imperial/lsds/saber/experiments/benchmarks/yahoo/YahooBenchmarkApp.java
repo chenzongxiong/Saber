@@ -36,6 +36,7 @@ public class YahooBenchmarkApp {
         String TLB_PRESET = "PAPI_TLB_DM,PAPI_TLB_IM";
         String BRANCH_PRESET = "PAPI_BR_MSP,PAPI_BR_INS,PAPI_BR_TKN,PAPI_BR_NTK";
         String TOTAL_INSTR_CYCLE_PRESET = "PAPI_TOT_INS,PAPI_TOT_CYC";
+        int TUPLES_TO_MEASURE = 40 * 1000000;
 		/* Parse command line arguments */
 		if (args.length == 1) {
 			numberOfThreads = Integer.parseInt(args[0]);
@@ -92,8 +93,8 @@ public class YahooBenchmarkApp {
 			SystemConf.GPU = true;
 		SystemConf.HYBRID = SystemConf.CPU && SystemConf.GPU;
 		SystemConf.THREADS = numberOfThreads;
-		SystemConf.LATENCY_ON = false;
-
+		// SystemConf.LATENCY_ON = false;
+        SystemConf.LATENCY_ON = true;
 		/* Initialize the Operators of the Benchmark */
         PAPIHardwareSampler [] papiSamplers = null;
         if (usePAPI) {
@@ -115,11 +116,11 @@ public class YahooBenchmarkApp {
 
 
 		Generator generator = new Generator (bufferSize, numberOfGeneratorThreads, adsPerCampaign, ads, coreToBind, isV2);
-        long timeLimit = System.currentTimeMillis() + 10 * 10000;
+        long timeLimit = System.currentTimeMillis() + 1 * 10000;
 
 		while (true) {
 			if (timeLimit <= System.currentTimeMillis() ||
-                generator.totalGeneratedTuples >= 40*1000000) {
+                (usePAPI && generator.totalGeneratedTuples >= TUPLES_TO_MEASURE)) {
                 System.out.println("Total Generated Tuples is: " + generator.totalGeneratedTuples);
 
                 if (papiSamplers != null) {
@@ -163,6 +164,9 @@ public class YahooBenchmarkApp {
                     } catch (Exception ex) {
 
                     }
+                }
+                if (SystemConf.LATENCY_ON) {
+                    ((YahooBenchmark) benchmarkQuery).stopLatencyMonitor();
                 }
 				System.out.println("Terminating execution...");
 
