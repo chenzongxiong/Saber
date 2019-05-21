@@ -94,8 +94,12 @@ public class LatencyMonitor {
 
 		double [] array = new double [length];
 		int i = 0;
-		for (Double d: measurements)
+		for (Double d: measurements) {
+            System.out.println(d);
 			array[i++] = d.doubleValue();
+        }
+        System.out.println();
+
 		Arrays.sort(array);
 
 		System.out.println(String.format("[MON] [LatencyMonitor] 5th %10.3f 25th %10.3f 50th %10.3f 75th %10.3f 99th %10.3f",

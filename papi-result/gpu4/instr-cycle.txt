@@ -1,0 +1,220 @@
+[DBG] q 0 32768 bytes
+[DBG]   start                    0 [                   0] end                32000 [               32000]       0 wraps                  768 bytes remaining
+[DBG] aggregation type is COUNT(*)
+[DBG] aggregation type is MAX(0)
+[DBG] 8 threads (hybrid mode false)
+[DBG] CPU-only execution
+[DBG] bind worker  0 to core  5
+[DBG] bind worker  1 to core  6
+[DBG] bind worker  2 to core  7
+PAPI starts to sample
+[DBG] PID: 11 start sampling...
+[DBG] bind worker  3 to core  8
+PAPI starts to sample
+[DBG] PID: 14 start sampling...
+PAPI starts to sample
+PAPI starts to sample
+[DBG] PID: 12 start sampling...
+[DBG] PID: 13 start sampling...
+[DBG] bind worker  4 to core  9
+PAPI starts to sample
+[DBG] PID: 15 start sampling...
+[DBG] bind worker  5 to core 10
+PAPI starts to sample
+[DBG] PID: 16 start sampling...
+[DBG] q 1 67108864 bytes
+[DBG] bind worker  6 to core 11
+PAPI starts to sample
+[DBG] PID: 17 start sampling...
+[DBG] bind worker  7 to core 12
+PAPI starts to sample
+[DBG] PID: 18 start sampling...
+[DBG] 4194304 bytes/batch 1 panes/slide 1 panes/window
+Initialize PAPI Libraries
+Initial Thread is called in PAPI
+Initial Thread is called in PAPI
+Initial Thread is called in PAPI
+Initial Thread is called in PAPI
+Initial Thread is called in PAPI
+Initial Thread is called in PAPI
+Initial Thread is called in PAPI
+Initial Thread is called in PAPI
+GREPTHIS :: PID 13 Event PAPI_TOT_INS with id 0x80000032 added.
+GREPTHIS :: PID 18 Event PAPI_TOT_INS with id 0x80000032 added.
+GREPTHIS :: PID 18 Event PAPI_TOT_CYC with id 0x8000003b added.
+jni/eventset.c:57:Java_papi_Wrapper_eventSetCreate(): new eventset is 0
+jni/eventset.c:82:Java_papi_Wrapper_eventSetAddEvents(): enter
+jni/eventset.c:89:Java_papi_Wrapper_eventSetAddEvents(): eventset is 0
+jni/eventset.c:97:Java_papi_Wrapper_eventSetAddEvents(): eventset 0 binded to component 0
+jni/eventset.c:106:Java_papi_Wrapper_eventSetAddEvents(): component 0/2 perf_event 59 162
+jni/eventset.c:127:Java_papi_Wrapper_eventSetAddEvents(): returning 0 (No error)
+GREPTHIS :: PID 14 Event PAPI_TOT_INS with id 0x80000032 added.
+GREPTHIS :: PID 14 Event PAPI_TOT_CYC with id 0x8000003b added.
+jni/eventset.c:57:Java_papi_Wrapper_eventSetCreate(): new eventset is 1
+jni/eventset.c:82:Java_papi_Wrapper_eventSetAddEvents(): enter
+jni/eventset.c:89:Java_papi_Wrapper_eventSetAddEvents(): eventset is 1
+jni/eventset.c:97:Java_papi_Wrapper_eventSetAddEvents(): eventset 1 binded to component 0
+jni/eventset.c:106:Java_papi_Wrapper_eventSetAddEvents(): component 0/2 perf_event 59 162
+jni/eventset.c:127:Java_papi_Wrapper_eventSetAddEvents(): returning 0 (No error)
+GREPTHIS :: PID 17 Event PAPI_TOT_INS with id 0x80000032 added.
+GREPTHIS :: PID 11 Event PAPI_TOT_INS with id 0x80000032 added.
+GREPTHIS :: PID 16 Event PAPI_TOT_INS with id 0x80000032 added.
+GREPTHIS :: PID 16 Event PAPI_TOT_CYC with id 0x8000003b added.
+jni/eventset.c:57:Java_papi_Wrapper_eventSetCreate(): new eventset is 2
+jni/eventset.c:82:Java_papi_Wrapper_eventSetAddEvents(): enter
+jni/eventset.c:89:Java_papi_Wrapper_eventSetAddEvents(): eventset is 2
+jni/eventset.c:97:Java_papi_Wrapper_eventSetAddEvents(): eventset 2 binded to component 0
+jni/eventset.c:106:Java_papi_Wrapper_eventSetAddEvents(): component 0/2 perf_event 59 162
+jni/eventset.c:127:Java_papi_Wrapper_eventSetAddEvents(): returning 0 (No error)
+GREPTHIS :: PID 15 Event PAPI_TOT_INS with id 0x80000032 added.
+GREPTHIS :: PID 11 Event PAPI_TOT_CYC with id 0x8000003b added.
+jni/eventset.c:57:Java_papi_Wrapper_eventSetCreate(): new eventset is 3
+jni/eventset.c:82:Java_papi_Wrapper_eventSetAddEvents(): enter
+jni/eventset.c:89:Java_papi_Wrapper_eventSetAddEvents(): eventset is 3
+GREPTHIS :: PID 17 Event PAPI_TOT_CYC with id 0x8000003b added.
+jni/eventset.c:57:Java_papi_Wrapper_eventSetCreate(): new eventset is 4
+jni/eventset.c:82:Java_papi_Wrapper_eventSetAddEvents(): enter
+GREPTHIS :: PID 12 Event PAPI_TOT_INS with id 0x80000032 added.jni/eventset.c:89:Java_papi_Wrapper_eventSetAddEvents(): eventset is 4
+jni/eventset.c:97:Java_papi_Wrapper_eventSetAddEvents(): eventset 3 binded to component 0
+
+jni/eventset.c:106:Java_papi_Wrapper_eventSetAddEvents(): component 0/2 perf_event 59 162
+jni/eventset.c:97:Java_papi_Wrapper_eventSetAddEvents(): eventset 4 binded to component 0
+jni/eventset.c:106:Java_papi_Wrapper_eventSetAddEvents(): component 0/2 perf_event 59 162
+GREPTHIS :: PID 13 Event PAPI_TOT_CYC with id 0x8000003b added.jni/eventset.c:127:Java_papi_Wrapper_eventSetAddEvents(): returning 0 (No error)
+
+jni/eventset.c:127:Java_papi_Wrapper_eventSetAddEvents(): returning 0 (No error)
+jni/eventset.c:57:Java_papi_Wrapper_eventSetCreate(): new eventset is 5
+jni/eventset.c:82:Java_papi_Wrapper_eventSetAddEvents(): enter
+jni/eventset.c:89:Java_papi_Wrapper_eventSetAddEvents(): eventset is 5
+GREPTHIS :: PID 12 Event PAPI_TOT_CYC with id 0x8000003b added.
+jni/eventset.c:57:Java_papi_Wrapper_eventSetCreate(): new eventset is 6
+jni/eventset.c:82:Java_papi_Wrapper_eventSetAddEvents(): enter
+GREPTHIS :: PID 15 Event PAPI_TOT_CYC with id 0x8000003b added.jni/eventset.c:89:Java_papi_Wrapper_eventSetAddEvents(): eventset is 6
+jni/eventset.c:97:Java_papi_Wrapper_eventSetAddEvents(): eventset 5 binded to component 0
+jni/eventset.c:106:Java_papi_Wrapper_eventSetAddEvents(): component 0/2 perf_event 59 162
+
+jni/eventset.c:57:Java_papi_Wrapper_eventSetCreate(): new eventset is 7
+jni/eventset.c:82:Java_papi_Wrapper_eventSetAddEvents(): enter
+jni/eventset.c:89:Java_papi_Wrapper_eventSetAddEvents(): eventset is 7
+jni/eventset.c:127:Java_papi_Wrapper_eventSetAddEvents(): returning 0 (No error)
+jni/eventset.c:97:Java_papi_Wrapper_eventSetAddEvents(): eventset 6 binded to component 0
+jni/eventset.c:106:Java_papi_Wrapper_eventSetAddEvents(): component 0/2 perf_event 59 162
+jni/eventset.c:97:Java_papi_Wrapper_eventSetAddEvents(): eventset 7 binded to component 0
+jni/eventset.c:106:Java_papi_Wrapper_eventSetAddEvents(): component 0/2 perf_event 59 162
+jni/eventset.c:127:Java_papi_Wrapper_eventSetAddEvents(): returning 0 (No error)
+jni/eventset.c:127:Java_papi_Wrapper_eventSetAddEvents(): returning 0 (No error)
+[DBG] q 0 67108864 bytes
+id: 1, hwPAPI: uk.ac.imperial.lsds.saber.hardware.papi.PAPIHardwareSampler@b4c966a
+id: 2, hwPAPI: uk.ac.imperial.lsds.saber.hardware.papi.PAPIHardwareSampler@2f4d3709
+[DBG] bind Worker Generator thread  1 to core  1
+[DBG] PID: 19 start sampling...
+Initial Thread is called in PAPI
+GREPTHIS :: PID 19 Event PAPI_TOT_INS with id 0x80000032 added.
+GREPTHIS :: PID 19 Event PAPI_TOT_CYC with id 0x8000003b added.
+jni/eventset.c:57:Java_papi_Wrapper_eventSetCreate(): new eventset is 8
+jni/eventset.c:82:Java_papi_Wrapper_eventSetAddEvents(): enter
+jni/eventset.c:89:Java_papi_Wrapper_eventSetAddEvents(): eventset is 8
+jni/eventset.c:97:Java_papi_Wrapper_eventSetAddEvents(): eventset 8 binded to component 0
+jni/eventset.c:106:Java_papi_Wrapper_eventSetAddEvents(): component 0/2 perf_event 59 162
+jni/eventset.c:127:Java_papi_Wrapper_eventSetAddEvents(): returning 0 (No error)
+[DBG] bind Worker Generator thread  2 to core  2
+[DBG] PID: 20 start sampling...
+Initial Thread is called in PAPI
+GREPTHIS :: PID 20 Event PAPI_TOT_INS with id 0x80000032 added.
+GREPTHIS :: PID 20 Event PAPI_TOT_CYC with id 0x8000003b added.
+jni/eventset.c:57:Java_papi_Wrapper_eventSetCreate(): new eventset is 9
+jni/eventset.c:82:Java_papi_Wrapper_eventSetAddEvents(): enter
+jni/eventset.c:89:Java_papi_Wrapper_eventSetAddEvents(): eventset is 9
+jni/eventset.c:97:Java_papi_Wrapper_eventSetAddEvents(): eventset 9 binded to component 0
+jni/eventset.c:106:Java_papi_Wrapper_eventSetAddEvents(): component 0/2 perf_event 59 162
+jni/eventset.c:127:Java_papi_Wrapper_eventSetAddEvents(): returning 0 (No error)
+[DBG] 4194304 bytes/batch 1 panes/slide 1 panes/window
+[MON] [MultiOperator] S   0
+[MON] [MultiOperator] S   1
+[DBG] set aggregate operator
+[MON] q      0 ([[0][0]=    0 [0][1]=    0 [1][0]=    0 [1][1]=    0]) t      1 w      0 b      0 p      0 policy [[0][0]=    1 [0][1]=    1 [1][0]=    1 [1][1]=    1]
+[DBG] bind YSB Worker Generator thread  3 to core  3
+[DBG] bind YSB Worker Generator thread  4 to core  4
+[MON] q      0 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    3]) t      5 w      5 b      9 p     12 policy [[0][0]=    0 [0][1]=    0 [1][0]=   28 [1][1]=    3]
+Throughput Average(records/sec) 13,421,458.541
+Throughput Sum(records): 13,421,458.541
+[MON] S000   1638.362 MB/s output    180.396 MB/s [null] q      0 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    8]) t     11 w     11 b     65 p     56 policy [[0][0]=    0 [0][1]=    0 [1][0]=  394 [1][1]=   36]
+Throughput Average(records/sec) 15,874,661.474
+Throughput Sum(records): 31,749,322.948
+[MON] S000   2237.288 MB/s output    246.342 MB/s [null] S001    251.246 MB/s output      0.000 MB/s [null] q      0 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=   10]) t     11 w     11 b     72 p     56 policy [[0][0]=    0 [0][1]=    0 [1][0]=  560 [1][1]=   61]
+Total Generated Tuples is: 40001536
+jni/eventset.c:162:Java_papi_Wrapper_eventSetStop(): returning 0 (No error)
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_INS] = 2016696280
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_CYC] = 3048777696
+jni/eventset.c:66:Java_papi_Wrapper_eventSetDestroy(): cleanig-up the event set 8 first
+jni/eventset.c:72:Java_papi_Wrapper_eventSetDestroy(): destroying 8
+jni/eventset.c:76:Java_papi_Wrapper_eventSetDestroy(): returning 0 (No error)
+jni/eventset.c:162:Java_papi_Wrapper_eventSetStop(): returning 0 (No error)
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_INS] = 1949214691
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_CYC] = 3029893331
+jni/eventset.c:66:Java_papi_Wrapper_eventSetDestroy(): cleanig-up the event set 9 first
+jni/eventset.c:72:Java_papi_Wrapper_eventSetDestroy(): destroying 9
+jni/eventset.c:76:Java_papi_Wrapper_eventSetDestroy(): returning 0 (No error)
+jni/eventset.c:162:Java_papi_Wrapper_eventSetStop(): returning 0 (No error)
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_INS] = 6669843748
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_CYC] = 3863968793
+jni/eventset.c:66:Java_papi_Wrapper_eventSetDestroy(): cleanig-up the event set 3 first
+jni/eventset.c:72:Java_papi_Wrapper_eventSetDestroy(): destroying 3
+jni/eventset.c:76:Java_papi_Wrapper_eventSetDestroy(): returning 0 (No error)
+jni/eventset.c:162:Java_papi_Wrapper_eventSetStop(): returning 0 (No error)
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_INS] = 6734592377
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_CYC] = 3895310451
+jni/eventset.c:66:Java_papi_Wrapper_eventSetDestroy(): cleanig-up the event set 6 first
+jni/eventset.c:72:Java_papi_Wrapper_eventSetDestroy(): destroying 6
+jni/eventset.c:76:Java_papi_Wrapper_eventSetDestroy(): returning 0 (No error)
+jni/eventset.c:162:Java_papi_Wrapper_eventSetStop(): returning 0 (No error)
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_INS] = 6747074962
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_CYC] = 3907936962
+jni/eventset.c:66:Java_papi_Wrapper_eventSetDestroy(): cleanig-up the event set 5 first
+jni/eventset.c:72:Java_papi_Wrapper_eventSetDestroy(): destroying 5
+jni/eventset.c:76:Java_papi_Wrapper_eventSetDestroy(): returning 0 (No error)
+jni/eventset.c:162:Java_papi_Wrapper_eventSetStop(): returning 0 (No error)
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_INS] = 3037348427
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_CYC] = 1630251762
+jni/eventset.c:66:Java_papi_Wrapper_eventSetDestroy(): cleanig-up the event set 1 first
+jni/eventset.c:72:Java_papi_Wrapper_eventSetDestroy(): destroying 1
+jni/eventset.c:76:Java_papi_Wrapper_eventSetDestroy(): returning 0 (No error)
+jni/eventset.c:162:Java_papi_Wrapper_eventSetStop(): returning 0 (No error)
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_INS] = 2953821746
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_CYC] = 1651223256
+jni/eventset.c:66:Java_papi_Wrapper_eventSetDestroy(): cleanig-up the event set 7 first
+jni/eventset.c:72:Java_papi_Wrapper_eventSetDestroy(): destroying 7
+jni/eventset.c:76:Java_papi_Wrapper_eventSetDestroy(): returning 0 (No error)
+jni/eventset.c:162:Java_papi_Wrapper_eventSetStop(): returning 0 (No error)
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_INS] = 2950728367
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_CYC] = 1640286778
+jni/eventset.c:66:Java_papi_Wrapper_eventSetDestroy(): cleanig-up the event set 2 first
+jni/eventset.c:72:Java_papi_Wrapper_eventSetDestroy(): destroying 2
+jni/eventset.c:76:Java_papi_Wrapper_eventSetDestroy(): returning 0 (No error)
+jni/eventset.c:162:Java_papi_Wrapper_eventSetStop(): returning 0 (No error)
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_INS] = 3001402390
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_CYC] = 1648321986
+jni/eventset.c:66:Java_papi_Wrapper_eventSetDestroy(): cleanig-up the event set 4 first
+jni/eventset.c:72:Java_papi_Wrapper_eventSetDestroy(): destroying 4
+jni/eventset.c:76:Java_papi_Wrapper_eventSetDestroy(): returning 0 (No error)
+jni/eventset.c:162:Java_papi_Wrapper_eventSetStop(): returning 0 (No error)
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_INS] = 2961633103
+GREPTHIS :: PAPI PID: 1 :: counter[PAPI_TOT_CYC] = 1677590411
+jni/eventset.c:66:Java_papi_Wrapper_eventSetDestroy(): cleanig-up the event set 0 first
+jni/eventset.c:72:Java_papi_Wrapper_eventSetDestroy(): destroying 0
+jni/eventset.c:76:Java_papi_Wrapper_eventSetDestroy(): returning 0 (No error)
+|  | PAPI_TOT_INS| PAPI_TOT_CYC|
+|  0 | 2016696280 | 3048777696|
+|  1 | 1949214691 | 3029893331|
+|  2 | 6669843748 | 3863968793|
+|  3 | 6734592377 | 3895310451|
+|  4 | 6747074962 | 3907936962|
+|  5 | 3037348427 | 1630251762|
+|  6 | 2953821746 | 1651223256|
+|  7 | 2950728367 | 1640286778|
+|  8 | 3001402390 | 1648321986|
+|  9 | 2961633103 | 1677590411|
+| overall  |  39022356091 |  25993561426|
+Terminating execution...
+Done.
+Bye.

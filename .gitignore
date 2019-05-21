@@ -5,6 +5,5 @@
 *.o
 *.so
 *.out
-*.txt
 *.log
 /lib/

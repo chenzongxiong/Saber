@@ -83,8 +83,8 @@ public class YahooBenchmark extends InputStream {
 		/* Set execution parameters */
 		long timestampReference = System.nanoTime();
 		boolean realtime = true;
-		int windowSize = 10000; //realtime? 10000 : 10000000;
-
+		// int windowSize = 10000; //realtime? 10000 : 10000000;
+        int windowSize = 2000;
 
 		/* Create Input Schema */
 		ITupleSchema inputSchema = schema;
