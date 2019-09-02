@@ -145,8 +145,6 @@ public class LinearRoadBenchmarkOp implements IOperatorCode {
                 });
             avgSpeed.putIfAbsent(k, new AvgSpeed(m_iSpeed, 1));
 
-            // System.out.println("m_iXway: " + m_iXway + ", m_iSeg: " + m_iSeg + ", m_iTime: " + m_iTime);
-
             if (m_iTime % 300 == 0 && m_iTime > 0 && timeOfLastToll != m_iTime) {
 
                 for (int seg = segMin; seg < segMax; seg++) {
@@ -164,8 +162,8 @@ public class LinearRoadBenchmarkOp implements IOperatorCode {
                             if (accidents.containsKey(ks)) {
                                 tollAmount = (2 * avg.count) ^ 2;
                             }
-                            System.out.println("toll is " + tollAmount + " for seg "+ seg + " and xway " + m_iXway);
-                            System.out.println("average speed is " + averageSpeed + " for seg "+ seg + " and xway " + m_iXway);
+                            // System.out.println("toll is " + tollAmount + " for seg "+ seg + " and xway " + m_iXway);
+                            // System.out.println("average speed is " + averageSpeed + " for seg "+ seg + " and xway " + m_iXway);
                         }
                     }
                 }

@@ -24,30 +24,30 @@ public class GeneratorWorker implements Runnable {
     private String line = null;
     private ArrayList<String> lines;
 
-    // private int index = 0;
-
+    private int index = 0;
     public long consumedTuples = 0;
     private final int tuplesPerBuffer;
     public ByteBuffer tmpBuffer;
     private final static int TUPLE_SIZE = 128;
 
-	private AtomicInteger index;
-    // private int prevStartPos = 0;
-    // private int prevEndPos = 0;
-
+    private int length = -1;
 	public GeneratorWorker (Generator generator, int startPos, int endPos, int id, ArrayList<String> lines) {
 		this.generator = generator;
-        // this.prevStartPos = startPos;
-        // this.prevEndPos = endPos;
 		this.startPos = startPos;
 		this.endPos = endPos;
 		this.id = id;
         this.lines = lines;
 
         this.tuplesPerBuffer = (endPos - startPos) / TUPLE_SIZE;
+        this.length = endPos - startPos + 1;
+
+        if (this.id % 2 == 1) {
+            this.index = 0;
+        } else {
+            this.index = 1;
+        }
 
         this.tmpBuffer = ByteBuffer.allocate(TUPLE_SIZE*lines.size());
-        // System.out.println("[DBG] Allocate size " + this.tmpBuffer.limit() + ", position: " + this.tmpBuffer.position());
         this._fill();
 	}
 
@@ -101,18 +101,20 @@ public class GeneratorWorker implements Runnable {
 
 	private void generate(GeneratedBuffer generatedBuffer, int startPos, int endPos, long timestamp) {
 
-        ByteBuffer buffer = generatedBuffer.getBuffer().duplicate();
-		/* Fill the buffer */
-        // TODO: seek to probablity position
-        ByteBuffer _tmp = this.tmpBuffer.duplicate();
+        if (((this.index + 1) * length -1) >= TUPLE_SIZE * lines.size()) {
+            this.index = (this.id % 2 == 1) ? 0 : 1;
+        }
 
-        _tmp.position(startPos);
-        _tmp.limit(endPos);
+        ByteBuffer _tmp = this.tmpBuffer.duplicate();
+        _tmp.position(this.index * length);
+        _tmp.limit((this.index + 1) * length - 1);
+        this.index += 2;
+
+        ByteBuffer buffer = generatedBuffer.getBuffer().duplicate();
         buffer.put(_tmp);
 
         buffer.position(startPos);
         buffer.limit(endPos);
-        // System.out.println("id: " + this.id + ", buffer.position: " + buffer.position() + ", buffer.limit: " + buffer.limit() + ", startPos: " + startPos + ", endPos: " + endPos);
 	}
 
     private void _fill() {
