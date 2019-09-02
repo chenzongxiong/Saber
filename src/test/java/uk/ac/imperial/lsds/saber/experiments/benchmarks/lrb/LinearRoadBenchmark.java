@@ -44,6 +44,10 @@ import uk.ac.imperial.lsds.saber.LatencyMonitor;
 
 
 public class LinearRoadBenchmark extends InputStream {
+    // SELELCT timestamp, m_iTime, xway, seg, AVG(speed), tollAmount
+    // FROM TABLE RANGE IN 300
+    // GROUP BY xway, seg
+
     private PAPIHardwareSampler[] circularWorkerPapiSamplers;
     private PAPIHardwareSampler[] taskWorkerPapiSamplers;
 
@@ -132,5 +136,31 @@ public class LinearRoadBenchmark extends InputStream {
             this.latencyMonitor1.stop();
             this.latencyMonitor2.stop();
         }
+    }
+
+
+    Expression [] expressions = null;
+
+    AggregationType [] aggregationTypes = null;
+    FloatColumnReference[] aggregationAttributes = null;
+
+    Expression [] groupByAttributes = null;
+
+    private void prepareExpressions () {
+        expressions = new Expression[5];
+        expressions[0] = new LongColumnReference(0); // timestamp
+        expressions[1] = new IntColumnReference(2);  // m_iTime
+        expressions[2] = new IntColumnReference(4);  // speed;
+        expressions[3] = new IntColumnReference(5);  // xway
+        expressions[4] = new IntColumnReference(8);  // seg
+
+        aggregationTypes = new AggregationType [1];
+        aggregationTypes[0] = AggregationType.AVG;
+        aggregationAttributes = new FloatColumnReference[] { new FloatColumnReference(4) };
+
+        groupByAttributes = new Expression [2];
+        groupByAttributes[0] = new IntColumnReference(5);
+        groupByAttributes[1] = new IntColumnReference(8);
+
     }
 }

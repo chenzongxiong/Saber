@@ -7,10 +7,20 @@ import java.util.function.BiFunction;
 import uk.ac.imperial.lsds.saber.ITupleSchema;
 import uk.ac.imperial.lsds.saber.WindowBatch;
 import uk.ac.imperial.lsds.saber.tasks.IWindowAPI;
-import uk.ac.imperial.lsds.saber.buffers.IQueryBuffer;
+import uk.ac.imperial.lsds.saber.cql.expressions.Expression;
+import uk.ac.imperial.lsds.saber.cql.expressions.ExpressionsUtil;
+import uk.ac.imperial.lsds.saber.cql.expressions.floats.FloatColumnReference;
+import uk.ac.imperial.lsds.saber.cql.expressions.longlongs.LongLongColumnReference;
+import uk.ac.imperial.lsds.saber.cql.expressions.longs.LongColumnReference;
+import uk.ac.imperial.lsds.saber.cql.operators.AggregationType;
+import uk.ac.imperial.lsds.saber.cql.operators.IAggregateOperator;
 import uk.ac.imperial.lsds.saber.cql.operators.IOperatorCode;
 import uk.ac.imperial.lsds.saber.cql.operators.IAggregateOperator;
+import uk.ac.imperial.lsds.saber.cql.predicates.IPredicate;
+import uk.ac.imperial.lsds.saber.buffers.IQueryBuffer;
+import uk.ac.imperial.lsds.saber.buffers.WindowHashTable;
 import uk.ac.imperial.lsds.saber.buffers.UnboundedQueryBufferFactory;
+
 
 import uk.ac.imperial.lsds.saber.cql.operators.udfs.lrb.record.StopTuple;
 import uk.ac.imperial.lsds.saber.cql.operators.udfs.lrb.record.AvgSpeed;
@@ -19,22 +29,25 @@ import uk.ac.imperial.lsds.saber.cql.operators.udfs.lrb.record.Accident;
 
 public class LinearRoadBenchmarkOp implements IOperatorCode {
 
-
 	private ITupleSchema outputSchema;
 
     private ConcurrentHashMap<Integer, Accident> accidents;
     private ConcurrentHashMap<Integer, AvgSpeed> avgSpeed;
     private ConcurrentHashMap<Integer, StopTuple> stopMap;
 
+    private Expression[] expressions;
+
     public LinearRoadBenchmarkOp (
         ConcurrentHashMap<Integer, Accident> acc,
         ConcurrentHashMap<Integer, AvgSpeed> avgSpeed,
         ConcurrentHashMap<Integer, StopTuple> stopMap
+        // Expression[] expressions
         ) {
-
         this.accidents = acc;
         this.avgSpeed = avgSpeed;
         this.stopMap = stopMap;
+        // this.expressions = expressions;
+        this.expressions = null;
     }
 
     @Override

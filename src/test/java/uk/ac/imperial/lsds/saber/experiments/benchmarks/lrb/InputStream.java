@@ -11,6 +11,7 @@ import uk.ac.imperial.lsds.saber.TupleSchema.PrimitiveType;
 public abstract class InputStream implements LinearRoadBenchmarkQuery {
 
 	ITupleSchema schema = null;
+    ITupleSchema sinkSchema = null;
 	QueryApplication application = null;
 
 	public InputStream () {
@@ -28,6 +29,11 @@ public abstract class InputStream implements LinearRoadBenchmarkQuery {
 		}
 		return schema;
 	}
+    public ITupleSchema getSinkSchema() {
+        if (sinkSchema == null)
+            createSinkSchema();
+        return sinkSchema;
+    }
 
 	// create schema for SABER
 	public void createSchema () {
@@ -68,4 +74,29 @@ public abstract class InputStream implements LinearRoadBenchmarkQuery {
 		schema.setAttributeName (14, "m_iTod");
 		schema.setAttributeName (15, "m_iDay");
 	}
+
+    // create schema for sink
+    public void createSinkSchema() {
+        final int COLUMNS = 6;
+        final int contentSize = 8 + 4 * (COLUMNS - 1);
+		int [] offsets = new int [COLUMNS]; // one slot for timestamp
+        offsets[0] = 0;         // timestamp long
+        for (int i = 1; i < COLUMNS; i ++) {
+            offsets[i] =  8 + 4*(i-1);
+        }
+		sinkSchema = new TupleSchema (offsets, contentSize);
+
+		/* 0:undefined 1:int, 2:float, 3:long, 4:longlong*/
+        sinkSchema.setAttributeType (0, PrimitiveType.LONG);
+        for (int i = 1; i < COLUMNS; i ++) {
+            sinkSchema.setAttributeType (i, PrimitiveType.INT);
+        }
+
+		sinkSchema.setAttributeName (0, "timestamp"); // timestamp
+		sinkSchema.setAttributeName (1, "m_iTime");
+		sinkSchema.setAttributeName (2, "m_iXway");
+		sinkSchema.setAttributeName (3, "m_iSeg");
+		sinkSchema.setAttributeName (4, "avg_speed");
+		sinkSchema.setAttributeName (5, "toll_amount");
+    }
 }
