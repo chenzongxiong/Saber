@@ -67,7 +67,12 @@ public class LinearRoadBenchmark extends InputStream {
                 this.taskWorkerPapiSamplers[i] = papiSamplers[i+SystemConf.NUMBER_OF_CICULAR_WORKERS];
             }
         }
+
+        this.prepareExpressions();
         this.createSchema();
+        this.createIntermediateSchema();
+        this.createSinkSchema();
+
         this.createApplication(queryConf, isExecuted);
     }
 
@@ -87,17 +92,18 @@ public class LinearRoadBenchmark extends InputStream {
             (IntComparisonPredicate.EQUAL_OP, new IntColumnReference(1), new IntConstant(0));
 
         // only perform selection operation
-        IOperatorCode selection_code = new Selection((IPredicate) selectPredicate);
-        IOperatorCode gpuCode = null;
+        // IOperatorCode selection_code = new Selection((IPredicate) selectPredicate);
+        // IOperatorCode gpuCode = null;
 
-        QueryOperator operator1;
-        operator1 = new QueryOperator (selection_code, null);
+        // QueryOperator operator1;
+        // operator1 = new QueryOperator (selection_code, null);
 
-        Set<QueryOperator> operators1 = new HashSet<QueryOperator>();
-        operators1.add(operator1);
+        // Set<QueryOperator> operators1 = new HashSet<QueryOperator>();
+        // operators1.add(operator1);
+
 		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
 
-        Query query1 = new Query (0, operators1, inputSchema, windowDefinition, null, null, queryConf, timestampReference, this.circularWorkerPapiSamplers);
+        // Query query1 = new Query (0, operators1, inputSchema, windowDefinition, null, null, queryConf, timestampReference, this.circularWorkerPapiSamplers);
 
         ConcurrentHashMap<Integer, Accident> accidents = new ConcurrentHashMap<>();
         ConcurrentHashMap<Integer, AvgSpeed> avgSpeed = new ConcurrentHashMap<>();
@@ -106,26 +112,30 @@ public class LinearRoadBenchmark extends InputStream {
         IOperatorCode lrb_code = new LinearRoadBenchmarkOp(
             accidents,
             avgSpeed,
-            stopMap
+            stopMap,
+            selectPredicate,
+            expressions,
+            interSchema
             );
+        // System.out.println("[DBG] sinkSchema.getPad(): " + sinkSchema.getPadLength());
 
         QueryOperator operator2 = new QueryOperator(lrb_code, null);
         Set<QueryOperator> operators2 = new HashSet<QueryOperator>();
         operators2.add(operator2);
-        Query query2 = new Query (1, operators2, inputSchema, windowDefinition, null, null, queryConf, timestampReference);
+        Query query2 = new Query (0, operators2, inputSchema, windowDefinition, null, null, queryConf, timestampReference);
 
         Set<Query> queries = new HashSet<Query>();
-        queries.add(query1);
+        // queries.add(query1);
         queries.add(query2);
-        query1.connectTo(query2);
+        // query1.connectTo(query2);
 
 		if (isExecuted) {
 			application = new QueryApplication(queries, this.taskWorkerPapiSamplers);
 			application.setup();
 
             if (SystemConf.LATENCY_ON) {
-                this.latencyMonitor1 = query1.getLatencyMonitor();
-                this.latencyMonitor2 = query2.getLatencyMonitor();
+                // this.latencyMonitor1 = query1.getLatencyMonitor();
+                // this.latencyMonitor2 = query2.getLatencyMonitor();
             }
 		}
 		return;
@@ -133,8 +143,8 @@ public class LinearRoadBenchmark extends InputStream {
 
     public void stopLatencyMonitor() {
         if (SystemConf.LATENCY_ON) {
-            this.latencyMonitor1.stop();
-            this.latencyMonitor2.stop();
+            // this.latencyMonitor1.stop();
+            // this.latencyMonitor2.stop();
         }
     }
 

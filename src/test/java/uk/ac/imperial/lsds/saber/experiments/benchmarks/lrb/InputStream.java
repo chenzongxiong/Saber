@@ -12,6 +12,8 @@ public abstract class InputStream implements LinearRoadBenchmarkQuery {
 
 	ITupleSchema schema = null;
     ITupleSchema sinkSchema = null;
+    ITupleSchema interSchema = null;
+
 	QueryApplication application = null;
 
 	public InputStream () {
@@ -34,7 +36,11 @@ public abstract class InputStream implements LinearRoadBenchmarkQuery {
             createSinkSchema();
         return sinkSchema;
     }
-
+    public ITupleSchema getIntermediateSchema() {
+        if (interSchema == null)
+            createIntermediateSchema();
+        return interSchema;
+    }
 	// create schema for SABER
 	public void createSchema () {
         final int COLUMNS = 16;
@@ -97,6 +103,30 @@ public abstract class InputStream implements LinearRoadBenchmarkQuery {
 		sinkSchema.setAttributeName (2, "m_iXway");
 		sinkSchema.setAttributeName (3, "m_iSeg");
 		sinkSchema.setAttributeName (4, "avg_speed");
-		sinkSchema.setAttributeName (5, "toll_amount");
+        sinkSchema.setAttributeName (5, "toll_amount");
+    }
+
+    // create schema for intermediate tuples
+    public void createIntermediateSchema() {
+        final int COLUMNS = 5;
+        final int contentSize = 8 + 4 * (COLUMNS - 1);
+		int [] offsets = new int [COLUMNS]; // one slot for timestamp
+        offsets[0] = 0;         // timestamp long
+        for (int i = 1; i < COLUMNS; i ++) {
+            offsets[i] =  8 + 4*(i-1);
+        }
+		interSchema = new TupleSchema (offsets, contentSize);
+
+		/* 0:undefined 1:int, 2:float, 3:long, 4:longlong*/
+        interSchema.setAttributeType (0, PrimitiveType.LONG);
+        for (int i = 1; i < COLUMNS; i ++) {
+            interSchema.setAttributeType (i, PrimitiveType.INT);
+        }
+
+		interSchema.setAttributeName (0, "timestamp"); // timestamp
+		interSchema.setAttributeName (1, "m_iTime");
+		interSchema.setAttributeName (2, "m_iSpeed");
+		interSchema.setAttributeName (3, "m_iXway");
+		interSchema.setAttributeName (4, "m_iSeg");
     }
 }
