@@ -36,7 +36,7 @@ public class Generator {
 		limit = 1; /* TODO */
 		timestampBase = System.currentTimeMillis();
 		timestamp = System.currentTimeMillis() - timestampBase;//0;
-
+        // System.out.println("[DBG] initial generator, timestampBase: " + timestampBase + ", timestamp: " + timestamp);
 		int inputTupleSize = 128; //inputSchema.getTupleSize()
 		createPositionsList(inputTupleSize);
 
@@ -88,14 +88,14 @@ public class Generator {
 		/* Set time stamp */
 		if (count >= limit) {
 			count = 0;
-			//System.out.println("Timestamp is " + timestamp);
 			timestamp = System.currentTimeMillis() - timestampBase;
+			// System.out.println("[DBG] Generated timestamp: " + timestamp + ", timestampBase: " + timestampBase + ", sys.currentTimeMills: " + System.currentTimeMillis());
 			//timestamp ++;
 		}
 		/* Buffer swap */
 		id = (next + 1) & (buffers.length - 1);
 
-        // System.out.println("Fill buffer " + id);
+        // System.out.println("[DBG] Fill buffer " + id);
 
 		GeneratedBuffer buffer = buffers[id];
 		/*

@@ -127,6 +127,7 @@ public class GeneratorWorker implements Runnable {
 			isFirstTime --;
 		} else {
 			buffer.position(startPos);
+            // System.out.println("[DBG] Generated timestamp: " + timestamp);
 			while (buffer.position()  < endPos) {
 
 			    buffer.putLong (timestamp);

@@ -80,10 +80,17 @@ public class LinearRoadBenchmark extends InputStream {
 		/* Set execution parameters */
 		long timestampReference = System.nanoTime();
 		boolean realtime = true;
-		int windowSize = 1000;//realtime? 10000 : 10000000;
+		int windowSize = 1000;   //realtime? 10000 : 10000000;
 
 		/* Create Input Schema */
 		ITupleSchema inputSchema = schema;
+
+
+		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
+
+        ConcurrentHashMap<Integer, Accident> accidents = new ConcurrentHashMap<>();
+        ConcurrentHashMap<Integer, AvgSpeed> avgSpeed = new ConcurrentHashMap<>();
+        ConcurrentHashMap<Integer, StopTuple> stopMap = new ConcurrentHashMap<> ();
 
         /* FILTER (m_iType == 0) */
         /* 0: position report */
@@ -91,52 +98,61 @@ public class LinearRoadBenchmark extends InputStream {
         IPredicate selectPredicate = new IntComparisonPredicate
             (IntComparisonPredicate.EQUAL_OP, new IntColumnReference(1), new IntConstant(0));
 
-        // only perform selection operation
-        // IOperatorCode selection_code = new Selection((IPredicate) selectPredicate);
-        // IOperatorCode gpuCode = null;
+        // ----------------------------------------
+        // IOperatorCode lrbCode = new LinearRoadBenchmarkOp(
+        //     accidents,
+        //     avgSpeed,
+        //     stopMap,
+        //     selectPredicate,
+        //     expressions,
+        //     interSchema,
+        //     groupByAttributes,
+        //     aggregationTypes,
+        //     aggregationAttributes
+        //     );
 
-        // QueryOperator operator1;
-        // operator1 = new QueryOperator (selection_code, null);
+        // QueryOperator lrbOperator = new QueryOperator(lrbCode, null);
+        // Set<QueryOperator> lrbOperators = new HashSet<QueryOperator>();
+        // lrbOperators.add(lrbOperator);
+        // Query query1 = new Query (0, lrbOperators, inputSchema, windowDefinition, null, null, queryConf, timestampReference);
+        // query1.setName("[LRB Operator]");
+        // ----------------------------------------
+        IOperatorCode selectCode = new Selection((IPredicate) selectPredicate);
+        QueryOperator selectOperator = new QueryOperator(selectCode, null);
+        Set<QueryOperator> selectOperators = new HashSet<QueryOperator>();
+        selectOperators.add(selectOperator);
+        Query query1 = new Query(0, selectOperators, inputSchema, windowDefinition, null, null, queryConf, timestampReference);
+        query1.setName("[Select Operator]");
+        // Create the aggreate opeator
+        // ----------------------------------------
+        IOperatorCode aggCode = new Aggregation(windowDefinition, aggregationTypes, aggregationAttributes, groupByAttributes);
+        QueryOperator aggOperator = new QueryOperator(aggCode, null);
+        Set<QueryOperator> aggOperators = new HashSet<QueryOperator>();
+        aggOperators.add(aggOperator);
 
-        // Set<QueryOperator> operators1 = new HashSet<QueryOperator>();
-        // operators1.add(operator1);
-
-		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
-
-        // Query query1 = new Query (0, operators1, inputSchema, windowDefinition, null, null, queryConf, timestampReference, this.circularWorkerPapiSamplers);
-
-        ConcurrentHashMap<Integer, Accident> accidents = new ConcurrentHashMap<>();
-        ConcurrentHashMap<Integer, AvgSpeed> avgSpeed = new ConcurrentHashMap<>();
-        ConcurrentHashMap<Integer, StopTuple> stopMap = new ConcurrentHashMap<> ();
-
-        IOperatorCode lrb_code = new LinearRoadBenchmarkOp(
-            accidents,
-            avgSpeed,
-            stopMap,
-            selectPredicate,
-            expressions,
-            interSchema
-            );
-        // System.out.println("[DBG] sinkSchema.getPad(): " + sinkSchema.getPadLength());
-
-        QueryOperator operator2 = new QueryOperator(lrb_code, null);
-        Set<QueryOperator> operators2 = new HashSet<QueryOperator>();
-        operators2.add(operator2);
-        Query query2 = new Query (0, operators2, inputSchema, windowDefinition, null, null, queryConf, timestampReference);
+        Query query2 = new Query(1, aggOperators, inputSchema, windowDefinition, null, null, queryConf, timestampReference);
+        query2.setName("[Aggregation Operator]");
 
         Set<Query> queries = new HashSet<Query>();
-        // queries.add(query1);
+        queries.add(query1);
         queries.add(query2);
-        // query1.connectTo(query2);
+        query1.connectTo(query2);
 
 		if (isExecuted) {
 			application = new QueryApplication(queries, this.taskWorkerPapiSamplers);
-			application.setup();
+            application.setup();
+
+            if (SystemConf.CPU) {
+                query2.setAggregateOperator((IAggregateOperator) aggCode);
+            } else {
+                throw new IllegalStateException("Not support GPU version");
+            }
 
             if (SystemConf.LATENCY_ON) {
                 // this.latencyMonitor1 = query1.getLatencyMonitor();
-                // this.latencyMonitor2 = query2.getLatencyMonitor();
+                // this.latencyMonitor2 = query1.getLatencyMonitor();
             }
+
 		}
 		return;
 	}
@@ -168,9 +184,8 @@ public class LinearRoadBenchmark extends InputStream {
         aggregationTypes[0] = AggregationType.AVG;
         aggregationAttributes = new FloatColumnReference[] { new FloatColumnReference(4) };
 
-        groupByAttributes = new Expression [2];
+        groupByAttributes = new Expression [1];
         groupByAttributes[0] = new IntColumnReference(5);
-        groupByAttributes[1] = new IntColumnReference(8);
-
+        // groupByAttributes[1] = new IntColumnReference(8);
     }
 }

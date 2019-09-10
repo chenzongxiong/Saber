@@ -40,15 +40,16 @@ public class GeneratorWorker implements Runnable {
 
         this.tuplesPerBuffer = (endPos - startPos) / TUPLE_SIZE;
         this.length = endPos - startPos + 1;
-
-        if (this.id % 2 == 1) {
-            this.index = 0;
-        } else {
-            this.index = 1;
-        }
+        // System.out.println("[DBG] startPos: " + startPos + ", endPos: " + endPos);
+        // if (this.id % 2 == 1) {
+        //     this.index = 0;
+        // } else {
+        //     this.index = 1;
+        // }
 
         this.tmpBuffer = ByteBuffer.allocate(TUPLE_SIZE*lines.size());
-        this._fill();
+        this.isFirstTime = generator.workers.length;
+        // this._fill();
 	}
 
 	/*
@@ -100,35 +101,72 @@ public class GeneratorWorker implements Runnable {
 	}
 
 	private void generate(GeneratedBuffer generatedBuffer, int startPos, int endPos, long timestamp) {
+		ByteBuffer buffer = generatedBuffer.getBuffer().duplicate();
+		/* Fill the buffer */
+        buffer.position(startPos);
+        while (buffer.position()  < endPos) {
+            buffer.putLong (timestamp);
+            this.line = this.lines.get(this.index);
+            String[] tokens = this.line.split(",");
+            for (int i = 0; i < 15; i ++) {
+                buffer.putInt(Integer.parseInt(tokens[i]));
+            }
+            buffer.position(buffer.position() + 60); // padding to 128 bytes
 
-        if (((this.index + 1) * length -1) >= TUPLE_SIZE * lines.size()) {
-            this.index = (this.id % 2 == 1) ? 0 : 1;
+            this.index ++;
+            // end of line, reuse the buffer
+            if (this.index >= this.lines.size()) {
+                this.index = 0;
+            }
         }
 
-        ByteBuffer _tmp = this.tmpBuffer.duplicate();
-        _tmp.position(this.index * length);
-        _tmp.limit((this.index + 1) * length - 1);
-        this.index += 2;
+        // if (this.isFirstTime > 0) {
+        //     System.out.println("[DBG] id: " + this.id + ", isFirstTime: " + this.isFirstTime);
+        //     this._fill(timestamp);
 
-        ByteBuffer buffer = generatedBuffer.getBuffer().duplicate();
-        buffer.put(_tmp);
+        //     this.isFirstTime --;
+        // }
 
-        buffer.position(startPos);
-        buffer.limit(endPos);
+
+        // if (((this.index + 1) * length -1) >= TUPLE_SIZE * lines.size()) {
+        //     this.index = (this.id % 2 == 1) ? 0 : 1;
+        // }
+
+        // ByteBuffer _tmp = this.tmpBuffer.duplicate();
+        // _tmp.position(this.index * length);
+        // _tmp.limit((this.index + 1) * length - 1);
+        // this.index += 2;
+
+        // ByteBuffer buffer = generatedBuffer.getBuffer().duplicate();
+        // buffer.put(_tmp);
+
+        // buffer.position(startPos);
+        // System.out.println("[DBG] Generated timestamp: " + timestamp + ", id: " + this.id + ", buffer.position(): " + buffer.position() + ", startPos: " + startPos);
+        // while (buffer.position() < endPos) {
+        //     buffer.putLong(timestamp);
+        //     buffer.position(buffer.position() + (TUPLE_SIZE - 8));
+        // }
+        // System.out.println("[DBG] Generated timestamp: " + timestamp + ", id: " + this.id + ", buffer.position()-2: " + buffer.position() + ", endPos: " + endPos + ", buffer.limit(): " + buffer.limit());
+        // buffer.limit(endPos);
+        // System.out.println("[DBG] Generated timestamp: " + timestamp + ", id: " + this.id + ", buffer.limit(): " + buffer.limit());
 	}
 
-    private void _fill() {
+    private void _fill(long timestamp) {
+        // System.out.println("[DBG] ")
+        // long start = System.currentTimeMillis();
         for (int i = 0; i < this.lines.size(); i ++) {
-            this.tmpBuffer.putLong(0);
+            // this.tmpBuffer.putLong(0);
+            this.tmpBuffer.putLong(timestamp);
             this.line = this.lines.get(i);
             String[] tokens = this.line.split(",");
 
             for (int j = 0; j < 15; j ++) {
                 this.tmpBuffer.putInt(Integer.parseInt(tokens[j]));
             }
-
+            System.out.println("[DBG] this.tmpBuffer.position: " + this.tmpBuffer.position());
             this.tmpBuffer.position(this.tmpBuffer.position() + 60); // padding to 128 bytes
         }
-
+        // long end = System.currentTimeMillis();
+        // System.out.println("[DBG] cost " + (end-start) + " to fill buffers");
     }
 }

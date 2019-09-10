@@ -14,8 +14,11 @@ public class Query {
 	/* Note that since we implement an N-way join as a series of binary
 	 * joins, the maximum number of upstream operators should be 2
 	 */
-	private int numberOfUpstreamQueries;
-	private int numberOfDownstreamQueries;
+	// private int numberOfUpstreamQueries;
+	// private int numberOfDownstreamQueries;
+	public int numberOfUpstreamQueries;
+    public int numberOfDownstreamQueries;
+
 
 	private long timestampReference = 0L;
 
@@ -263,9 +266,14 @@ public class Query {
 		if (numberOfDownstreamQueries >= downstreamQueries.length)
 			throw new ArrayIndexOutOfBoundsException("error: invalid number of downstream queries in query");
 
+
+        // System.out.println("[DBG] <" + this.getName() + ">.numberOfDownStreamQueries: " + numberOfDownstreamQueries + ", <" + this.getName() + ">.numberOfUpstreamQueries: " + numberOfUpstreamQueries + ", <" + query.getName() + ">.numberOfUpstreamQueries: " + query.numberOfUpstreamQueries + ", <" + query.getName() + ">.numberOfDownstreamQueries: " + query.numberOfDownstreamQueries);
+
 		int idx = numberOfDownstreamQueries++;
 		this.downstreamQueries [idx] = query;
 		query.setUpstreamQuery (this);
+
+        // System.out.println("[DBG] <" + this.getName() + ">.numberOfDownStreamQueries: " + numberOfDownstreamQueries + ", <" + this.getName() + ">.numberOfUpstreamQueries: " + numberOfUpstreamQueries + ", <" + query.getName() + ">.numberOfUpstreamQueries: " + query.numberOfUpstreamQueries + ", <" + query.getName() + ">.numberOfDownstreamQueries: " + query.numberOfDownstreamQueries);
 	}
 
 	private void setUpstreamQuery (Query query) {

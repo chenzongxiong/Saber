@@ -53,7 +53,7 @@ public class QueryApplication {
 
 		N = this.queries.size();
         if (papiSamplers != null && papiSamplers.length != this.threads) {
-            System.out.println("Some threads not catched by PAPI");
+            System.out.println("Some threads not caught by PAPI");
             System.exit(1);
         }
         this.papiSamplers = papiSamplers;
@@ -122,11 +122,14 @@ public class QueryApplication {
 		executor = Executors.newCachedThreadPool();
 		queue = workerPool.start(executor);
 
+        System.out.println("[DBG] QueryApplication, numberOfQueries: " + queries.size());
 		for (Query q: queries) {
 			q.setParent(this);
 			q.setup();
-			if (q.isMostUpstream())
+			if (q.isMostUpstream()) {
+                // System.out.println("[DBG] " + q.getName() + " isMostUpstream");
 				setDispatcher(q.getTaskDispatcher());
+            }
 		}
 
 		Thread performanceMonitor = new Thread(new PerformanceMonitor(this));

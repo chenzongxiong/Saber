@@ -26,7 +26,7 @@ public class CircularBufferWorker implements Runnable {
 		this.circularBuffer = circularBuffer;
 		this.id = id;
         this.hwPAPI = hwPAPI;
-        System.out.println("id: " + id + ", hwPAPI: " + hwPAPI);
+        System.out.println("[DBG] id: " + id + ", hwPAPI: " + hwPAPI);
     }
 	/*
 	 * Pass start/end pointers here...

@@ -1,0 +1,2534 @@
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/devices/TheCPU.java,220
+public class TheCPU 5,90
+	private static final String cpuLibrary TheCPU.cpuLibrary7,114
+	private static final TheCPU cpuInstance TheCPU.cpuInstance18,398
+	public static TheCPU getInstance TheCPU.getInstance20,458
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/devices/TheGPU.java,946
+public class TheGPU 7,191
+	private static final String gpuLibrary TheGPU.gpuLibrary9,215
+	private static final int pipelines TheGPU.pipelines11,302
+	private static final TheGPU gpuInstance TheGPU.gpuInstance13,369
+	public static TheGPU getInstance TheGPU.getInstance15,434
+	private WindowBatch [] batches;TheGPU.batches19,550
+	private HeapMemoryManager memoryManager;TheGPU.memoryManager21,585
+	public TheGPU TheGPU.TheGPU23,629
+	public void load TheGPU.load32,822
+	public WindowBatch shiftUp TheGPU.shiftUp44,1023
+	public void setInputBuffer TheGPU.setInputBuffer53,1234
+	public void setInputBuffer TheGPU.setInputBuffer57,1381
+	public void setOutputBuffer TheGPU.setOutputBuffer61,1538
+	public IQueryBuffer getOutputBuffer TheGPU.getOutputBuffer65,1665
+	public void inputDataMovementCallback TheGPU.inputDataMovementCallback69,1778
+	public void outputDataMovementCallback TheGPU.outputDataMovementCallback73,1935
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/devices/HeapMemoryManager.java,1243
+public class HeapMemoryManager 9,190
+	private static Unsafe getUnsafeMemory HeapMemoryManager.getUnsafeMemory11,225
+	private int Q;HeapMemoryManager.Q22,488
+	private int N;HeapMemoryManager.N23,504
+	private IQueryBuffer [][]  inputs;HeapMemoryManager.inputs25,522
+	private IQueryBuffer [][] outputs;HeapMemoryManager.outputs26,558
+	private int  [][] start;HeapMemoryManager.start28,596
+	private int  [][]   end;HeapMemoryManager.end29,669
+	private static Unsafe theUnsafe;HeapMemoryManager.theUnsafe31,744
+	public HeapMemoryManager HeapMemoryManager.HeapMemoryManager33,780
+	private void checkQueryIndexBounds HeapMemoryManager.checkQueryIndexBounds47,1028
+	public void checkBufferIndexBounds HeapMemoryManager.checkBufferIndexBounds52,1187
+	public void setInputBuffer HeapMemoryManager.setInputBuffer57,1347
+	public void setInputBuffer HeapMemoryManager.setInputBuffer61,1481
+	public void setOutputBuffer HeapMemoryManager.setOutputBuffer71,1756
+	public IQueryBuffer getOutputBuffer HeapMemoryManager.getOutputBuffer79,1951
+	public void inputDataMovementCallback HeapMemoryManager.inputDataMovementCallback87,2136
+	public void outputDataMovementCallback HeapMemoryManager.outputDataMovementCallback146,3826
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/Utils.java,206
+public class Utils 3,36
+	public static long pack Utils.pack5,58
+	public static int getSystemTimestamp Utils.getSystemTimestamp9,185
+	public static int getTupleTimestamp Utils.getTupleTimestamp13,273
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/processors/HashMap.java,746
+public class HashMap 7,137
+	private int _SIZE HashMap._SIZE10,236
+	private class ThreadMapNode HashMap.ThreadMapNode12,268
+		public byte [] tupleKey;HashMap.ThreadMapNode.tupleKey14,302
+		public int value;HashMap.ThreadMapNode.value15,329
+		public ThreadMapNode next;HashMap.ThreadMapNode.next17,352
+		public ThreadMapNode HashMap.ThreadMapNode.ThreadMapNode19,384
+	ThreadMapNode [] content;HashMap.content27,545
+	int size HashMap.size28,572
+	int nextValue HashMap.nextValue29,587
+	public HashMap HashMap.HashMap31,608
+	public int register HashMap.register37,740
+	public int register HashMap.register45,879
+	public int size HashMap.size53,1033
+	private int put HashMap.put57,1081
+	public int get HashMap.get79,1748
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/processors/TaskProcessorPool.java,599
+public class TaskProcessorPool 8,205
+	private int workers;TaskProcessorPool.workers10,239
+	private TaskQueue queue;TaskProcessorPool.queue12,262
+	private TaskProcessor [] processor;TaskProcessorPool.processor13,288
+	public TaskProcessorPool TaskProcessorPool.TaskProcessorPool14,325
+	public TaskProcessorPool TaskProcessorPool.TaskProcessorPool19,498
+	public TaskQueue start TaskProcessorPool.start62,2030
+	public long getProcessedTasks TaskProcessorPool.getProcessedTasks68,2172
+	public double mean TaskProcessorPool.mean72,2276
+	public double stdv TaskProcessorPool.stdv76,2344
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/processors/TaskProcessor.java,1234
+public class TaskProcessor 11,363
+	TaskQueue queue;TaskProcessor.queue13,413
+	private int [][] policy;TaskProcessor.policy14,431
+	private int pid;TaskProcessor.pid15,457
+	boolean GPU,TaskProcessor.GPU16,475
+	boolean GPU, hybrid;TaskProcessor.hybrid16,475
+	private int cid TaskProcessor.cid18,498
+	private AtomicLong [] tasksProcessed;TaskProcessor.tasksProcessed21,583
+	boolean monitor TaskProcessor.monitor24,680
+	private long count TaskProcessor.count26,707
+	private long start;TaskProcessor.start27,733
+	private double  dt;TaskProcessor.dt28,754
+	double _m,TaskProcessor._m29,775
+	double _m, m,TaskProcessor.m29,775
+	double _m, m, _s,TaskProcessor._s29,775
+	double _m, m, _s, s;TaskProcessor.s29,775
+	double avg TaskProcessor.avg30,797
+    PAPIHardwareSampler hwPAPI;TaskProcessor.hwPAPI31,825
+	public TaskProcessor TaskProcessor.TaskProcessor32,857
+	public TaskProcessor TaskProcessor.TaskProcessor36,1011
+	public void enableMonitoring TaskProcessor.enableMonitoring57,1492
+	public void run TaskProcessor.run61,1554
+	public long getProcessedTasks(TaskProcessor.getProcessedTasks133,4001
+	public double mean TaskProcessor.mean137,4083
+	public double stdv TaskProcessor.stdv144,4187
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/processors/ThreadMap.java,924
+public class ThreadMap 3,47
+	private static final ThreadMap instance ThreadMap.instance5,74
+	public static final int _SIZE ThreadMap._SIZE8,211
+	private static class ThreadMapNode ThreadMap.ThreadMapNode10,250
+		public long key;ThreadMap.ThreadMapNode.key12,291
+		public int value;ThreadMap.ThreadMapNode.value13,310
+		public ThreadMapNode next;ThreadMap.ThreadMapNode.next15,333
+		public ThreadMapNode ThreadMap.ThreadMapNode.ThreadMapNode17,365
+	ThreadMapNode [] content;ThreadMap.content25,508
+	int size ThreadMap.size26,535
+	int nextValue ThreadMap.nextValue27,550
+	public static ThreadMap getInstance ThreadMap.getInstance29,572
+	public synchronized int register ThreadMap.register31,635
+	public int size ThreadMap.size39,766
+	public ThreadMap ThreadMap.ThreadMap43,813
+	private int hash ThreadMap.hash49,945
+	private int put ThreadMap.put53,1018
+	public int get ThreadMap.get73,1518
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/www/MeasurementQueue.java,2260
+public class MeasurementQueue 9,232
+	private static class Node MeasurementQueue.Node11,266
+		long timestamp;MeasurementQueue.Node.timestamp13,298
+		float cpuValue,MeasurementQueue.Node.cpuValue14,316
+		float cpuValue, gpuValue;MeasurementQueue.Node.gpuValue14,316
+		Node next,MeasurementQueue.Node.next15,344
+		Node next, prev;MeasurementQueue.Node.prev15,344
+		public Node MeasurementQueue.Node.Node17,366
+		public void clear MeasurementQueue.Node.clear21,405
+		public void set MeasurementQueue.Node.set27,508
+	private static class NodeFactory MeasurementQueue.NodeFactory34,675
+		private int poolSize;MeasurementQueue.NodeFactory.poolSize36,714
+		public NodeFactory MeasurementQueue.NodeFactory.NodeFactory40,824
+		public Node get MeasurementQueue.NodeFactory.get47,951
+		public void free MeasurementQueue.NodeFactory.free54,1061
+	private class NodeIterator MeasurementQueue.NodeIterator60,1133
+		private Node current,MeasurementQueue.NodeIterator.current62,1166
+		private Node current, last;MeasurementQueue.NodeIterator.last62,1166
+		private int index;MeasurementQueue.NodeIterator.index63,1196
+		public NodeIterator MeasurementQueue.NodeIterator.NodeIterator65,1220
+		public void reset MeasurementQueue.NodeIterator.reset69,1266
+		public boolean hasNext MeasurementQueue.NodeIterator.hasNext75,1352
+		public Node next MeasurementQueue.NodeIterator.next79,1415
+		@SuppressWarnings(MeasurementQueue.NodeIterator.@SuppressWarnings90,1667
+	Node head,MeasurementQueue.head109,2044
+	Node head, tail;MeasurementQueue.tail109,2044
+	int size;MeasurementQueue.size111,2064
+	int limit;MeasurementQueue.limit112,2075
+	NodeFactory factory;MeasurementQueue.factory114,2089
+	NodeIterator iterator;MeasurementQueue.iterator115,2111
+	Lock lock;MeasurementQueue.lock117,2137
+	public MeasurementQueue MeasurementQueue.MeasurementQueue119,2151
+	public boolean isEmpty MeasurementQueue.isEmpty133,2519
+	public void add MeasurementQueue.add137,2575
+	public void remove MeasurementQueue.remove152,2903
+	public long getFirstTimestamp MeasurementQueue.getFirstTimestamp161,3066
+	public long getLastTimestamp MeasurementQueue.getLastTimestamp168,3201
+	public List<Float> fill MeasurementQueue.fill174,3332
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/www/RESTfulServer.java,176
+public class RESTfulServer 5,81
+	Server server;RESTfulServer.server7,131
+	public RESTfulServer RESTfulServer.RESTfulServer9,149
+	public void run(RESTfulServer.run15,276
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/www/RESTfulHandler.java,540
+public class RESTfulHandler 16,406
+	private static final ObjectMapper mapper RESTfulHandler.mapper18,462
+	private QueryApplicationHandler q;RESTfulHandler.q20,528
+	private ThroughputHandler [] t;RESTfulHandler.t21,564
+	public RESTfulHandler RESTfulHandler.RESTfulHandler23,599
+	private int getQueryIndex RESTfulHandler.getQueryIndex31,865
+	private void checkQueryBounds RESTfulHandler.checkQueryBounds37,1012
+	public void addMeasurement RESTfulHandler.addMeasurement42,1171
+	public void handle RESTfulHandler.handle47,1345
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/www/QueryApplicationHandler.java,654
+public class QueryApplicationHandler 17,491
+	private QueryApplication application;QueryApplicationHandler.application19,552
+	private Map<QueryApplicationHandler.Map21,593
+	private Map<String, Object> info;QueryApplicationHandler.info21,593
+	private List<Object> nodes;QueryApplicationHandler.nodes23,629
+	private List<Object> edges;QueryApplicationHandler.edges24,658
+	public QueryApplicationHandler QueryApplicationHandler.QueryApplicationHandler26,689
+	private void parse QueryApplicationHandler.parse41,1033
+	public void tryAdd QueryApplicationHandler.tryAdd58,1570
+	public Object getAnswer QueryApplicationHandler.getAnswer78,2187
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/www/IHandler.java,32
+public interface IHandler 5,81
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/www/helpers/GraphElement.java,65
+public interface GraphElement 5,71
+	Map<GraphElement.Map7,104
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/www/helpers/GraphQuery.java,695
+public class GraphQuery 6,97
+	private static String defaultType GraphQuery.defaultType8,149
+	private String    id;GraphQuery.id10,208
+	private String  type;GraphQuery.type11,231
+	private String  name;GraphQuery.name12,254
+	private String query;GraphQuery.query13,277
+	public GraphQuery GraphQuery.GraphQuery15,302
+	public GraphQuery setId GraphQuery.setId21,389
+	public GraphQuery setType GraphQuery.setType26,490
+	public GraphQuery setName GraphQuery.setName31,573
+	public GraphQuery setQuery GraphQuery.setQuery36,656
+	public Map<GraphQuery.Map41,743
+	public Map<String, Object> getDetails GraphQuery.getDetails41,743
+	public boolean equals GraphQuery.equals60,1233
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/www/helpers/GraphSource.java,989
+public class GraphSource 6,97
+	public static Map<GraphSource.Map8,150
+	public static Map<String, GraphSource> sources GraphSource.sources8,150
+	private static String defaultType GraphSource.defaultType10,239
+	private static int next GraphSource.next12,299
+	private String     id;GraphSource.id14,331
+	private String   type;GraphSource.type15,355
+	private String   name;GraphSource.name16,379
+	private String schema;GraphSource.schema17,403
+	public GraphSource GraphSource.GraphSource19,429
+	public GraphSource setId GraphSource.setId25,518
+	public String getId(GraphSource.getId30,611
+	public GraphSource setType GraphSource.setType36,750
+	public GraphSource setName GraphSource.setName41,834
+	public GraphSource setSchema GraphSource.setSchema46,918
+	public Map<GraphSource.Map51,1010
+	public Map<String, Object> getDetails GraphSource.getDetails51,1010
+	public String getKey GraphSource.getKey70,1507
+	public boolean equals GraphSource.equals78,1721
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/www/helpers/GraphEdge.java,800
+public class GraphEdge 6,97
+	private static String defaultType GraphEdge.defaultType8,148
+	private static int next GraphEdge.next10,210
+	private String     id;GraphEdge.id12,242
+	private String source;GraphEdge.source13,266
+	private String target;GraphEdge.target14,290
+	private String   type;GraphEdge.type15,314
+	public GraphEdge GraphEdge.GraphEdge17,340
+	public GraphEdge setSource GraphEdge.setSource23,453
+	public GraphEdge setSource GraphEdge.setSource28,543
+	public GraphEdge setTarget GraphEdge.setTarget33,651
+	public GraphEdge setTarget GraphEdge.setTarget38,741
+	public GraphEdge setType GraphEdge.setType43,849
+	public Map<GraphEdge.Map48,930
+	public Map<String, Object> getDetails(GraphEdge.getDetails48,930
+	public boolean equals GraphEdge.equals67,1436
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/www/ThroughputHandler.java,291
+public class ThroughputHandler 5,81
+	MeasurementQueue queue;ThroughputHandler.queue7,136
+	public ThroughputHandler ThroughputHandler.ThroughputHandler9,163
+	public void addMeasurement ThroughputHandler.addMeasurement13,248
+	public Object getAnswer ThroughputHandler.getAnswer17,377
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/SystemConf.java,2023
+public class SystemConf 5,59
+	public static boolean WWW SystemConf.WWW7,86
+	public static String SABER_HOME SystemConf.SABER_HOME9,123
+	public enum SchedulingPolicy SystemConf.SchedulingPolicy20,356
+	public enum SchedulingPolicy { HLS,SystemConf.SchedulingPolicy.HLS20,356
+	public enum SchedulingPolicy { HLS, FIFO,SystemConf.SchedulingPolicy.FIFO20,356
+	public enum SchedulingPolicy { HLS, FIFO, STATIC SystemConf.SchedulingPolicy.STATIC20,356
+	public static SchedulingPolicy SCHEDULING_POLICY SystemConf.SCHEDULING_POLICY22,410
+	public static int SWITCH_THRESHOLD SystemConf.SWITCH_THRESHOLD24,486
+	public static int PARTIAL_WINDOWS SystemConf.PARTIAL_WINDOWS26,529
+	public static int HASH_TABLE_SIZE SystemConf.HASH_TABLE_SIZE28,570
+	public static long THROUGHPUT_MONITOR_INTERVAL SystemConf.THROUGHPUT_MONITOR_INTERVAL30,617
+	public static long PERFORMANCE_MONITOR_INTERVAL SystemConf.PERFORMANCE_MONITOR_INTERVAL32,675
+	public static int MOST_UPSTREAM_QUERIES SystemConf.MOST_UPSTREAM_QUERIES34,734
+	public static int PIPELINE_DEPTH SystemConf.PIPELINE_DEPTH36,781
+	public static int CIRCULAR_BUFFER_SIZE SystemConf.CIRCULAR_BUFFER_SIZE38,821
+	public static int RELATIONAL_TABLE_BUFFER_SIZE SystemConf.RELATIONAL_TABLE_BUFFER_SIZE40,876
+	public static int UNBOUNDED_BUFFER_SIZE SystemConf.UNBOUNDED_BUFFER_SIZE42,936
+	public static int THREADS SystemConf.THREADS44,989
+	public static int SLOTS SystemConf.SLOTS46,1022
+	public static boolean CPU SystemConf.CPU48,1056
+	public static boolean GPU SystemConf.GPU49,1092
+	public static boolean HYBRID SystemConf.HYBRID51,1129
+	public static boolean LATENCY_ON SystemConf.LATENCY_ON53,1169
+	public static long DURATION SystemConf.DURATION55,1213
+    public static String HW_PERF_COUNTERS SystemConf.HW_PERF_COUNTERS57,1248
+    public static int NUMBER_OF_CICULAR_WORKERS SystemConf.NUMBER_OF_CICULAR_WORKERS58,1298
+	public static boolean parse SystemConf.parse60,1352
+	public static void dump SystemConf.dump135,3591
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/Query.java,3696
+public class Query 12,433
+	public int numberOfUpstreamQueries;Query.numberOfUpstreamQueries19,677
+    public int numberOfDownstreamQueries;Query.numberOfDownstreamQueries20,714
+	private long timestampReference Query.timestampReference23,758
+	private int id;Query.id25,798
+	private String name;Query.name27,816
+	private String sql;Query.sql28,838
+	private Set<QueryOperator> operators Query.operators30,860
+	private QueryOperator mostUpstreamOperator Query.mostUpstreamOperator32,907
+	private QueryOperator mostDownstreamOperator Query.mostDownstreamOperator33,959
+	private QueryApplication parent;Query.parent35,1014
+	private Query [] upstreamQueries Query.upstreamQueries37,1049
+	private Query [] downstreamQueries Query.downstreamQueries38,1093
+	private ITaskDispatcher dispatcher;Query.dispatcher40,1138
+	private ITupleSchema firstSchema,Query.firstSchema42,1176
+	private ITupleSchema firstSchema, secondSchema;Query.secondSchema42,1176
+	private WindowDefinition firstWindow,Query.firstWindow43,1225
+	private WindowDefinition firstWindow, secondWindow;Query.secondWindow43,1225
+	private QueryConf queryConf;Query.queryConf45,1279
+	private LatencyMonitor latencyMonitor;Query.latencyMonitor47,1310
+	private boolean isLeft Query.isLeft49,1351
+    private PAPIHardwareSampler [] papiSamplers;Query.papiSamplers51,1385
+	public Query Query.Query53,1435
+	public Query Query.Query63,1644
+	public Query(Query.Query74,1897
+	public Query Query.Query86,2205
+	public Query Query.Query99,2567
+	public void setName Query.setName153,3772
+	public void setSQLExpression Query.setSQLExpression157,3833
+	public String getName Query.getName161,3900
+	public String getSQLExpression Query.getSQLExpression168,4016
+	public int getId Query.getId182,4375
+	public boolean isMostUpstream Query.isMostUpstream186,4415
+	public boolean isMostDownstream Query.isMostDownstream190,4496
+	public QueryOperator getMostUpstreamOperator Query.getMostUpstreamOperator194,4581
+	public QueryOperator getMostDownstreamOperator Query.getMostDownstreamOperator198,4672
+	public QueryApplication getParent Query.getParent202,4767
+	public void setParent Query.setParent206,4828
+	public ITaskDispatcher getTaskDispatcher Query.getTaskDispatcher210,4907
+	public TaskQueue getExecutorQueue Query.getExecutorQueue214,4979
+	public WindowDefinition getWindowDefinition Query.getWindowDefinition218,5059
+	public ITupleSchema getSchema Query.getSchema222,5135
+	public WindowDefinition getFirstWindowDefinition Query.getFirstWindowDefinition226,5197
+	public ITupleSchema getFirstSchema(Query.getFirstSchema230,5288
+	public WindowDefinition getSecondWindowDefinition Query.getSecondWindowDefinition234,5354
+	public ITupleSchema getSecondSchema Query.getSecondSchema238,5437
+	public QueryConf getQueryConf Query.getQueryConf242,5506
+	public LatencyMonitor getLatencyMonitor Query.getLatencyMonitor246,5566
+	public void setup Query.setup250,5641
+	public void connectTo Query.connectTo264,5904
+	private void setUpstreamQuery Query.setUpstreamQuery279,7004
+	private void setLeft Query.setLeft292,7467
+	public boolean isLeft Query.isLeft296,7536
+	public Query getUpstreamQuery Query.getUpstreamQuery300,7585
+	public Query getUpstreamQuery Query.getUpstreamQuery304,7654
+	public Query getDownstreamQuery Query.getDownstreamQuery308,7732
+	public Query getDownstreamQuery Query.getDownstreamQuery312,7805
+	public int getNumberOfUpstreamQueries Query.getNumberOfUpstreamQueries316,7887
+	public int getNumberOfDownstreamQueries Query.getNumberOfDownstreamQueries320,7969
+	public void setAggregateOperator Query.setAggregateOperator324,8055
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/dispatchers/JoinTaskDispatcher.java,3679
+public class JoinTaskDispatcher 20,897
+	private TaskQueue workerQueue;JoinTaskDispatcher.workerQueue22,959
+	private Query parent;JoinTaskDispatcher.parent24,992
+	private IQueryBuffer firstBuffer;JoinTaskDispatcher.firstBuffer26,1016
+	private IQueryBuffer secondBuffer;JoinTaskDispatcher.secondBuffer27,1051
+	private WindowDefinition firstWindow;JoinTaskDispatcher.firstWindow29,1088
+	private ITupleSchema firstSchema;JoinTaskDispatcher.firstSchema30,1127
+	private int firstTupleSize;JoinTaskDispatcher.firstTupleSize32,1163
+	private WindowDefinition secondWindow;JoinTaskDispatcher.secondWindow34,1193
+	private ITupleSchema secondSchema;JoinTaskDispatcher.secondSchema35,1233
+	private int secondTupleSize;JoinTaskDispatcher.secondTupleSize37,1270
+	private ResultHandler handler;JoinTaskDispatcher.handler39,1301
+	private int batchSize;JoinTaskDispatcher.batchSize41,1334
+	private int nextTask JoinTaskDispatcher.nextTask43,1359
+	private int firstStartIndex JoinTaskDispatcher.firstStartIndex45,1387
+	private int firstNextIndex JoinTaskDispatcher.firstNextIndex46,1426
+	private int firstEndIndex JoinTaskDispatcher.firstEndIndex47,1465
+	private int firstLastEndIndex JoinTaskDispatcher.firstLastEndIndex48,1504
+	private int firstToProcessCount JoinTaskDispatcher.firstToProcessCount49,1543
+	private long firstNextTime;JoinTaskDispatcher.firstNextTime51,1583
+	private long firstEndTime;JoinTaskDispatcher.firstEndTime52,1612
+	private int secondStartIndex JoinTaskDispatcher.secondStartIndex54,1641
+	private int secondNextIndex JoinTaskDispatcher.secondNextIndex55,1680
+	private int secondLastEndIndex JoinTaskDispatcher.secondLastEndIndex56,1719
+	private int secondEndIndex JoinTaskDispatcher.secondEndIndex57,1758
+	private int secondToProcessCount JoinTaskDispatcher.secondToProcessCount58,1797
+	private long secondNextTime;JoinTaskDispatcher.secondNextTime60,1837
+	private long secondEndTime;JoinTaskDispatcher.secondEndTime61,1867
+	private int mask;JoinTaskDispatcher.mask63,1897
+	private int latencyMark JoinTaskDispatcher.latencyMark65,1917
+	private Object lock JoinTaskDispatcher.lock67,1949
+    public JoinTaskDispatcher JoinTaskDispatcher.JoinTaskDispatcher69,1987
+	public void setup JoinTaskDispatcher.setup100,2923
+	public void dispatch JoinTaskDispatcher.dispatch105,3061
+	public boolean tryDispatch JoinTaskDispatcher.tryDispatch113,3235
+	public void dispatchToFirstStream JoinTaskDispatcher.dispatchToFirstStream122,3425
+	public boolean tryDispatchToFirstStream JoinTaskDispatcher.tryDispatchToFirstStream126,3520
+	public void dispatchToSecondStream JoinTaskDispatcher.dispatchToSecondStream130,3631
+	public boolean tryDispatchToSecondStream JoinTaskDispatcher.tryDispatchToSecondStream138,3821
+	public IQueryBuffer getBuffer JoinTaskDispatcher.getBuffer147,4027
+	public IQueryBuffer getFirstBuffer JoinTaskDispatcher.getFirstBuffer151,4089
+	public IQueryBuffer getSecondBuffer JoinTaskDispatcher.getSecondBuffer155,4156
+	public long getBytesGenerated JoinTaskDispatcher.getBytesGenerated159,4225
+	public ResultHandler getHandler JoinTaskDispatcher.getHandler163,4305
+	public void setAggregateOperator JoinTaskDispatcher.setAggregateOperator167,4365
+	private void assembleFirst JoinTaskDispatcher.assembleFirst171,4537
+	private void assembleSecond JoinTaskDispatcher.assembleSecond229,6175
+	private static int normaliseIndex JoinTaskDispatcher.normaliseIndex276,7523
+	private void createTask JoinTaskDispatcher.createTask282,7660
+	private int getTaskNumber JoinTaskDispatcher.getTaskNumber405,10675
+	private long getTimestamp JoinTaskDispatcher.getTimestamp412,10802
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/dispatchers/ITaskDispatcher.java,40
+public interface ITaskDispatcher 7,228
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/dispatchers/TaskDispatcher.java,1964
+public class TaskDispatcher 19,827
+	private TaskQueue workerQueue;TaskDispatcher.workerQueue21,885
+	private IQueryBuffer buffer;TaskDispatcher.buffer23,918
+	private WindowDefinition window;TaskDispatcher.window25,949
+	private ITupleSchema schema;TaskDispatcher.schema26,983
+	private ResultHandler handler;TaskDispatcher.handler28,1014
+	private Query parent;TaskDispatcher.parent30,1047
+	private int batchSize;TaskDispatcher.batchSize32,1071
+	private int tupleSize;TaskDispatcher.tupleSize33,1095
+	private int nextTask TaskDispatcher.nextTask36,1143
+	private long f;TaskDispatcher.f39,1187
+	private long mask;TaskDispatcher.mask40,1204
+	private int latencyMark;TaskDispatcher.latencyMark42,1225
+	private long accumulated TaskDispatcher.accumulated44,1252
+	private long thisBatchStartPointer;TaskDispatcher.thisBatchStartPointer46,1284
+	private long nextBatchEndPointer;TaskDispatcher.nextBatchEndPointer47,1321
+	public TaskDispatcher TaskDispatcher.TaskDispatcher49,1357
+	public void setup TaskDispatcher.setup78,2125
+	public void dispatch TaskDispatcher.dispatch84,2321
+	public boolean tryDispatch TaskDispatcher.tryDispatch92,2485
+	public void dispatchToFirstStream TaskDispatcher.dispatchToFirstStream101,2665
+	public boolean tryDispatchToFirstStream TaskDispatcher.tryDispatchToFirstStream105,2759
+	public void dispatchToSecondStream TaskDispatcher.dispatchToSecondStream109,2869
+	public boolean tryDispatchToSecondStream TaskDispatcher.tryDispatchToSecondStream114,3034
+	public IQueryBuffer getBuffer TaskDispatcher.getBuffer119,3204
+	public IQueryBuffer getFirstBuffer TaskDispatcher.getFirstBuffer123,3261
+	public IQueryBuffer getSecondBuffer TaskDispatcher.getSecondBuffer127,3328
+	public long getBytesGenerated TaskDispatcher.getBytesGenerated131,3389
+	public ResultHandler getHandler TaskDispatcher.getHandler135,3469
+	public void setAggregateOperator TaskDispatcher.setAggregateOperator139,3529
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/JenkinsHashFunctions.java,223
+public class JenkinsHashFunctions 3,44
+	private static final int rotate JenkinsHashFunctions.rotate5,82
+	public static int hash JenkinsHashFunctions.hash10,193
+	public static int hash JenkinsHashFunctions.hash15,303
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/CircularBufferWorker.java,705
+public class CircularBufferWorker 12,435
+	private CircularQueryBuffer circularBuffer;CircularBufferWorker.circularBuffer14,492
+	volatile boolean started CircularBufferWorker.started15,537
+	private final int id;CircularBufferWorker.id16,572
+	public int value CircularBufferWorker.value17,595
+	private ByteBuffer helper;CircularBufferWorker.helper18,618
+    PAPIHardwareSampler hwPAPI;CircularBufferWorker.hwPAPI19,646
+	public CircularBufferWorker CircularBufferWorker.CircularBufferWorker21,679
+    public CircularBufferWorker CircularBufferWorker.CircularBufferWorker25,799
+	public void configure CircularBufferWorker.configure34,1114
+	public void run(CircularBufferWorker.run39,1158
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/UnboundedQueryBufferFactory.java,546
+public class UnboundedQueryBufferFactory 8,196
+	private static final int _pool_size UnboundedQueryBufferFactory._pool_size10,243
+	private static final int _buffer_size UnboundedQueryBufferFactory._buffer_size12,313
+	public static AtomicLong count UnboundedQueryBufferFactory.count14,392
+	private static ConcurrentLinkedQueue<IQueryBuffer> pool UnboundedQueryBufferFactory.pool16,450
+	public static IQueryBuffer newInstance UnboundedQueryBufferFactory.newInstance29,746
+	public static void free UnboundedQueryBufferFactory.free39,995
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/IQueryBuffer.java,36
+public interface IQueryBuffer 5,77
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/PaddedAtomicLong.java,615
+public class PaddedAtomicLong 4,91
+	private static final long serialVersionUID PaddedAtomicLong.serialVersionUID6,143
+	public PaddedAtomicLong PaddedAtomicLong.PaddedAtomicLong8,194
+	public volatile long _2,PaddedAtomicLong._212,261
+	public volatile long _2, _3,PaddedAtomicLong._312,261
+	public volatile long _2, _3, _4,PaddedAtomicLong._412,261
+	public volatile long _2, _3, _4, _5,PaddedAtomicLong._512,261
+	public volatile long _2, _3, _4, _5, _6,PaddedAtomicLong._612,261
+	public volatile long _2, _3, _4, _5, _6, _7 PaddedAtomicLong._712,261
+	public long dummy PaddedAtomicLong.dummy14,314
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/RelationalTableQueryBuffer.java,3900
+public class RelationalTableQueryBuffer 8,166
+	private static final int _default_capacity RelationalTableQueryBuffer._default_capacity10,234
+	private int id;RelationalTableQueryBuffer.id12,323
+	private boolean isDirect RelationalTableQueryBuffer.isDirect14,342
+	private byte [] data RelationalTableQueryBuffer.data16,379
+	private int size;RelationalTableQueryBuffer.size18,411
+	private final PaddedAtomicLong start;RelationalTableQueryBuffer.start20,432
+	private final PaddedAtomicLong end;RelationalTableQueryBuffer.end21,471
+	private long mask;RelationalTableQueryBuffer.mask23,510
+	private long wraps;RelationalTableQueryBuffer.wraps24,530
+	private ByteBuffer buffer;RelationalTableQueryBuffer.buffer26,553
+	private AtomicLong bytesProcessed;RelationalTableQueryBuffer.bytesProcessed28,583
+	private PaddedLong h;RelationalTableQueryBuffer.h30,621
+	private static int nextPowerOfTwo RelationalTableQueryBuffer.nextPowerOfTwo32,646
+	public RelationalTableQueryBuffer RelationalTableQueryBuffer.RelationalTableQueryBuffer37,763
+	public RelationalTableQueryBuffer RelationalTableQueryBuffer.RelationalTableQueryBuffer42,856
+	public RelationalTableQueryBuffer RelationalTableQueryBuffer.RelationalTableQueryBuffer47,954
+	public int getInt RelationalTableQueryBuffer.getInt84,1833
+	public float getFloat RelationalTableQueryBuffer.getFloat89,1918
+	public long getLong RelationalTableQueryBuffer.getLong94,2009
+	public long getMSBLongLong RelationalTableQueryBuffer.getMSBLongLong99,2097
+	public long getLSBLongLong RelationalTableQueryBuffer.getLSBLongLong104,2190
+	public byte [] array RelationalTableQueryBuffer.array109,2287
+	public ByteBuffer getByteBuffer RelationalTableQueryBuffer.getByteBuffer117,2453
+	public int capacity RelationalTableQueryBuffer.capacity121,2513
+	public int remaining RelationalTableQueryBuffer.remaining125,2559
+	public boolean hasRemaining RelationalTableQueryBuffer.hasRemaining136,2746
+	public boolean hasRemaining RelationalTableQueryBuffer.hasRemaining140,2813
+	public int limit RelationalTableQueryBuffer.limit145,2899
+	public void close RelationalTableQueryBuffer.close149,2942
+	public void clear RelationalTableQueryBuffer.clear153,2981
+	public int putInt RelationalTableQueryBuffer.putInt157,3020
+	public int putInt RelationalTableQueryBuffer.putInt162,3160
+	public int putFloat RelationalTableQueryBuffer.putFloat167,3311
+	public int putFloat RelationalTableQueryBuffer.putFloat172,3455
+	public int putLong RelationalTableQueryBuffer.putLong177,3610
+	public int putLong RelationalTableQueryBuffer.putLong182,3752
+	public int putLongLong RelationalTableQueryBuffer.putLongLong187,3904
+	public int putLongLong RelationalTableQueryBuffer.putLongLong192,4060
+	public int put RelationalTableQueryBuffer.put197,4227
+	public int put RelationalTableQueryBuffer.put202,4308
+	public int put RelationalTableQueryBuffer.put239,5282
+	public int put RelationalTableQueryBuffer.put247,5533
+	public int put RelationalTableQueryBuffer.put252,5612
+	public void free RelationalTableQueryBuffer.free260,5876
+	public void release RelationalTableQueryBuffer.release278,6252
+	public int normalise RelationalTableQueryBuffer.normalise282,6295
+	public long getBytesProcessed RelationalTableQueryBuffer.getBytesProcessed287,6404
+	public long getWraps RelationalTableQueryBuffer.getWraps292,6480
+	public void debug RelationalTableQueryBuffer.debug297,6531
+	public void appendBytesTo RelationalTableQueryBuffer.appendBytesTo306,6891
+	public void appendBytesTo RelationalTableQueryBuffer.appendBytesTo316,7174
+	public int position RelationalTableQueryBuffer.position332,7639
+	public void position(RelationalTableQueryBuffer.position337,7778
+	public boolean isDirect RelationalTableQueryBuffer.isDirect342,7927
+	public int getBufferId RelationalTableQueryBuffer.getBufferId347,7989
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/PartialWindowResults.java,1237
+public class PartialWindowResults 7,119
+	private static final int N PartialWindowResults.N9,156
+	int pid;PartialWindowResults.pid11,215
+	IQueryBuffer buffer;PartialWindowResults.buffer13,277
+	boolean empty;PartialWindowResults.empty15,355
+	int size;PartialWindowResults.size17,372
+	public int count;PartialWindowResults.count18,383
+	int [] startPointers;PartialWindowResults.startPointers20,403
+	public PartialWindowResults PartialWindowResults.PartialWindowResults22,427
+	public IQueryBuffer getBuffer PartialWindowResults.getBuffer35,666
+	public boolean isEmpty PartialWindowResults.isEmpty41,800
+	public void release PartialWindowResults.release48,915
+	public void init PartialWindowResults.init57,1106
+	public void nullify PartialWindowResults.nullify62,1168
+	public void increment PartialWindowResults.increment71,1324
+	public int getStartPointer PartialWindowResults.getStartPointer79,1622
+	public int numberOfWindows PartialWindowResults.numberOfWindows85,1823
+	public void append PartialWindowResults.append89,1876
+	public void append PartialWindowResults.append97,2155
+	public void prepend PartialWindowResults.prepend108,2598
+	public void setCount PartialWindowResults.setCount152,3937
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/PaddedLong.java,505
+public class PaddedLong 3,44
+	public long value;PaddedLong.value5,72
+	public PaddedLong PaddedLong.PaddedLong7,94
+	public volatile long _2,PaddedLong._211,155
+	public volatile long _2, _3,PaddedLong._311,155
+	public volatile long _2, _3, _4,PaddedLong._411,155
+	public volatile long _2, _3, _4, _5,PaddedLong._511,155
+	public volatile long _2, _3, _4, _5, _6,PaddedLong._611,155
+	public volatile long _2, _3, _4, _5, _6, _7 PaddedLong._711,155
+	public long dummy PaddedLong.dummy13,208
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/WindowHashTable.java,1780
+public class WindowHashTable 7,119
+	public static final int TSTAMP_OFFSET WindowHashTable.TSTAMP_OFFSET9,151
+	public static final int KEY_OFFSET WindowHashTable.KEY_OFFSET10,195
+	public static final int N WindowHashTable.N13,297
+	ByteBuffer content;WindowHashTable.content15,355
+	int id;WindowHashTable.id17,377
+	long autoIndex;WindowHashTable.autoIndex19,387
+	int keyLength,WindowHashTable.keyLength21,405
+	int keyLength, valueLength,WindowHashTable.valueLength21,405
+	int keyLength, valueLength, tupleLength;WindowHashTable.tupleLength21,405
+	int slots WindowHashTable.slots23,448
+	public int numberOfSlots WindowHashTable.numberOfSlots25,465
+	public boolean isInitialised WindowHashTable.isInitialised29,516
+	public WindowHashTable WindowHashTable.WindowHashTable33,578
+	public int getId WindowHashTable.getId47,850
+	public void setId WindowHashTable.setId51,890
+	public long getAutoIndex WindowHashTable.getAutoIndex55,940
+	public ByteBuffer getBuffer WindowHashTable.getBuffer59,995
+	public String toString WindowHashTable.toString63,1051
+	public int getTimestampOffset WindowHashTable.getTimestampOffset68,1209
+	public int getKeyOffset WindowHashTable.getKeyOffset72,1288
+	public int getValueOffset WindowHashTable.getValueOffset76,1358
+	public int getCountOffset WindowHashTable.getCountOffset80,1442
+	public int getIntermediateTupleSize WindowHashTable.getIntermediateTupleSize84,1540
+	public void setTupleLength WindowHashTable.setTupleLength88,1608
+	private int getNext WindowHashTable.getNext101,2121
+	public int getIndex WindowHashTable.getIndex105,2198
+	private int compare WindowHashTable.compare127,2672
+	public void clear WindowHashTable.clear141,2997
+	public void release WindowHashTable.release150,3180
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/Latch.java,295
+public class Latch 5,95
+	AtomicInteger latch;Latch.latch7,117
+	public Latch Latch.Latch9,141
+    public void setLatch Latch.setLatch13,214
+    public int incReaders Latch.incReaders20,416
+    public int decReaders Latch.decReaders33,811
+    public int getCount Latch.getCount40,991
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/WindowHashTableFactory.java,552
+public class WindowHashTableFactory 8,189
+	private static final int N WindowHashTableFactory.N10,229
+	private static long idx WindowHashTableFactory.idx12,281
+	private static int _pool_size WindowHashTableFactory._pool_size14,313
+	public static AtomicLong count;WindowHashTableFactory.count16,351
+	public static ConcurrentLinkedQueue<WindowHashTable> [] pool WindowHashTableFactory.pool19,418
+	public static WindowHashTable newInstance WindowHashTableFactory.newInstance36,824
+	public static void free WindowHashTableFactory.free48,1064
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/WindowHashTableWrapper.java,1692
+public class WindowHashTableWrapper 7,119
+	public static final int TSTAMP_OFFSET WindowHashTableWrapper.TSTAMP_OFFSET9,159
+	public static final int KEY_OFFSET WindowHashTableWrapper.KEY_OFFSET10,203
+	public static final int N WindowHashTableWrapper.N13,306
+	ByteBuffer content;WindowHashTableWrapper.content15,365
+	int start,WindowHashTableWrapper.start17,388
+	int start, end;WindowHashTableWrapper.end17,388
+	int keyLength,WindowHashTableWrapper.keyLength19,407
+	int keyLength, valueLength,WindowHashTableWrapper.valueLength19,407
+	int keyLength, valueLength, tupleLength;WindowHashTableWrapper.tupleLength19,407
+	int slots;WindowHashTableWrapper.slots21,451
+	public int numberOfSlots WindowHashTableWrapper.numberOfSlots23,465
+	public boolean isInitialised WindowHashTableWrapper.isInitialised27,517
+	public WindowHashTableWrapper WindowHashTableWrapper.WindowHashTableWrapper31,580
+	public void configure WindowHashTableWrapper.configure38,716
+	public int getTimestampOffset WindowHashTableWrapper.getTimestampOffset58,1266
+	public ByteBuffer getContent WindowHashTableWrapper.getContent62,1346
+	public int getKeyOffset WindowHashTableWrapper.getKeyOffset66,1409
+	public int getValueOffset WindowHashTableWrapper.getValueOffset70,1480
+	public int getCountOffset WindowHashTableWrapper.getCountOffset74,1565
+	public int getIntermediateTupleSize WindowHashTableWrapper.getIntermediateTupleSize78,1664
+	public int getNext WindowHashTableWrapper.getNext83,1770
+	public int getIndex WindowHashTableWrapper.getIndex87,1857
+	public int findIndex WindowHashTableWrapper.findIndex110,2404
+	private int compare WindowHashTableWrapper.compare130,2868
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/CircularQueryBuffer.java,4431
+public class CircularQueryBuffer 10,327
+	private static final int _default_capacity CircularQueryBuffer._default_capacity12,387
+	private int id;CircularQueryBuffer.id14,467
+	private boolean isDirect CircularQueryBuffer.isDirect16,485
+	private byte [] data CircularQueryBuffer.data18,521
+	public int size;CircularQueryBuffer.size20,552
+	private final PaddedAtomicLong start;CircularQueryBuffer.start22,571
+	private final PaddedAtomicLong end;CircularQueryBuffer.end23,610
+	private long mask;CircularQueryBuffer.mask25,648
+	private long wraps;CircularQueryBuffer.wraps26,668
+	private ByteBuffer buffer;CircularQueryBuffer.buffer28,690
+	private AtomicLong bytesProcessed;CircularQueryBuffer.bytesProcessed30,719
+	private PaddedLong h;CircularQueryBuffer.h32,756
+	public boolean isParallel;CircularQueryBuffer.isParallel35,829
+	private CircularBufferWorker [] workers;CircularQueryBuffer.workers36,857
+	public AtomicInteger isReady;CircularQueryBuffer.isReady37,899
+	public Latch isBufferFilledLatch;CircularQueryBuffer.isBufferFilledLatch38,930
+	public long timestamp CircularQueryBuffer.timestamp39,965
+	public long timestampBase CircularQueryBuffer.timestampBase40,993
+	public int globalIndex;CircularQueryBuffer.globalIndex41,1025
+	public int globalLength;CircularQueryBuffer.globalLength42,1050
+	public int numberOfThreads;CircularQueryBuffer.numberOfThreads43,1076
+	private boolean isFirst CircularQueryBuffer.isFirst44,1105
+	public int counter CircularQueryBuffer.counter45,1138
+	public byte[] inputBuffer;CircularQueryBuffer.inputBuffer46,1164
+	public CountDownLatch latch;CircularQueryBuffer.latch47,1192
+	private static int nextPowerOfTwo CircularQueryBuffer.nextPowerOfTwo50,1242
+	public CircularQueryBuffer CircularQueryBuffer.CircularQueryBuffer55,1356
+	public CircularQueryBuffer CircularQueryBuffer.CircularQueryBuffer60,1439
+	public CircularQueryBuffer CircularQueryBuffer.CircularQueryBuffer65,1527
+    public CircularQueryBuffer(CircularQueryBuffer.CircularQueryBuffer69,1640
+	public int getInt CircularQueryBuffer.getInt125,3317
+	public float getFloat CircularQueryBuffer.getFloat130,3399
+	public long getLong CircularQueryBuffer.getLong135,3487
+	public long getMSBLongLong CircularQueryBuffer.getMSBLongLong140,3572
+	public long getLSBLongLong CircularQueryBuffer.getLSBLongLong145,3664
+	public byte [] array CircularQueryBuffer.array150,3760
+	public ByteBuffer getByteBuffer CircularQueryBuffer.getByteBuffer158,3921
+	public int capacity CircularQueryBuffer.capacity162,3980
+	public int remaining CircularQueryBuffer.remaining166,4025
+	public boolean hasRemaining CircularQueryBuffer.hasRemaining177,4207
+	public boolean hasRemaining CircularQueryBuffer.hasRemaining181,4273
+	public int limit CircularQueryBuffer.limit186,4356
+	public void close CircularQueryBuffer.close190,4398
+	public void clear CircularQueryBuffer.clear194,4436
+	public int putInt CircularQueryBuffer.putInt198,4474
+	public int putInt CircularQueryBuffer.putInt203,4603
+	public int putFloat CircularQueryBuffer.putFloat208,4743
+	public int putFloat CircularQueryBuffer.putFloat213,4876
+	public int putLong CircularQueryBuffer.putLong218,5020
+	public int putLong CircularQueryBuffer.putLong223,5151
+	public int putLongLong CircularQueryBuffer.putLongLong228,5293
+	public int putLongLong CircularQueryBuffer.putLongLong233,5446
+	public int put CircularQueryBuffer.put238,5610
+	public int put CircularQueryBuffer.put243,5688
+	public int put CircularQueryBuffer.put247,5773
+	public int put CircularQueryBuffer.put313,7400
+	public int put CircularQueryBuffer.put318,7476
+	public void free CircularQueryBuffer.free323,7592
+	public void release CircularQueryBuffer.release341,7961
+	public int normalise CircularQueryBuffer.normalise345,8002
+	public long getBytesProcessed CircularQueryBuffer.getBytesProcessed350,8107
+	public long getWraps CircularQueryBuffer.getWraps355,8179
+	public void debug CircularQueryBuffer.debug360,8227
+	public void appendBytesTo CircularQueryBuffer.appendBytesTo369,8586
+	public void appendBytesTo CircularQueryBuffer.appendBytesTo379,8862
+	public int position CircularQueryBuffer.position395,9313
+	public void position(CircularQueryBuffer.position400,9442
+	public boolean isDirect CircularQueryBuffer.isDirect405,9580
+	public int getBufferId CircularQueryBuffer.getBufferId410,9639
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/PartialWindowResultsFactory.java,536
+public class PartialWindowResultsFactory 8,189
+	public static final int N PartialWindowResultsFactory.N10,234
+	private static int _pool_size PartialWindowResultsFactory._pool_size12,285
+	public static AtomicLong count;PartialWindowResultsFactory.count14,323
+	public static ConcurrentLinkedQueue<PartialWindowResults> [] pool PartialWindowResultsFactory.pool17,390
+	public static PartialWindowResults newInstance PartialWindowResultsFactory.newInstance33,849
+	public static void free PartialWindowResultsFactory.free44,1076
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/buffers/UnboundedQueryBuffer.java,2540
+public class UnboundedQueryBuffer 6,119
+	private int id;UnboundedQueryBuffer.id8,183
+	ByteBuffer buffer;UnboundedQueryBuffer.buffer10,204
+	private boolean isDirect;UnboundedQueryBuffer.isDirect12,228
+	public UnboundedQueryBuffer UnboundedQueryBuffer.UnboundedQueryBuffer14,259
+	public int getInt UnboundedQueryBuffer.getInt29,620
+	public float getFloat UnboundedQueryBuffer.getFloat34,700
+	public long getLong UnboundedQueryBuffer.getLong39,786
+	public long getMSBLongLong UnboundedQueryBuffer.getMSBLongLong44,869
+	public long getLSBLongLong UnboundedQueryBuffer.getLSBLongLong49,967
+	public byte [] array UnboundedQueryBuffer.array54,1069
+	public ByteBuffer getByteBuffer UnboundedQueryBuffer.getByteBuffer62,1253
+	public int capacity UnboundedQueryBuffer.capacity67,1322
+	public int remaining UnboundedQueryBuffer.remaining72,1390
+	public boolean hasRemaining UnboundedQueryBuffer.hasRemaining77,1460
+	public int position(UnboundedQueryBuffer.position82,1540
+	public int limit UnboundedQueryBuffer.limit87,1606
+	public void close UnboundedQueryBuffer.close92,1668
+	public void clear UnboundedQueryBuffer.clear97,1723
+	@SuppressWarnings(UnboundedQueryBuffer.@SuppressWarnings102,1778
+	public int putInt UnboundedQueryBuffer.putInt113,1986
+	@SuppressWarnings(UnboundedQueryBuffer.@SuppressWarnings119,2087
+	public int putFloat UnboundedQueryBuffer.putFloat130,2301
+	@SuppressWarnings(UnboundedQueryBuffer.@SuppressWarnings136,2408
+	public int putLong UnboundedQueryBuffer.putLong147,2618
+	@SuppressWarnings(UnboundedQueryBuffer.@SuppressWarnings153,2722
+	public int putLongLong UnboundedQueryBuffer.putLongLong165,2987
+	@SuppressWarnings(UnboundedQueryBuffer.@SuppressWarnings172,3156
+	public int put UnboundedQueryBuffer.put183,3363
+	public int put UnboundedQueryBuffer.put189,3480
+	public int put UnboundedQueryBuffer.put195,3580
+	public int put UnboundedQueryBuffer.put199,3674
+	public void free UnboundedQueryBuffer.free204,3792
+	public void release(UnboundedQueryBuffer.release209,3932
+	public void appendBytesTo UnboundedQueryBuffer.appendBytesTo214,4012
+	public void appendBytesTo UnboundedQueryBuffer.appendBytesTo224,4350
+	public void position UnboundedQueryBuffer.position232,4623
+	public int normalise UnboundedQueryBuffer.normalise237,4697
+	public long getBytesProcessed UnboundedQueryBuffer.getBytesProcessed241,4765
+	public boolean isDirect UnboundedQueryBuffer.isDirect246,4903
+	public int getBufferId UnboundedQueryBuffer.getBufferId251,4964
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/udfs/YahooBenchmarkOp.java,3673
+public class YahooBenchmarkOp 31,1483
+	private static final boolean debug YahooBenchmarkOp.debug33,1562
+	private static boolean monitorSelectivity YahooBenchmarkOp.monitorSelectivity35,1609
+	private long invoked YahooBenchmarkOp.invoked37,1663
+	private long matched YahooBenchmarkOp.matched38,1691
+	private IQueryBuffer relationBuffer;YahooBenchmarkOp.relationBuffer40,1721
+	private WindowDefinition windowDefinition;YahooBenchmarkOp.windowDefinition42,1761
+	private IPredicate selectPredicate YahooBenchmarkOp.selectPredicate44,1807
+	private Expression [] expressions;YahooBenchmarkOp.expressions46,1853
+	private ITupleSchema projectedSchema;YahooBenchmarkOp.projectedSchema48,1891
+	private IPredicate joinPredicate YahooBenchmarkOp.joinPredicate50,1932
+	private ITupleSchema joinedSchema;YahooBenchmarkOp.joinedSchema52,1976
+	private ITupleSchema relationSchema;YahooBenchmarkOp.relationSchema54,2014
+	private ITupleSchema outputSchema;YahooBenchmarkOp.outputSchema56,2054
+	private boolean incrementalProcessing;YahooBenchmarkOp.incrementalProcessing58,2092
+	private AggregationType [] aggregationTypes;YahooBenchmarkOp.aggregationTypes60,2134
+	private FloatColumnReference [] aggregationAttributes;YahooBenchmarkOp.aggregationAttributes62,2181
+	private LongColumnReference timestampReference;YahooBenchmarkOp.timestampReference64,2239
+	private Expression [] groupByAttributes;YahooBenchmarkOp.groupByAttributes66,2290
+	private boolean groupBy YahooBenchmarkOp.groupBy67,2332
+	private int keyLength,YahooBenchmarkOp.keyLength69,2368
+	private int keyLength, valueLength;YahooBenchmarkOp.valueLength69,2368
+	private boolean isV2 YahooBenchmarkOp.isV271,2407
+	private ThreadLocal<float   []> tl_values;YahooBenchmarkOp.tl_values74,2469
+	private ThreadLocal<int     []> tl_counts;YahooBenchmarkOp.tl_counts75,2513
+	private ThreadLocal<byte    []> tl_tuplekey;YahooBenchmarkOp.tl_tuplekey76,2557
+	private ThreadLocal<boolean []> tl_found;YahooBenchmarkOp.tl_found77,2603
+	private HashMap hashMap;YahooBenchmarkOp.hashMap80,2696
+	public YahooBenchmarkOp YahooBenchmarkOp.YahooBenchmarkOp82,2724
+	public YahooBenchmarkOp YahooBenchmarkOp.YahooBenchmarkOp100,3375
+	public boolean hasGroupBy YahooBenchmarkOp.hasGroupBy244,8024
+	public ITupleSchema getOutputSchema YahooBenchmarkOp.getOutputSchema249,8089
+	public int getKeyLength(YahooBenchmarkOp.getKeyLength254,8169
+	public int getValueLength(YahooBenchmarkOp.getValueLength259,8233
+	public int numberOfValues(YahooBenchmarkOp.numberOfValues264,8301
+	public AggregationType getAggregationType(YahooBenchmarkOp.getAggregationType269,8386
+	public AggregationType getAggregationType(YahooBenchmarkOp.getAggregationType274,8481
+	public void processData(YahooBenchmarkOp.processData281,8721
+	private void calc(YahooBenchmarkOp.calc346,10394
+	private void select(YahooBenchmarkOp.select381,11567
+	private void project YahooBenchmarkOp.project411,12431
+	private void hashJoin YahooBenchmarkOp.hashJoin444,13495
+	private void setGroupByKey YahooBenchmarkOp.setGroupByKey559,17270
+	private void processDataPerWindowWithGroupBy YahooBenchmarkOp.processDataPerWindowWithGroupBy566,17539
+	private void evaluateWindow YahooBenchmarkOp.evaluateWindow730,23188
+	private void processDataPerWindowIncrementallyWithGroupBy YahooBenchmarkOp.processDataPerWindowIncrementallyWithGroupBy828,26231
+	public void processData(YahooBenchmarkOp.processData834,26453
+	public void configureOutput YahooBenchmarkOp.configureOutput840,26647
+	public void processOutput(YahooBenchmarkOp.processOutput846,26824
+	public void setup(YahooBenchmarkOp.setup852,27015
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/udfs/MonetDBComparisonThetaJoinKernel.java,2956
+public class MonetDBComparisonThetaJoinKernel 22,979
+	private static boolean debug MonetDBComparisonThetaJoinKernel.debug24,1054
+	private static boolean print MonetDBComparisonThetaJoinKernel.print25,1093
+	private static boolean isFirst MonetDBComparisonThetaJoinKernel.isFirst27,1134
+	private static final int numberOfThreadsPerGroup MonetDBComparisonThetaJoinKernel.numberOfThreadsPerGroup29,1176
+	private static final int numberOfTuplesPerThread MonetDBComparisonThetaJoinKernel.numberOfTuplesPerThread30,1233
+	private int qid;MonetDBComparisonThetaJoinKernel.qid32,1292
+	private static String filename MonetDBComparisonThetaJoinKernel.filename34,1312
+	private ITupleSchema left,MonetDBComparisonThetaJoinKernel.left36,1410
+	private ITupleSchema left, right;MonetDBComparisonThetaJoinKernel.right36,1410
+	private ITupleSchema outputSchema;MonetDBComparisonThetaJoinKernel.outputSchema37,1445
+	private IPredicate predicate;MonetDBComparisonThetaJoinKernel.predicate39,1483
+	private String customPredicate;MonetDBComparisonThetaJoinKernel.customPredicate40,1514
+	private String customCopy MonetDBComparisonThetaJoinKernel.customCopy42,1549
+	private int batchSize,MonetDBComparisonThetaJoinKernel.batchSize44,1586
+	private int batchSize, outputSize;MonetDBComparisonThetaJoinKernel.outputSize44,1586
+	private int [] args;MonetDBComparisonThetaJoinKernel.args46,1624
+	private int [] threads;MonetDBComparisonThetaJoinKernel.threads48,1648
+	private int [] threadsPerGroup;MonetDBComparisonThetaJoinKernel.threadsPerGroup49,1673
+	private int records,MonetDBComparisonThetaJoinKernel.records51,1708
+	private int records, numberOfThreadGroups;MonetDBComparisonThetaJoinKernel.numberOfThreadGroups51,1708
+	IQueryBuffer startPointers,MonetDBComparisonThetaJoinKernel.startPointers53,1754
+	IQueryBuffer startPointers, endPointers;MonetDBComparisonThetaJoinKernel.endPointers53,1754
+	private boolean isPowerOfTwo MonetDBComparisonThetaJoinKernel.isPowerOfTwo55,1798
+	public MonetDBComparisonThetaJoinKernel MonetDBComparisonThetaJoinKernel.MonetDBComparisonThetaJoinKernel66,1963
+	public void setup MonetDBComparisonThetaJoinKernel.setup142,4461
+	public void processData MonetDBComparisonThetaJoinKernel.processData166,5435
+	public void configureOutput MonetDBComparisonThetaJoinKernel.configureOutput222,7179
+	public void processOutput MonetDBComparisonThetaJoinKernel.processOutput228,7371
+	public void processData(MonetDBComparisonThetaJoinKernel.processData239,7705
+	private void clearPointers MonetDBComparisonThetaJoinKernel.clearPointers244,7874
+	private void normalisePointers MonetDBComparisonThetaJoinKernel.normalisePointers255,8101
+	private void printPointers MonetDBComparisonThetaJoinKernel.printPointers267,8500
+	private void computePointers MonetDBComparisonThetaJoinKernel.computePointers277,8826
+	private long getTimestamp MonetDBComparisonThetaJoinKernel.getTimestamp414,13227
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/udfs/LinearRoadBenchmarkOp.java,2941
+public class LinearRoadBenchmarkOp 36,1883
+	private static final boolean DEBUG LinearRoadBenchmarkOp.DEBUG38,1946
+	private ITupleSchema outputSchema;LinearRoadBenchmarkOp.outputSchema40,1992
+    private ITupleSchema projectedSchema;LinearRoadBenchmarkOp.projectedSchema41,2028
+    private ConcurrentHashMap<LinearRoadBenchmarkOp.ConcurrentHashMap43,2071
+    private ConcurrentHashMap<Integer, Accident> accidents;LinearRoadBenchmarkOp.accidents43,2071
+    private ConcurrentHashMap<LinearRoadBenchmarkOp.ConcurrentHashMap44,2131
+    private ConcurrentHashMap<Integer, AvgSpeed> avgSpeed;LinearRoadBenchmarkOp.avgSpeed44,2131
+    private ConcurrentHashMap<LinearRoadBenchmarkOp.ConcurrentHashMap45,2190
+    private ConcurrentHashMap<Integer, StopTuple> stopMap;LinearRoadBenchmarkOp.stopMap45,2190
+    private Expression[] expressions LinearRoadBenchmarkOp.expressions47,2250
+	private IPredicate selectPredicate LinearRoadBenchmarkOp.selectPredicate48,2295
+	private Expression [] groupByAttributes;LinearRoadBenchmarkOp.groupByAttributes49,2339
+	private boolean groupBy LinearRoadBenchmarkOp.groupBy50,2381
+    private AggregationType [] aggregationTypes;LinearRoadBenchmarkOp.aggregationTypes52,2416
+	private FloatColumnReference [] aggregationAttributes;LinearRoadBenchmarkOp.aggregationAttributes53,2465
+	private ThreadLocal<float   []> tl_values;LinearRoadBenchmarkOp.tl_values55,2522
+	private ThreadLocal<int     []> tl_counts;LinearRoadBenchmarkOp.tl_counts56,2566
+	private ThreadLocal<byte    []> tl_tuplekey;LinearRoadBenchmarkOp.tl_tuplekey57,2610
+	private ThreadLocal<boolean []> tl_found;LinearRoadBenchmarkOp.tl_found58,2656
+    private int keyLength,LinearRoadBenchmarkOp.keyLength60,2700
+    private int keyLength, valueLength;LinearRoadBenchmarkOp.valueLength60,2700
+    public LinearRoadBenchmarkOp LinearRoadBenchmarkOp.LinearRoadBenchmarkOp62,2741
+	public void processData(LinearRoadBenchmarkOp.processData116,4573
+    private void select(LinearRoadBenchmarkOp.select185,7855
+    private void project(LinearRoadBenchmarkOp.project235,9623
+    private void aggregate(LinearRoadBenchmarkOp.aggregate259,10544
+    public boolean hasGroupBy(LinearRoadBenchmarkOp.hasGroupBy298,11858
+	public void processData(LinearRoadBenchmarkOp.processData302,11936
+	public void configureOutput(LinearRoadBenchmarkOp.configureOutput307,12139
+	public void processOutput(LinearRoadBenchmarkOp.processOutput312,12324
+	public void setup(LinearRoadBenchmarkOp.setup317,12524
+    private void setGroupByKey LinearRoadBenchmarkOp.setGroupByKey321,12658
+	private void processDataPerWindowWithGroupBy LinearRoadBenchmarkOp.processDataPerWindowWithGroupBy329,12970
+	private void evaluateWindow LinearRoadBenchmarkOp.evaluateWindow498,19177
+	public int numberOfValues LinearRoadBenchmarkOp.numberOfValues596,22440
+    public String toString LinearRoadBenchmarkOp.toString602,22550
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/udfs/lrb/record/StopTuple.java,218
+public class StopTuple 3,66
+    public int pos,StopTuple.pos5,92
+    public int pos, count;StopTuple.count5,92
+    public StopTuple(StopTuple.StopTuple7,120
+    public String toString(StopTuple.toString12,213
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/udfs/lrb/record/AvgSpeed.java,211
+public class AvgSpeed 3,66
+    public int speed;AvgSpeed.speed5,91
+    public int count;AvgSpeed.count6,113
+    public AvgSpeed(AvgSpeed.AvgSpeed8,136
+    public String toString(AvgSpeed.toString13,252
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/udfs/lrb/record/Accident.java,267
+public class Accident 5,96
+    public int vid1,Accident.vid17,145
+    public int vid1, vid2,Accident.vid27,145
+    public int vid1, vid2, time;Accident.time7,145
+    public Accident(Accident.Accident9,179
+    public String toString(Accident.toString15,329
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/udfs/MonetDBComparisonThetaJoin.java,1127
+public class MonetDBComparisonThetaJoin 19,890
+	private static boolean debug MonetDBComparisonThetaJoin.debug21,959
+	private static boolean monitorSelectivity MonetDBComparisonThetaJoin.monitorSelectivity22,998
+	private long invoked MonetDBComparisonThetaJoin.invoked24,1052
+	private long matched MonetDBComparisonThetaJoin.matched25,1080
+	private IPredicate predicate;MonetDBComparisonThetaJoin.predicate27,1110
+	Expression [] expressions;MonetDBComparisonThetaJoin.expressions29,1143
+	private ITupleSchema outputSchema MonetDBComparisonThetaJoin.outputSchema31,1172
+	public MonetDBComparisonThetaJoin(MonetDBComparisonThetaJoin.MonetDBComparisonThetaJoin33,1217
+	public void processData MonetDBComparisonThetaJoin.processData52,1815
+	private long getTimestamp MonetDBComparisonThetaJoin.getTimestamp266,8818
+	public void processData(MonetDBComparisonThetaJoin.processData273,9041
+	public void configureOutput MonetDBComparisonThetaJoin.configureOutput278,9209
+	public void processOutput MonetDBComparisonThetaJoin.processOutput283,9375
+	public void setup(MonetDBComparisonThetaJoin.setup288,9557
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/IFragmentWindowsOperator.java,49
+public interface IFragmentWindowsOperator 6,144
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/cpu/Aggregation.java,2869
+public class Aggregation 29,1569
+	private static final boolean debug Aggregation.debug31,1642
+	WindowDefinition windowDefinition;Aggregation.windowDefinition32,1686
+	private AggregationType [] aggregationTypes;Aggregation.aggregationTypes34,1723
+	private FloatColumnReference [] aggregationAttributes;Aggregation.aggregationAttributes36,1770
+	private LongColumnReference timestampReference;Aggregation.timestampReference38,1827
+	private Expression [] groupByAttributes;Aggregation.groupByAttributes40,1877
+	private boolean groupBy Aggregation.groupBy41,1919
+	private boolean processIncremental;Aggregation.processIncremental43,1954
+	ITupleSchema outputSchema;Aggregation.outputSchema45,1992
+	private int keyLength,Aggregation.keyLength47,2021
+	private int keyLength, valueLength;Aggregation.valueLength47,2021
+	private ThreadLocal<float   []> tl_values;Aggregation.tl_values50,2089
+	private ThreadLocal<int     []> tl_counts;Aggregation.tl_counts51,2133
+	private ThreadLocal<byte    []> tl_tuplekey;Aggregation.tl_tuplekey52,2177
+	private ThreadLocal<boolean []> tl_found;Aggregation.tl_found53,2223
+	public Aggregation Aggregation.Aggregation55,2267
+	public Aggregation Aggregation.Aggregation97,3447
+	public Aggregation Aggregation.Aggregation147,4855
+	public Aggregation Aggregation.Aggregation203,6604
+	public String toString Aggregation.toString312,10016
+	public boolean hasGroupBy Aggregation.hasGroupBy322,10460
+	public ITupleSchema getOutputSchema Aggregation.getOutputSchema326,10514
+	public int getKeyLength Aggregation.getKeyLength330,10583
+	public int getValueLength Aggregation.getValueLength334,10637
+	public int numberOfValues Aggregation.numberOfValues338,10695
+	public AggregationType getAggregationType Aggregation.getAggregationType342,10770
+	public AggregationType getAggregationType Aggregation.getAggregationType346,10855
+	public void processData Aggregation.processData352,11085
+	private void processDataPerWindow Aggregation.processDataPerWindow399,12385
+	private void processDataPerWindowIncrementally Aggregation.processDataPerWindowIncrementally531,16897
+	private void setGroupByKey Aggregation.setGroupByKey684,21929
+	private void processDataPerWindowWithGroupBy Aggregation.processDataPerWindowWithGroupBy691,22197
+	private void evaluateWindow Aggregation.evaluateWindow845,27462
+	private void processDataPerWindowIncrementallyWithGroupBy Aggregation.processDataPerWindowIncrementallyWithGroupBy938,30403
+	private void exitWindow Aggregation.exitWindow1046,34185
+	private void enterWindow Aggregation.enterWindow1094,35618
+	public void processData Aggregation.processData1174,37905
+	public void configureOutput Aggregation.configureOutput1179,38087
+	public void processOutput Aggregation.processOutput1184,38251
+	public void setup(Aggregation.setup1189,38430
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/cpu/Projection.java,601
+public class Projection 12,513
+	private Expression [] expressions;Projection.expressions14,565
+	private ITupleSchema outputSchema;Projection.outputSchema16,603
+	public Projection Projection.Projection18,641
+	public Projection Projection.Projection23,811
+	public String toString Projection.toString29,1009
+	public void processData Projection.processData38,1219
+	public void processData Projection.processData65,2098
+	public void configureOutput Projection.configureOutput70,2282
+	public void processOutput Projection.processOutput75,2448
+	public void setup(Projection.setup80,2631
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/cpu/NoOp.java,364
+public class NoOp 9,339
+	public static final boolean debug NoOp.debug11,386
+	public NoOp NoOp.NoOp13,431
+	public void processData NoOp.processData16,454
+	public void processData NoOp.processData41,1149
+	public void configureOutput NoOp.configureOutput46,1333
+	public void processOutput NoOp.processOutput51,1499
+	public void setup(NoOp.setup57,1683
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/cpu/Selection.java,465
+public class Selection 11,446
+	private IPredicate predicate;Selection.predicate13,498
+	public Selection Selection.Selection15,531
+	public String toString Selection.toString20,620
+	public void processData Selection.processData28,802
+	public void processData Selection.processData51,1485
+	public void configureOutput Selection.configureOutput56,1669
+	public void processOutput Selection.processOutput61,1835
+	public void setup(Selection.setup66,2017
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/cpu/ThetaJoin.java,780
+public class ThetaJoin 15,648
+	private static boolean debug ThetaJoin.debug17,700
+	private static boolean monitorSelectivity ThetaJoin.monitorSelectivity18,739
+	private long invoked ThetaJoin.invoked20,793
+	private long matched ThetaJoin.matched21,821
+	private IPredicate predicate;ThetaJoin.predicate23,851
+	private ITupleSchema outputSchema ThetaJoin.outputSchema25,883
+	public ThetaJoin(ThetaJoin.ThetaJoin27,928
+	public void processData ThetaJoin.processData34,1125
+	private long getTimestamp ThetaJoin.getTimestamp327,11226
+	public void processData(ThetaJoin.processData334,11449
+	public void configureOutput ThetaJoin.configureOutput339,11617
+	public void processOutput ThetaJoin.processOutput344,11783
+	public void setup(ThetaJoin.setup349,11965
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/IHashJoinOperator.java,42
+public interface IHashJoinOperator 6,144
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/AggregationType.java,890
+public enum AggregationType 3,50
+	MAX,AggregationType.MAX5,81
+	MAX, MIN,AggregationType.MIN5,81
+	MAX, MIN, CNT,AggregationType.CNT5,81
+	MAX, MIN, CNT, SUM,AggregationType.SUM5,81
+	MAX, MIN, CNT, SUM, AVG;AggregationType.AVG5,81
+	public AggregationType.public7,108
+	public static AggregationType.static7,108
+	public static AggregationType AggregationType.AggregationType7,108
+	public static AggregationType fromString AggregationType.fromString7,108
+	public static AggregationType fromString (String AggregationType.String7,108
+	public static AggregationType fromString (String s)AggregationType.s7,108
+	public AggregationType.public27,555
+	public String AggregationType.String27,555
+	public String asString AggregationType.asString27,555
+	public String asString (String AggregationType.String27,555
+	public String asString (String s)AggregationType.s27,555
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/IOperatorCode.java,38
+public interface IOperatorCode 6,148
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/IAggregateOperator.java,42
+public interface IAggregateOperator 5,98
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/ProjectionKernel.java,1487
+public class ProjectionKernel 15,691
+	private static final int numberOfThreadsPerGroup ProjectionKernel.numberOfThreadsPerGroup17,750
+	private int qid;ProjectionKernel.qid19,809
+	private static String filename ProjectionKernel.filename21,829
+	private ITupleSchema inputSchema,ProjectionKernel.inputSchema23,922
+	private ITupleSchema inputSchema, outputSchema;ProjectionKernel.outputSchema23,922
+	private Expression [] expressions;ProjectionKernel.expressions25,973
+	private int inputSize,ProjectionKernel.inputSize27,1011
+	private int inputSize, outputSize;ProjectionKernel.outputSize27,1011
+	private int depth ProjectionKernel.depth30,1142
+	private int [] args;ProjectionKernel.args32,1169
+	private int [] threads;ProjectionKernel.threads34,1193
+	private int [] threadsPerGroup;ProjectionKernel.threadsPerGroup35,1218
+	public ProjectionKernel ProjectionKernel.ProjectionKernel37,1253
+	public void setup ProjectionKernel.setup69,2164
+	public int getQueryId ProjectionKernel.getQueryId84,2576
+	public int getThreads ProjectionKernel.getThreads88,2623
+	public int getThreadsPerGroup ProjectionKernel.getThreadsPerGroup95,2721
+	public String toString ProjectionKernel.toString103,2854
+	public void processData ProjectionKernel.processData112,3064
+	public void configureOutput ProjectionKernel.configureOutput141,3934
+	public void processOutput ProjectionKernel.processOutput147,4126
+	public void processData ProjectionKernel.processData153,4298
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/NoOpKernel.java,1011
+public class NoOpKernel 13,564
+	private static final int numberOfThreadsPerGroup NoOpKernel.numberOfThreadsPerGroup15,617
+	private int qid;NoOpKernel.qid17,676
+	private String filename NoOpKernel.filename19,696
+	private ITupleSchema schema;NoOpKernel.schema21,783
+	private int inputSize;NoOpKernel.inputSize23,815
+	private int [] threads;NoOpKernel.threads25,841
+	private int [] threadsPerGroup;NoOpKernel.threadsPerGroup26,866
+	public NoOpKernel NoOpKernel.NoOpKernel28,901
+	public void setup(NoOpKernel.setup47,1379
+	public int getQueryId NoOpKernel.getQueryId62,1763
+	public int getThreads NoOpKernel.getThreads66,1810
+	public int getThreadsPerGroup NoOpKernel.getThreadsPerGroup73,1908
+	public String toString NoOpKernel.toString81,2041
+	public void processData NoOpKernel.processData87,2172
+	public void configureOutput NoOpKernel.configureOutput118,3114
+	public void processOutput NoOpKernel.processOutput124,3307
+	public void processData NoOpKernel.processData132,3560
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/code/generators/ProjectionKernelGenerator.java,123
+public class ProjectionKernelGenerator 6,178
+	public static String getFunctor(ProjectionKernelGenerator.getFunctor8,220
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/code/generators/AggregationKernelGenerator.java,247
+public class AggregationKernelGenerator 13,684
+	public static String getIntermediateTupleDefinition AggregationKernelGenerator.getIntermediateTupleDefinition15,727
+	public static String getFunctor AggregationKernelGenerator.getFunctor89,3002
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/code/generators/ReductionKernelGenerator.java,121
+public class ReductionKernelGenerator 7,260
+	public static Object getFunctor ReductionKernelGenerator.getFunctor9,301
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/code/generators/NoopKernelGenerator.java,111
+public class NoopKernelGenerator 5,118
+	public static String getFunctor NoopKernelGenerator.getFunctor7,154
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/code/generators/ThetaJoinKernelGenerator.java,121
+public class ThetaJoinKernelGenerator 6,178
+	public static String getFunctor(ThetaJoinKernelGenerator.getFunctor8,219
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/code/generators/KernelGenerator.java,1021
+public class KernelGenerator 17,653
+	public static int getVectorSize KernelGenerator.getVectorSize19,686
+	private static String load KernelGenerator.load34,1013
+	private static String getHeader KernelGenerator.getHeader47,1439
+	private static String getInputHeader KernelGenerator.getInputHeader101,3300
+	private static String getOutputHeader KernelGenerator.getOutputHeader146,4835
+	private static String getWindowDefinition KernelGenerator.getWindowDefinition200,6609
+	public static String getDummyOperator KernelGenerator.getDummyOperator218,7197
+	public static String getProjectionOperator KernelGenerator.getProjectionOperator231,7544
+	public static String getSelectionOperator KernelGenerator.getSelectionOperator244,7930
+	public static String getThetaJoinOperator(KernelGenerator.getThetaJoinOperator259,8361
+	public static String getReductionOperator KernelGenerator.getReductionOperator274,8863
+	public static String getAggregationOperator KernelGenerator.getAggregationOperator291,9454
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/code/generators/SelectionKernelGenerator.java,121
+public class SelectionKernelGenerator 5,131
+	public static Object getFunctor SelectionKernelGenerator.getFunctor7,172
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/ThetaJoinKernel.java,2136
+public class ThetaJoinKernel 20,872
+	private static boolean debug ThetaJoinKernel.debug22,930
+	private static final int numberOfThreadsPerGroup ThetaJoinKernel.numberOfThreadsPerGroup24,971
+	private static final int numberOfTuplesPerThread ThetaJoinKernel.numberOfTuplesPerThread25,1028
+	private int qid;ThetaJoinKernel.qid27,1087
+	private static String filename ThetaJoinKernel.filename29,1107
+	private ITupleSchema left,ThetaJoinKernel.left31,1199
+	private ITupleSchema left, right;ThetaJoinKernel.right31,1199
+	private ITupleSchema outputSchema;ThetaJoinKernel.outputSchema32,1234
+	private IPredicate predicate;ThetaJoinKernel.predicate34,1272
+	private String customPredicate;ThetaJoinKernel.customPredicate35,1303
+	private int batchSize,ThetaJoinKernel.batchSize37,1338
+	private int batchSize, outputSize;ThetaJoinKernel.outputSize37,1338
+	private int [] args;ThetaJoinKernel.args39,1376
+	private int [] threads;ThetaJoinKernel.threads41,1400
+	private int [] threadsPerGroup;ThetaJoinKernel.threadsPerGroup42,1425
+	private int records,ThetaJoinKernel.records44,1460
+	private int records, numberOfThreadGroups;ThetaJoinKernel.numberOfThreadGroups44,1460
+	IQueryBuffer startPointers,ThetaJoinKernel.startPointers46,1506
+	IQueryBuffer startPointers, endPointers;ThetaJoinKernel.endPointers46,1506
+	private boolean isPowerOfTwo ThetaJoinKernel.isPowerOfTwo48,1550
+	public ThetaJoinKernel ThetaJoinKernel.ThetaJoinKernel59,1715
+	public void setup ThetaJoinKernel.setup122,3773
+	public void processData ThetaJoinKernel.processData146,4741
+	public void configureOutput ThetaJoinKernel.configureOutput201,6439
+	public void processOutput ThetaJoinKernel.processOutput207,6631
+	public void processData(ThetaJoinKernel.processData243,7830
+	private void clearPointers ThetaJoinKernel.clearPointers248,7999
+	private void normalisePointers ThetaJoinKernel.normalisePointers259,8226
+	private void printPointers ThetaJoinKernel.printPointers271,8625
+	private void computePointers ThetaJoinKernel.computePointers281,8951
+	private long getTimestamp ThetaJoinKernel.getTimestamp417,13349
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/ReductionKernel.java,2670
+public class ReductionKernel 28,1408
+	private static final boolean debug ReductionKernel.debug30,1486
+	private static final int numberOfThreadsPerGroup ReductionKernel.numberOfThreadsPerGroup32,1533
+	private int qid;ReductionKernel.qid34,1592
+	private static String filename ReductionKernel.filename36,1612
+	WindowDefinition windowDefinition;ReductionKernel.windowDefinition38,1704
+	private AggregationType [] aggregationTypes;ReductionKernel.aggregationTypes40,1742
+	private FloatColumnReference [] aggregationAttributes;ReductionKernel.aggregationAttributes42,1790
+	private LongColumnReference timestampReference;ReductionKernel.timestampReference44,1848
+	ITupleSchema inputSchema,ReductionKernel.inputSchema46,1899
+	ITupleSchema inputSchema, outputSchema;ReductionKernel.outputSchema46,1899
+	private int keyLength,ReductionKernel.keyLength48,1942
+	private int keyLength, valueLength;ReductionKernel.valueLength48,1942
+	private int inputSize;ReductionKernel.inputSize50,1981
+	private int  [] args1;ReductionKernel.args152,2007
+	private long [] args2;ReductionKernel.args253,2031
+	private int [] threads;ReductionKernel.threads55,2057
+	private int [] threadsPerGroup;ReductionKernel.threadsPerGroup56,2082
+	IQueryBuffer windowCounts ReductionKernel.windowCounts64,2333
+	public ReductionKernel ReductionKernel.ReductionKernel66,2370
+	public ReductionKernel ReductionKernel.ReductionKernel94,3249
+	public ReductionKernel ReductionKernel.ReductionKernel126,4205
+	public boolean hasGroupBy ReductionKernel.hasGroupBy155,5236
+	public ITupleSchema getOutputSchema ReductionKernel.getOutputSchema159,5289
+	public int getKeyLength ReductionKernel.getKeyLength163,5359
+	public int getValueLength ReductionKernel.getValueLength167,5414
+	public int numberOfValues ReductionKernel.numberOfValues171,5472
+	public AggregationType getAggregationType ReductionKernel.getAggregationType175,5548
+	public AggregationType getAggregationType ReductionKernel.getAggregationType179,5634
+	public int getQueryId ReductionKernel.getQueryId185,5865
+	public int getThreads ReductionKernel.getThreads189,5912
+	public int getThreadsPerGroup ReductionKernel.getThreadsPerGroup196,6010
+	public String toString ReductionKernel.toString204,6143
+	private static boolean isPowerOfTwo ReductionKernel.isPowerOfTwo212,6434
+	public void setup ReductionKernel.setup223,6632
+	public void processData ReductionKernel.processData284,8615
+	public void configureOutput ReductionKernel.configureOutput328,9963
+	public void processOutput ReductionKernel.processOutput336,10223
+	public void processData ReductionKernel.processData410,12696
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/AggregationKernel.java,2703
+public class AggregationKernel 31,1621
+	private static final boolean debug AggregationKernel.debug33,1701
+	private static final int numberOfThreadsPerGroup AggregationKernel.numberOfThreadsPerGroup35,1748
+	private int qid;AggregationKernel.qid37,1807
+	private static String filename AggregationKernel.filename39,1827
+	WindowDefinition windowDefinition;AggregationKernel.windowDefinition41,1921
+	private AggregationType [] aggregationTypes;AggregationKernel.aggregationTypes43,1959
+	private FloatColumnReference [] aggregationAttributes;AggregationKernel.aggregationAttributes45,2006
+	private LongColumnReference timestampReference;AggregationKernel.timestampReference47,2064
+	private Expression [] groupByAttributes;AggregationKernel.groupByAttributes49,2115
+	ITupleSchema inputSchema,AggregationKernel.inputSchema51,2159
+	ITupleSchema inputSchema, outputSchema;AggregationKernel.outputSchema51,2159
+	private int keyLength,AggregationKernel.keyLength53,2202
+	private int keyLength, valueLength;AggregationKernel.valueLength53,2202
+	private int inputSize;AggregationKernel.inputSize55,2241
+	private int  [] args1;AggregationKernel.args157,2267
+	private long [] args2;AggregationKernel.args258,2291
+	private int [] threads;AggregationKernel.threads60,2317
+	private int [] threadsPerGroup;AggregationKernel.threadsPerGroup61,2342
+	IQueryBuffer windowCounts AggregationKernel.windowCounts69,2593
+	public AggregationKernel AggregationKernel.AggregationKernel71,2630
+	public boolean hasGroupBy AggregationKernel.hasGroupBy116,4235
+	public ITupleSchema getOutputSchema AggregationKernel.getOutputSchema120,4287
+	public int getKeyLength AggregationKernel.getKeyLength124,4357
+	public int getValueLength AggregationKernel.getValueLength128,4411
+	public int numberOfValues AggregationKernel.numberOfValues132,4469
+	public AggregationType getAggregationType AggregationKernel.getAggregationType136,4545
+	public AggregationType getAggregationType AggregationKernel.getAggregationType140,4631
+	public int getQueryId AggregationKernel.getQueryId146,4862
+	public int getThreads AggregationKernel.getThreads150,4909
+	public int getThreadsPerGroup AggregationKernel.getThreadsPerGroup157,5007
+	public String toString AggregationKernel.toString165,5140
+	private static boolean isPowerOfTwo AggregationKernel.isPowerOfTwo173,5435
+	public void setup AggregationKernel.setup184,5633
+	public void processData AggregationKernel.processData276,8464
+	public void configureOutput AggregationKernel.configureOutput320,9816
+	public void processOutput AggregationKernel.processOutput330,10138
+	public void processData AggregationKernel.processData440,13632
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/operators/gpu/SelectionKernel.java,1685
+public class SelectionKernel 14,624
+	private static final int numberOfThreadsPerGroup SelectionKernel.numberOfThreadsPerGroup16,682
+	private static final int numberOfTuplesPerThread SelectionKernel.numberOfTuplesPerThread17,739
+	private int qid;SelectionKernel.qid19,798
+	private static String filename SelectionKernel.filename21,818
+	private ITupleSchema schema;SelectionKernel.schema23,910
+	private IPredicate predicate;SelectionKernel.predicate25,942
+	private String customPredicate;SelectionKernel.customPredicate26,973
+	private int inputSize,SelectionKernel.inputSize28,1008
+	private int inputSize, outputSize;SelectionKernel.outputSize28,1008
+	private int [] args;SelectionKernel.args30,1046
+	private int [] threads;SelectionKernel.threads32,1110
+	private int [] threadsPerGroup;SelectionKernel.threadsPerGroup33,1135
+	int records,SelectionKernel.records35,1170
+	int records, numberOfThreadGroups;SelectionKernel.numberOfThreadGroups35,1170
+	private static boolean isPowerOfTwo SelectionKernel.isPowerOfTwo37,1208
+	public SelectionKernel SelectionKernel.SelectionKernel48,1406
+	public void setup SelectionKernel.setup96,2999
+	public int getQueryId SelectionKernel.getQueryId114,3753
+	public int getThreads SelectionKernel.getThreads118,3800
+	public int getThreadsPerGroup SelectionKernel.getThreadsPerGroup125,3898
+	public String toString SelectionKernel.toString133,4031
+	public void processData SelectionKernel.processData144,4308
+	public void configureOutput SelectionKernel.configureOutput173,5177
+	public void processOutput SelectionKernel.processOutput179,5369
+	public void processData SelectionKernel.processData189,5695
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/predicates/IntComparisonPredicate.java,1622
+public class IntComparisonPredicate 8,284
+	public static final int      EQUAL_OP IntComparisonPredicate.EQUAL_OP11,392
+	public static final int   NONEQUAL_OP IntComparisonPredicate.NONEQUAL_OP12,436
+	public static final int       LESS_OP IntComparisonPredicate.LESS_OP13,480
+	public static final int    NONLESS_OP IntComparisonPredicate.NONLESS_OP14,524
+	public static final int    GREATER_OP IntComparisonPredicate.GREATER_OP15,568
+	public static final int NONGREATER_OP IntComparisonPredicate.NONGREATER_OP16,612
+	int op;IntComparisonPredicate.op19,696
+	IntExpression v1;IntComparisonPredicate.v122,748
+	IntExpression v2;IntComparisonPredicate.v223,767
+	public IntComparisonPredicate IntComparisonPredicate.IntComparisonPredicate25,788
+	public IntComparisonPredicate IntComparisonPredicate.IntComparisonPredicate29,889
+	public String getComparisonOperator IntComparisonPredicate.getComparisonOperator35,1020
+	public int getOperator IntComparisonPredicate.getOperator39,1098
+	public String toString IntComparisonPredicate.toString57,1580
+	private String getComparisonString IntComparisonPredicate.getComparisonString63,1762
+	private boolean compare IntComparisonPredicate.compare76,2141
+	public boolean satisfied IntComparisonPredicate.satisfied89,2553
+	public boolean satisfied IntComparisonPredicate.satisfied97,2770
+	public int numberOfPredicates IntComparisonPredicate.numberOfPredicates107,3060
+	public Expression getFirstExpression IntComparisonPredicate.getFirstExpression111,3113
+	public Expression getSecondExpression IntComparisonPredicate.getSecondExpression115,3174
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/predicates/IPredicate.java,35
+public interface IPredicate 7,215
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/predicates/LongComparisonPredicate.java,1650
+public class LongComparisonPredicate 8,286
+	public static final int      EQUAL_OP LongComparisonPredicate.EQUAL_OP11,395
+	public static final int   NONEQUAL_OP LongComparisonPredicate.NONEQUAL_OP12,439
+	public static final int       LESS_OP LongComparisonPredicate.LESS_OP13,483
+	public static final int    NONLESS_OP LongComparisonPredicate.NONLESS_OP14,527
+	public static final int    GREATER_OP LongComparisonPredicate.GREATER_OP15,571
+	public static final int NONGREATER_OP LongComparisonPredicate.NONGREATER_OP16,615
+	int op;LongComparisonPredicate.op19,699
+	LongExpression v1;LongComparisonPredicate.v122,751
+	LongExpression v2;LongComparisonPredicate.v223,771
+	public LongComparisonPredicate LongComparisonPredicate.LongComparisonPredicate25,793
+	public LongComparisonPredicate LongComparisonPredicate.LongComparisonPredicate29,897
+	public String getComparisonOperator LongComparisonPredicate.getComparisonOperator35,1033
+	public int getOperator LongComparisonPredicate.getOperator39,1111
+	public String toString LongComparisonPredicate.toString57,1593
+	private String getComparisonString LongComparisonPredicate.getComparisonString63,1775
+	private boolean compare LongComparisonPredicate.compare76,2154
+	public boolean satisfied LongComparisonPredicate.satisfied89,2578
+	public boolean satisfied LongComparisonPredicate.satisfied97,2795
+	public int numberOfPredicates LongComparisonPredicate.numberOfPredicates107,3089
+	public Expression getFirstExpression(LongComparisonPredicate.getFirstExpression111,3143
+	public Expression getSecondExpression(LongComparisonPredicate.getSecondExpression115,3210
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/predicates/ANDPredicate.java,545
+public class ANDPredicate 7,215
+	IPredicate [] predicates;ANDPredicate.predicates9,267
+	public ANDPredicate ANDPredicate.ANDPredicate11,295
+	public boolean satisfied ANDPredicate.satisfied15,382
+	public String toString(ANDPredicate.toString24,596
+	public boolean satisfied(ANDPredicate.satisfied38,868
+	public int numberOfPredicates ANDPredicate.numberOfPredicates48,1167
+	public Expression getFirstExpression ANDPredicate.getFirstExpression52,1236
+	public Expression getSecondExpression ANDPredicate.getSecondExpression56,1299
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/predicates/LongLongComparisonPredicate.java,1804
+public class LongLongComparisonPredicate ANDPredicate.LongLongComparisonPredicate9,363
+	public static final int      EQUAL_OP LongLongComparisonPredicate.EQUAL_OP12,476
+	public static final int   NONEQUAL_OP LongLongComparisonPredicate.NONEQUAL_OP13,520
+	public static final int       LESS_OP LongLongComparisonPredicate.LESS_OP14,564
+	public static final int    NONLESS_OP LongLongComparisonPredicate.NONLESS_OP15,608
+	public static final int    GREATER_OP LongLongComparisonPredicate.GREATER_OP16,652
+	public static final int NONGREATER_OP LongLongComparisonPredicate.NONGREATER_OP17,696
+	int op;LongLongComparisonPredicate.op20,780
+	LongLongExpression v1;LongLongComparisonPredicate.v123,832
+	LongLongExpression v2;LongLongComparisonPredicate.v224,856
+	public LongLongComparisonPredicate LongLongComparisonPredicate.LongLongComparisonPredicate26,882
+	public LongLongComparisonPredicate LongLongComparisonPredicate.LongLongComparisonPredicate30,998
+	public String getComparisonOperator LongLongComparisonPredicate.getComparisonOperator36,1146
+	public int getOperator LongLongComparisonPredicate.getOperator40,1224
+	public String toString LongLongComparisonPredicate.toString58,1706
+	private String getComparisonString LongLongComparisonPredicate.getComparisonString64,1888
+	private boolean compare LongLongComparisonPredicate.compare77,2267
+	public boolean satisfied LongLongComparisonPredicate.satisfied90,2987
+	public boolean satisfied LongLongComparisonPredicate.satisfied100,3346
+	public int numberOfPredicates LongLongComparisonPredicate.numberOfPredicates112,3788
+	public Expression getFirstExpression(LongLongComparisonPredicate.getFirstExpression116,3842
+	public Expression getSecondExpression(LongLongComparisonPredicate.getSecondExpression120,3909
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/predicates/ORPredicate.java,534
+public class ORPredicate 7,215
+	IPredicate [] predicates;ORPredicate.predicates9,266
+	public ORPredicate ORPredicate.ORPredicate11,295
+	public boolean satisfied ORPredicate.satisfied15,381
+	public String toString(ORPredicate.toString25,603
+	public boolean satisfied(ORPredicate.satisfied39,875
+	public int numberOfPredicates(ORPredicate.numberOfPredicates49,1172
+	public Expression getFirstExpression ORPredicate.getFirstExpression53,1240
+	public Expression getSecondExpression ORPredicate.getSecondExpression57,1303
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/predicates/FloatComparisonPredicate.java,1715
+public class FloatComparisonPredicate ORPredicate.FloatComparisonPredicate8,288
+	public static final int      EQUAL_OP FloatComparisonPredicate.EQUAL_OP11,398
+	public static final int   NONEQUAL_OP FloatComparisonPredicate.NONEQUAL_OP12,442
+	public static final int       LESS_OP FloatComparisonPredicate.LESS_OP13,486
+	public static final int    NONLESS_OP FloatComparisonPredicate.NONLESS_OP14,530
+	public static final int    GREATER_OP FloatComparisonPredicate.GREATER_OP15,574
+	public static final int NONGREATER_OP FloatComparisonPredicate.NONGREATER_OP16,618
+	int op;FloatComparisonPredicate.op19,702
+	FloatExpression v1;FloatComparisonPredicate.v122,753
+	FloatExpression v2;FloatComparisonPredicate.v223,774
+	public FloatComparisonPredicate FloatComparisonPredicate.FloatComparisonPredicate25,797
+	public FloatComparisonPredicate FloatComparisonPredicate.FloatComparisonPredicate29,904
+	public String getComparisonOperator FloatComparisonPredicate.getComparisonOperator35,1041
+	public int getOperator FloatComparisonPredicate.getOperator39,1119
+	public String toString FloatComparisonPredicate.toString57,1600
+	private String getComparisonString FloatComparisonPredicate.getComparisonString63,1782
+	private boolean compare FloatComparisonPredicate.compare76,2161
+	public boolean satisfied FloatComparisonPredicate.satisfied89,2576
+	public boolean satisfied FloatComparisonPredicate.satisfied97,2797
+	public int numberOfPredicates FloatComparisonPredicate.numberOfPredicates107,3090
+	public Expression getFirstExpression FloatComparisonPredicate.getFirstExpression111,3143
+	public Expression getSecondExpression FloatComparisonPredicate.getSecondExpression115,3204
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/floats/FloatColumnReference.java,787
+public class FloatColumnReference 7,228
+	private int column;FloatColumnReference.column9,292
+	private final int size FloatColumnReference.size11,315
+	public FloatColumnReference FloatColumnReference.FloatColumnReference13,345
+	public int getColumn FloatColumnReference.getColumn21,527
+	public String toString FloatColumnReference.toString26,587
+	public float eval FloatColumnReference.eval32,736
+	public void appendByteResult FloatColumnReference.appendByteResult37,890
+	public void writeByteResult FloatColumnReference.writeByteResult43,1066
+	public byte [] evalAsByteArray FloatColumnReference.evalAsByteArray49,1334
+	public void evalAsByteArray FloatColumnReference.evalAsByteArray55,1527
+	public int evalAsByteArray FloatColumnReference.evalAsByteArray60,1690
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/floats/FloatExpression.java,40
+public interface FloatExpression 7,223
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/floats/FloatConstant.java,662
+public class FloatConstant FloatExpression.FloatConstant7,228
+	private float constant;FloatConstant.constant9,285
+	private byte [] b;FloatConstant.b11,311
+	public FloatConstant FloatConstant.FloatConstant13,332
+	public String toString FloatConstant.toString21,473
+	public float eval FloatConstant.eval27,619
+	public void appendByteResult FloatConstant.appendByteResult32,722
+	public void writeByteResult FloatConstant.writeByteResult37,858
+	public byte [] evalAsByteArray FloatConstant.evalAsByteArray42,1045
+	public void evalAsByteArray FloatConstant.evalAsByteArray47,1154
+	public int evalAsByteArray FloatConstant.evalAsByteArray52,1315
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/floats/FloatDivision.java,668
+public class FloatDivision 7,228
+	private FloatExpression [] expressions FloatDivision.expressions9,285
+	public FloatDivision FloatDivision.FloatDivision11,334
+	public FloatDivision FloatDivision.FloatDivision15,429
+	public String toString FloatDivision.toString23,609
+	public float eval FloatDivision.eval33,876
+	public void appendByteResult FloatDivision.appendByteResult42,1155
+	public void writeByteResult FloatDivision.writeByteResult48,1331
+	public byte [] evalAsByteArray FloatDivision.evalAsByteArray54,1537
+	public void evalAsByteArray FloatDivision.evalAsByteArray60,1729
+	public int evalAsByteArray FloatDivision.evalAsByteArray65,1890
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/floats/FloatMultiplication.java,758
+public class FloatMultiplication 7,228
+	private FloatExpression [] expressions FloatMultiplication.expressions9,291
+	public FloatMultiplication FloatMultiplication.FloatMultiplication11,340
+	public FloatMultiplication(FloatMultiplication.FloatMultiplication15,441
+	public String toString FloatMultiplication.toString23,626
+	public float eval FloatMultiplication.eval33,893
+	public void appendByteResult FloatMultiplication.appendByteResult42,1172
+	public void writeByteResult FloatMultiplication.writeByteResult48,1347
+	public byte [] evalAsByteArray FloatMultiplication.evalAsByteArray54,1553
+	public void evalAsByteArray FloatMultiplication.evalAsByteArray60,1745
+	public int evalAsByteArray FloatMultiplication.evalAsByteArray65,1906
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/ints/IntExpression.java,38
+public interface IntExpression 7,221
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/ints/IntColumnReference.java,757
+public class IntColumnReference 7,226
+	private int column;IntColumnReference.column9,286
+	private final int size IntColumnReference.size11,309
+	public IntColumnReference IntColumnReference.IntColumnReference13,339
+	public int getColumn IntColumnReference.getColumn21,519
+	public String toString IntColumnReference.toString26,579
+	public int eval(IntColumnReference.eval32,728
+	public void appendByteResult IntColumnReference.appendByteResult37,877
+	public void writeByteResult IntColumnReference.writeByteResult43,1049
+	public byte [] evalAsByteArray IntColumnReference.evalAsByteArray49,1318
+	public void evalAsByteArray IntColumnReference.evalAsByteArray55,1507
+	public int evalAsByteArray IntColumnReference.evalAsByteArray60,1669
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/ints/IntSubtraction.java,679
+public class IntSubtraction 7,226
+	private IntExpression [] expressions IntSubtraction.expressions9,282
+	public IntSubtraction IntSubtraction.IntSubtraction11,329
+	public IntSubtraction IntSubtraction.IntSubtraction15,423
+	public String toString IntSubtraction.toString23,598
+	public int eval IntSubtraction.eval33,864
+	public void appendByteResult IntSubtraction.appendByteResult42,1138
+	public void writeByteResult IntSubtraction.writeByteResult48,1309
+	public byte [] evalAsByteArray IntSubtraction.evalAsByteArray54,1511
+	public void evalAsByteArray IntSubtraction.evalAsByteArray60,1700
+	public int evalAsByteArray IntSubtraction.evalAsByteArray65,1861
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/ints/IntAddition.java,634
+public class IntAddition 7,226
+	private IntExpression [] expressions IntAddition.expressions9,279
+	public IntAddition IntAddition.IntAddition12,328
+	public IntAddition IntAddition.IntAddition16,419
+	public String toString IntAddition.toString24,591
+	public int eval IntAddition.eval34,858
+	public void appendByteResult IntAddition.appendByteResult42,1127
+	public void writeByteResult IntAddition.writeByteResult48,1299
+	public byte [] evalAsByteArray IntAddition.evalAsByteArray54,1502
+	public void evalAsByteArray IntAddition.evalAsByteArray60,1690
+	public int evalAsByteArray(IntAddition.evalAsByteArray65,1852
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/ints/IntDivision.java,658
+public class IntDivision IntAddition.IntDivision7,226
+	private IntExpression [] expressions IntDivision.expressions9,279
+	public IntDivision IntDivision.IntDivision11,327
+	public IntDivision IntDivision.IntDivision15,418
+	public String toString IntDivision.toString23,590
+	public int eval IntDivision.eval33,857
+	public void appendByteResult IntDivision.appendByteResult42,1132
+	public void writeByteResult IntDivision.writeByteResult48,1303
+	public byte [] evalAsByteArray IntDivision.evalAsByteArray54,1506
+	public void evalAsByteArray IntDivision.evalAsByteArray60,1694
+	public int evalAsByteArray IntDivision.evalAsByteArray65,1855
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/ints/IntConstant.java,602
+public class IntConstant 7,226
+	private int constant;IntConstant.constant9,279
+	private byte [] b;IntConstant.b11,303
+	public IntConstant(IntConstant.IntConstant13,324
+	public String toString(IntConstant.toString21,458
+	public int eval IntConstant.eval27,603
+	public void appendByteResult(IntConstant.appendByteResult32,704
+	public void writeByteResult(IntConstant.writeByteResult37,837
+	public byte [] evalAsByteArray IntConstant.evalAsByteArray42,1023
+	public void evalAsByteArray IntConstant.evalAsByteArray47,1132
+	public int evalAsByteArray IntConstant.evalAsByteArray52,1293
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/ints/IntMultiplication.java,724
+public class IntMultiplication 7,226
+	private IntExpression [] expressions IntMultiplication.expressions9,285
+	public IntMultiplication IntMultiplication.IntMultiplication11,332
+	public IntMultiplication IntMultiplication.IntMultiplication15,429
+	public String toString IntMultiplication.toString23,607
+	public int eval IntMultiplication.eval33,873
+	public void appendByteResult IntMultiplication.appendByteResult42,1148
+	public void writeByteResult IntMultiplication.writeByteResult48,1319
+	public byte [] evalAsByteArray IntMultiplication.evalAsByteArray54,1522
+	public void evalAsByteArray IntMultiplication.evalAsByteArray60,1710
+	public int evalAsByteArray IntMultiplication.evalAsByteArray65,1871
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/longs/LongColumnReference.java,772
+public class LongColumnReference 7,227
+	private int column;LongColumnReference.column9,289
+	private final int size LongColumnReference.size11,312
+	public LongColumnReference LongColumnReference.LongColumnReference13,342
+	public int getColumn LongColumnReference.getColumn21,523
+	public String toString(LongColumnReference.toString26,583
+	public long eval LongColumnReference.eval32,732
+	public void appendByteResult LongColumnReference.appendByteResult37,883
+	public void writeByteResult LongColumnReference.writeByteResult43,1057
+	public byte [] evalAsByteArray LongColumnReference.evalAsByteArray49,1325
+	public void evalAsByteArray LongColumnReference.evalAsByteArray55,1515
+	public int evalAsByteArray(LongColumnReference.evalAsByteArray61,1717
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/longs/LongExpression.java,39
+public interface LongExpression 7,222
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/ExpressionsUtil.java,1232
+public class ExpressionsUtil 11,498
+	public static final byte [] intToByteArray ExpressionsUtil.intToByteArray13,530
+	public static void intToByteArray ExpressionsUtil.intToByteArray23,722
+	public static int intToByteArray ExpressionsUtil.intToByteArray28,829
+	public static final byte [] floatToByteArray ExpressionsUtil.floatToByteArray38,1105
+	public static void floatToByteArray ExpressionsUtil.floatToByteArray50,1383
+	public static int floatToByteArray ExpressionsUtil.floatToByteArray55,1496
+	public static final byte [] longToByteArray ExpressionsUtil.longToByteArray67,1856
+	public static void longToByteArray ExpressionsUtil.longToByteArray79,2059
+	public static int longToByteArray ExpressionsUtil.longToByteArray84,2169
+	public static final byte [] longLongToByteArray ExpressionsUtil.longLongToByteArray93,2373
+	public static void longLongToByteArray ExpressionsUtil.longLongToByteArray110,2695
+	public static int longLongToByteArray ExpressionsUtil.longLongToByteArray115,2844
+	public static final ITupleSchema getTupleSchemaFromExpressions ExpressionsUtil.getTupleSchemaFromExpressions130,3185
+	public static final ITupleSchema mergeTupleSchemas ExpressionsUtil.mergeTupleSchemas164,4284
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/Expression.java,35
+public interface Expression 6,155
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/longlongs/LongLongExpression.java,43
+public interface LongLongExpression 7,226
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/cql/expressions/longlongs/LongLongColumnReference.java,896
+public class LongLongColumnReference 7,231
+	private int column;LongLongColumnReference.column9,301
+	private final int size LongLongColumnReference.size11,324
+	public LongLongColumnReference LongLongColumnReference.LongLongColumnReference13,355
+	public int getColumn LongLongColumnReference.getColumn21,540
+	public String toString(LongLongColumnReference.toString26,600
+	public long evalMSB LongLongColumnReference.evalMSB32,749
+	public long evalLSB LongLongColumnReference.evalLSB37,907
+	public void appendByteResult LongLongColumnReference.appendByteResult42,1066
+	public void writeByteResult LongLongColumnReference.writeByteResult49,1311
+	public byte [] evalAsByteArray LongLongColumnReference.evalAsByteArray55,1579
+	public void evalAsByteArray LongLongColumnReference.evalAsByteArray62,1843
+	public int evalAsByteArray(LongLongColumnReference.evalAsByteArray69,2119
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/QueryOperator.java,1140
+public class QueryOperator 7,151
+	private Query parent;QueryOperator.parent9,181
+	private QueryOperator downstream;QueryOperator.downstream11,206
+	private QueryOperator upstream;QueryOperator.upstream12,241
+	private IOperatorCode cpuCode;QueryOperator.cpuCode14,276
+	private IOperatorCode gpuCode;QueryOperator.gpuCode15,308
+	public QueryOperator QueryOperator.QueryOperator17,341
+	public IOperatorCode getGpuCode(QueryOperator.getGpuCode23,501
+	public void setParent QueryOperator.setParent27,561
+	public Query getParent QueryOperator.getParent31,630
+	public void connectTo QueryOperator.connectTo35,680
+	private void setUpstream QueryOperator.setUpstream40,791
+		upstream = operator;QueryOperator.operator;41,844
+	public boolean isMostDownstream QueryOperator.isMostDownstream48,940
+	public QueryOperator getDownstream QueryOperator.getDownstream52,1014
+	public int getId QueryOperator.getId56,1081
+	public void process QueryOperator.process62,1169
+	public void process QueryOperator.process70,1339
+	public void setup(QueryOperator.setup78,1544
+	public String toString QueryOperator.toString83,1633
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/TupleSchema.java,1642
+public class TupleSchema 3,36
+	public enum PrimitiveType TupleSchema.PrimitiveType5,89
+		UNDEFINED,TupleSchema.PrimitiveType.UNDEFINED7,121
+		UNDEFINED, INT,TupleSchema.PrimitiveType.INT7,121
+		UNDEFINED, INT, FLOAT,TupleSchema.PrimitiveType.FLOAT7,121
+		UNDEFINED, INT, FLOAT, LONG,TupleSchema.PrimitiveType.LONG7,121
+		UNDEFINED, INT, FLOAT, LONG, LONGLONG;TupleSchema.PrimitiveType.LONGLONG7,121
+	private int [] offsets;TupleSchema.offsets10,167
+	private int contentSize;TupleSchema.contentSize11,192
+	private int tupleSize;TupleSchema.tupleSize13,220
+	private byte [] pad;TupleSchema.pad15,246
+	private PrimitiveType [] types;TupleSchema.types17,270
+	private String [] names;TupleSchema.names18,358
+	private String name;TupleSchema.name20,386
+	public TupleSchema TupleSchema.TupleSchema22,410
+	public int numberOfAttributes TupleSchema.numberOfAttributes61,1498
+	public int getAttributeOffset TupleSchema.getAttributeOffset66,1567
+	public int getTupleSize TupleSchema.getTupleSize74,1771
+	public byte [] getPad TupleSchema.getPad79,1829
+	public int getPadLength TupleSchema.getPadLength84,1879
+	public int [] getOffsets TupleSchema.getOffsets89,1938
+	public void setAttributeType TupleSchema.setAttributeType94,1995
+	public PrimitiveType getAttributeType TupleSchema.getAttributeType102,2206
+	public void setAttributeName TupleSchema.setAttributeName110,2414
+	public String getAttributeName TupleSchema.getAttributeName119,2621
+	public void setName TupleSchema.setName127,2876
+	public String getName TupleSchema.getName131,2938
+	public String getSchema TupleSchema.getSchema137,3026
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/tasks/LockFreeTaskQueue.java,450
+	public class LockFreeTaskQueue 6,104
+		private AbstractTask head,LockFreeTaskQueue.head8,143
+		private AbstractTask head, tail;LockFreeTaskQueue.tail8,143
+		public LockFreeTaskQueue LockFreeTaskQueue.LockFreeTaskQueue10,181
+		private TaskWindow find LockFreeTaskQueue.find18,396
+		public int size LockFreeTaskQueue.size55,1104
+		public boolean add LockFreeTaskQueue.add60,1149
+		public AbstractTask poll LockFreeTaskQueue.poll81,1570
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/tasks/Task.java,372
+public class Task 12,407
+	private WindowBatch batch1,Task.batch114,449
+	private WindowBatch batch1, batch2;Task.batch214,449
+	public Task(Task.Task16,487
+	public Task Task.Task20,531
+	public void set Task.set35,864
+	public int run(Task.run52,1173
+	public void outputWindowBatchResult Task.outputWindowBatchResult79,2072
+	public void free Task.free84,2216
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/tasks/TaskQueue.java,768
+public class TaskQueue 20,539
+	private AbstractTask head;TaskQueue.head22,567
+	private AtomicIntegerArray [] count;TaskQueue.count24,606
+	public TaskQueue TaskQueue.TaskQueue28,702
+	private int incrementAndGet TaskQueue.incrementAndGet215,4914
+	private void resetCounter TaskQueue.resetCounter222,5090
+	public int getCount TaskQueue.getCount226,5161
+	private int getPreferredProcessor TaskQueue.getPreferredProcessor230,5230
+	public boolean add TaskQueue.add242,5612
+	public AbstractTask getNextTask TaskQueue.getNextTask262,6241
+	public AbstractTask staticTaskAssignment TaskQueue.staticTaskAssignment298,7495
+	public AbstractTask poll TaskQueue.poll325,8166
+	public int size TaskQueue.size335,8414
+	public void dump TaskQueue.dump351,8770
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/tasks/TaskFactory.java,340
+public class TaskFactory 8,188
+	private static int _pool_size TaskFactory._pool_size10,217
+	public static AtomicLong count;TaskFactory.count12,255
+	private static ConcurrentLinkedQueue<Task> pool TaskFactory.pool14,290
+	public static Task newInstance TaskFactory.newInstance23,497
+	public static void free TaskFactory.free34,773
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/tasks/TaskWindow.java,516
+class TaskWindow 7,144
+	public AbstractTask pred,TaskWindow.pred9,165
+	public AbstractTask pred, curr;TaskWindow.curr9,165
+	public TaskWindow TaskWindow.TaskWindow11,200
+	public static TaskWindow findTail TaskWindow.findTail16,304
+	public static TaskWindow findHead TaskWindow.findHead42,959
+	public static TaskWindow findQueryTask TaskWindow.findQueryTask66,1545
+	private static boolean select TaskWindow.select92,2240
+	public static TaskWindow findNextSkipCost TaskWindow.findNextSkipCost115,3040
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/tasks/AbstractTask.java,309
+public abstract class AbstractTask 5,103
+	public int taskid;AbstractTask.taskid7,164
+	public int queryid;AbstractTask.queryid8,184
+	public AtomicMarkableReference<AbstractTask> next;AbstractTask.next10,207
+	protected boolean GPU AbstractTask.GPU12,261
+	public void setGPU AbstractTask.setGPU18,359
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/tasks/IWindowAPI.java,34
+public interface IWindowAPI 5,89
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/WindowBatchFactory.java,403
+public class WindowBatchFactory 8,191
+	private static final int _pool_size WindowBatchFactory._pool_size10,227
+	public static AtomicLong count;WindowBatchFactory.count12,295
+	private static ConcurrentLinkedQueue<WindowBatch> pool WindowBatchFactory.pool14,330
+	public static WindowBatch newInstance WindowBatchFactory.newInstance25,564
+	public static void free WindowBatchFactory.free47,1127
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/handlers/PartialResultSlot.java,1483
+public class PartialResultSlot 14,538
+	private static final boolean debug PartialResultSlot.debug16,572
+	int index;PartialResultSlot.index18,617
+	int freePointer1,PartialResultSlot.freePointer120,630
+	int freePointer1, freePointer2;PartialResultSlot.freePointer220,630
+	int mark;PartialResultSlot.mark22,664
+	int latch;PartialResultSlot.latch23,675
+	boolean GPU PartialResultSlot.GPU25,688
+	PartialResultSlot next;PartialResultSlot.next27,711
+	PartialWindowResults closingWindows,PartialResultSlot.closingWindows29,737
+	PartialWindowResults closingWindows, pendingWindows,PartialResultSlot.pendingWindows29,737
+	PartialWindowResults closingWindows, pendingWindows, openingWindows,PartialResultSlot.openingWindows29,737
+	PartialWindowResults closingWindows, pendingWindows, openingWindows, completeWindows;PartialResultSlot.completeWindows29,737
+	ByteBuffer w3;PartialResultSlot.w331,825
+	WindowHashTableWrapper windowHashTable;PartialResultSlot.windowHashTable33,842
+	WindowHashTableWrapper mergedHashTable;PartialResultSlot.mergedHashTable34,883
+	boolean [] b2found;PartialResultSlot.b2found36,925
+	boolean [] w3found;PartialResultSlot.w3found37,946
+	public PartialResultSlot PartialResultSlot.PartialResultSlot39,968
+	public void connectTo PartialResultSlot.connectTo67,1512
+	public void init PartialResultSlot.init71,1586
+	public void release PartialResultSlot.release87,1980
+	public void aggregate PartialResultSlot.aggregate106,2469
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/handlers/ResultCollector.java,186
+public class ResultCollector 12,390
+	public static void forwardAndFree ResultCollector.forwardAndFree14,422
+	public static void forwardAndFree ResultCollector.forwardAndFree45,1158
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/handlers/ResultHandler.java,1255
+public class ResultHandler 12,407
+	public final int numberOfSlots ResultHandler.numberOfSlots14,437
+	public Query query;ResultHandler.query16,490
+	public IQueryBuffer freeBuffer1,ResultHandler.freeBuffer118,512
+	public IQueryBuffer freeBuffer1, freeBuffer2;ResultHandler.freeBuffer218,512
+	public AtomicIntegerArray slots;ResultHandler.slots27,757
+	public PaddedAtomicLong paddedSlots ResultHandler.paddedSlots29,792
+	public IQueryBuffer [] results ResultHandler.results34,882
+	public int [] freePointers1 ResultHandler.freePointers136,951
+	public int [] freePointers2 ResultHandler.freePointers237,1007
+	public int [] latch ResultHandler.latch40,1122
+	public int [] mark ResultHandler.mark42,1171
+	Semaphore semaphore;ResultHandler.semaphore44,1220
+	int next;ResultHandler.next45,1262
+	private long totalOutputBytes;ResultHandler.totalOutputBytes47,1274
+	public ResultAggregator resultAggregator;ResultHandler.resultAggregator49,1307
+	public ResultHandler ResultHandler.ResultHandler51,1351
+	public long getTotalOutputBytes ResultHandler.getTotalOutputBytes81,1992
+	public void incTotalOutputBytes ResultHandler.incTotalOutputBytes86,2062
+	public void setAggregateOperator ResultHandler.setAggregateOperator91,2152
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/handlers/ResultAggregator.java,1171
+public class ResultAggregator 14,481
+	private static final int  FREE ResultAggregator.FREE16,515
+	private static final int  WAIT ResultAggregator.WAIT17,553
+	private static final int  AGGR ResultAggregator.AGGR18,629
+	private static final int READY ResultAggregator.READY20,793
+	private static final int  BUSY ResultAggregator.BUSY21,831
+	int size;ResultAggregator.size27,1089
+	IQueryBuffer freeBuffer1,ResultAggregator.freeBuffer128,1100
+	IQueryBuffer freeBuffer1, freeBuffer2;ResultAggregator.freeBuffer228,1100
+	Query query;ResultAggregator.query29,1140
+	ResultHandler handler;ResultAggregator.handler30,1154
+	AtomicIntegerArray slots;ResultAggregator.slots32,1180
+	PartialResultSlot [] nodes;ResultAggregator.nodes33,1207
+	Semaphore semaphore;ResultAggregator.semaphore35,1238
+	Semaphore lock;ResultAggregator.lock37,1275
+	int nextToAggregate;ResultAggregator.nextToAggregate42,1358
+	int nextToForward;ResultAggregator.nextToForward43,1380
+	public ResultAggregator ResultAggregator.ResultAggregator45,1402
+	public void setOperator ResultAggregator.setOperator72,2109
+		this.operator = operator;ResultAggregator.operator;73,2166
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/QueryConf.java,208
+public class QueryConf ResultAggregator.QueryConf3,36
+	private int batchSize QueryConf.batchSize9,123
+	public QueryConf QueryConf.QueryConf11,158
+	public int getBatchSize QueryConf.getBatchSize16,229
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/QueryApplication.java,2335
+public class QueryApplication 16,583
+	private static int threads QueryApplication.threads18,616
+	private Set<Query> queries;QueryApplication.queries20,667
+	private int numberOfUpstreamQueries;QueryApplication.numberOfUpstreamQueries26,805
+	private ITaskDispatcher	[] dispatchers;QueryApplication.dispatchers28,844
+	private TaskQueue queue;QueryApplication.queue30,886
+	private TaskProcessorPool workerPool;QueryApplication.workerPool31,912
+	private Executor executor;QueryApplication.executor32,951
+	private int M QueryApplication.M34,980
+	private int N;QueryApplication.N35,1020
+	int [][] policy;QueryApplication.policy37,1061
+	private RESTfulHandler handler QueryApplication.handler39,1080
+    private PAPIHardwareSampler [] papiSamplers;QueryApplication.papiSamplers40,1120
+	public QueryApplication QueryApplication.QueryApplication42,1170
+    public QueryApplication(QueryApplication.QueryApplication47,1252
+	public void processData QueryApplication.processData62,1696
+	public void processData QueryApplication.processData67,1784
+	public void processFirstStream QueryApplication.processFirstStream74,1943
+	public void processFirstStream QueryApplication.processFirstStream79,2045
+	public void processSecondStream QueryApplication.processSecondStream86,2224
+	public void processSecondStream QueryApplication.processSecondStream91,2328
+	public void setup(QueryApplication.setup98,2509
+	private void setDispatcher QueryApplication.setDispatcher151,4004
+	public TaskQueue getExecutorQueue(QueryApplication.getExecutorQueue163,4384
+	public int getExecutorQueueSize(QueryApplication.getExecutorQueueSize167,4443
+	public Set<Query> getQueries(QueryApplication.getQueries171,4507
+	public TaskProcessorPool getTaskProcessorPool QueryApplication.getTaskProcessorPool175,4563
+	public void updatePolicy QueryApplication.updatePolicy179,4640
+	public String policyToString QueryApplication.policyToString185,4786
+	public float getPolicy QueryApplication.getPolicy199,5164
+	public void RESTfulUpdate QueryApplication.RESTfulUpdate203,5242
+	public String getExecutorQueueCounts QueryApplication.getExecutorQueueCounts210,5457
+	public int numberOfQueries QueryApplication.numberOfQueries224,5862
+	public int numberOfUpstreamQueries QueryApplication.numberOfUpstreamQueries228,5911
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/monetdb/MonetDBExperimentalSetup.java,265
+public class MonetDBExperimentalSetup 3,44
+	public static boolean enabled MonetDBExperimentalSetup.enabled5,86
+	public static int numberOfTasks MonetDBExperimentalSetup.numberOfTasks6,126
+	public static long startTime MonetDBExperimentalSetup.startTime7,167
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/WindowDefinition.java,1629
+public class WindowDefinition 3,36
+	public enum WindowType WindowDefinition.WindowType5,70
+		ROW_BASED WindowDefinition.WindowType.ROW_BASED7,100
+		ROW_BASED , RANGE_BASED;WindowDefinition.WindowType.RANGE_BASED7,100
+		public WindowDefinition.WindowType.public9,130
+		public static WindowDefinition.WindowType.static9,130
+		public static WindowType WindowDefinition.WindowType.WindowType9,130
+		public static WindowType fromString WindowDefinition.WindowType.fromString9,130
+		public static WindowType fromString (String WindowDefinition.WindowType.String9,130
+		public static WindowType fromString (String type)WindowDefinition.WindowType.type9,130
+	private WindowType type;WindowDefinition.type21,441
+	private long  size;WindowDefinition.size23,469
+	private long slide;WindowDefinition.slide24,490
+	private long paneSize;WindowDefinition.paneSize26,513
+	public WindowDefinition WindowDefinition.WindowDefinition28,539
+	public long getSize WindowDefinition.getSize35,725
+	public long getSlide WindowDefinition.getSlide39,776
+	public WindowType getWindowType WindowDefinition.getWindowType43,829
+	public long getPaneSize WindowDefinition.getPaneSize47,892
+	public long numberOfPanes WindowDefinition.numberOfPanes51,951
+	public long panesPerSlide WindowDefinition.panesPerSlide55,1026
+	public boolean isRowBased WindowDefinition.isRowBased59,1102
+	public boolean isRangeBased WindowDefinition.isRangeBased63,1193
+	public boolean isTumbling WindowDefinition.isTumbling67,1288
+	private long gcd WindowDefinition.gcd71,1361
+	public String toString WindowDefinition.toString78,1460
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/ITupleSchema.java,36
+public interface ITupleSchema 5,97
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/LatencyMonitor.java,781
+public class LatencyMonitor 9,196
+	long count;LatencyMonitor.count11,227
+	double min,LatencyMonitor.min12,240
+	double min, max,LatencyMonitor.max12,240
+	double min, max, avg;LatencyMonitor.avg12,240
+	long timestampReference LatencyMonitor.timestampReference14,264
+	double latency;LatencyMonitor.latency16,296
+	AtomicBoolean active;LatencyMonitor.active18,314
+	ArrayList<Double> measurements;LatencyMonitor.measurements20,338
+	public LatencyMonitor LatencyMonitor.LatencyMonitor22,372
+	public void disable LatencyMonitor.disable38,659
+	public String toString LatencyMonitor.toString43,721
+	public void monitor LatencyMonitor.monitor57,914
+	public void stop(LatencyMonitor.stop84,1731
+	private double evaluateSorted LatencyMonitor.evaluateSorted114,2437
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/hardware/AbstractHardwareSampler.java,47
+public interface AbstractHardwareSampler 5,75
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/hardware/papi/PapiException.java,248
+public class PapiException 31,1582
+	private static final long serialVersionUID PapiException.serialVersionUID32,1629
+	public PapiException(PapiException.PapiException34,1680
+	public static void throwOnError(PapiException.throwOnError38,1748
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/hardware/papi/PapiRuntimeException.java,214
+public class PapiRuntimeException 32,1583
+	private static final long serialVersionUID PapiRuntimeException.serialVersionUID33,1644
+	public PapiRuntimeException(PapiRuntimeException.PapiRuntimeException35,1695
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/hardware/papi/Papi.java,83
+public class Papi 33,1583
+	static public void initThread(Papi.initThread48,1969
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/hardware/papi/PAPIHardwareSampler.java,942
+public class PAPIHardwareSampler 14,307
+    private boolean start_sampling_flag;PAPIHardwareSampler.start_sampling_flag16,378
+    private transient EventSet eventSet;PAPIHardwareSampler.eventSet17,419
+    private int[] countersId;PAPIHardwareSampler.countersId19,461
+    private String[] countersDescription;PAPIHardwareSampler.countersDescription21,492
+    private String hwPerfCountersCfg;PAPIHardwareSampler.hwPerfCountersCfg23,535
+    private HashMap<PAPIHardwareSampler.HashMap25,574
+    private HashMap<String, Long> results;PAPIHardwareSampler.results25,574
+    public PAPIHardwareSampler(PAPIHardwareSampler.PAPIHardwareSampler27,618
+    public void startSampling(PAPIHardwareSampler.startSampling34,787
+    public void stopSampling(PAPIHardwareSampler.stopSampling75,2321
+    public HashMap<PAPIHardwareSampler.HashMap99,3290
+    public HashMap<String, Long> getResults(PAPIHardwareSampler.getResults99,3290
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/hardware/papi/Wrapper.java,30
+public class Wrapper 33,1584
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/hardware/papi/EventSet.java,418
+public class EventSet 34,1609
+	private long eventId[EventSet.eventId35,1633
+	private long counters[EventSet.counters36,1672
+	public static EventSet create(EventSet.create38,1699
+	private EventSet(EventSet.EventSet51,2088
+	public void destroy(EventSet.destroy54,2114
+	public void start(EventSet.start61,2291
+	public void stop(EventSet.stop66,2441
+	public long[] getCounters(EventSet.getCounters71,2596
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/hardware/papi/Constants.java,8219
+public class Constants 9,195
+    public static final int PAPI_VER_CURRENT Constants.PAPI_VER_CURRENT10,220
+	public static final int PAPI_OK Constants.PAPI_OK12,299
+	public static final int PAPI_EINVAL Constants.PAPI_EINVAL13,337
+	public static final int CPU_CLK_UNHALTED_THREAD_P Constants.CPU_CLK_UNHALTED_THREAD_P16,401
+	public static final String CPU_CLK_UNHALTED_THREAD_P_name Constants.CPU_CLK_UNHALTED_THREAD_P_name17,466
+	public static final int IDQ_UOPS_NOT_DELIVERED_CORE Constants.IDQ_UOPS_NOT_DELIVERED_CORE18,556
+	public static final String IDQ_UOPS_NOT_DELIVERED_CORE_name Constants.IDQ_UOPS_NOT_DELIVERED_CORE_name19,623
+	public static final int UOPS_ISSUED Constants.UOPS_ISSUED20,717
+	public static final String UOPS_ISSUED_name Constants.UOPS_ISSUED_name21,768
+	public static final int UNHALTED_CORE_CYCLES Constants.UNHALTED_CORE_CYCLES22,830
+	public static final String UNHALTED_CORE_CYCLES_name Constants.UNHALTED_CORE_CYCLES_name23,890
+	public static final int RESOURCE_STALLS_ANY Constants.RESOURCE_STALLS_ANY24,970
+	public static final String RESOURCE_STALLS_ANY_name Constants.RESOURCE_STALLS_ANY_name25,1029
+	public static final int INT_MISC_RECOVERY_CYCLES Constants.INT_MISC_RECOVERY_CYCLES26,1107
+	public static final String INT_MISC_RECOVERY_CYCLES_name Constants.INT_MISC_RECOVERY_CYCLES_name27,1171
+	public static final int UOPS_RETIRED_RETIRE_SLOTS Constants.UOPS_RETIRED_RETIRE_SLOTS28,1259
+	public static final String UOPS_RETIRED_RETIRE_SLOTS_name Constants.UOPS_RETIRED_RETIRE_SLOTS_name29,1324
+	public static final int CYCLE_ACTIVITY_CYCLES_LDM_PENDING Constants.CYCLE_ACTIVITY_CYCLES_LDM_PENDING30,1414
+	public static final String CYCLE_ACTIVITY_CYCLES_LDM_PENDING_name Constants.CYCLE_ACTIVITY_CYCLES_LDM_PENDING_name31,1487
+	public static final int UOPS_EXECUTED_CORE_CYCLES_NONE Constants.UOPS_EXECUTED_CORE_CYCLES_NONE32,1593
+	public static final String UOPS_EXECUTED_CORE_CYCLES_NONE_name Constants.UOPS_EXECUTED_CORE_CYCLES_NONE_name33,1663
+	public static final int UOPS_EXECUTED_CORE_c_1 Constants.UOPS_EXECUTED_CORE_c_134,1763
+	public static final String UOPS_EXECUTED_CORE_c_1_name Constants.UOPS_EXECUTED_CORE_c_1_name35,1825
+	public static final int UOPS_EXECUTED_CORE_c_2 Constants.UOPS_EXECUTED_CORE_c_236,1909
+	public static final String UOPS_EXECUTED_CORE_c_2_name Constants.UOPS_EXECUTED_CORE_c_2_name37,1971
+	public static final int CYCLE_ACTIVITY_STALLS_L1D_MISS Constants.CYCLE_ACTIVITY_STALLS_L1D_MISS38,2055
+	public static final String CYCLE_ACTIVITY_STALLS_L1D_MISS_name Constants.CYCLE_ACTIVITY_STALLS_L1D_MISS_name39,2125
+	public static final int CYCLE_ACTIVITY_STALLS_L2_MISS Constants.CYCLE_ACTIVITY_STALLS_L2_MISS40,2225
+	public static final String CYCLE_ACTIVITY_STALLS_L2_MISS_name Constants.CYCLE_ACTIVITY_STALLS_L2_MISS_name41,2294
+	public static final int perf_L1_ICACHE_LOAD_MISSES Constants.perf_L1_ICACHE_LOAD_MISSES42,2392
+	public static final String perf_L1_ICACHE_LOAD_MISSES_name Constants.perf_L1_ICACHE_LOAD_MISSES_name43,2458
+	public static final int CYCLE_ACTIVITY_STALLS_MEM_ANY Constants.CYCLE_ACTIVITY_STALLS_MEM_ANY44,2551
+	public static final String CYCLE_ACTIVITY_STALLS_MEM_ANY_name Constants.CYCLE_ACTIVITY_STALLS_MEM_ANY_name45,2620
+	public static final int ICACHE_64B_IFTAG_STALL Constants.ICACHE_64B_IFTAG_STALL46,2718
+	public static final String ICACHE_64B_IFTAG_STALL_name Constants.ICACHE_64B_IFTAG_STALL_name47,2780
+	public static final int ICACHE_16B_IFDATA_STALL Constants.ICACHE_16B_IFDATA_STALL48,2864
+	public static final String ICACHE_16B_IFDATA_STALL_name Constants.ICACHE_16B_IFDATA_STALL_name49,2927
+	public static final int IDQ_UOPS_NOT_DELIVERED_CYCLES_0_UOPS_DELIV_CORE Constants.IDQ_UOPS_NOT_DELIVERED_CYCLES_0_UOPS_DELIV_CORE50,3013
+	public static final String IDQ_UOPS_NOT_DELIVERED_CYCLES_0_UOPS_DELIV_CORE_name Constants.IDQ_UOPS_NOT_DELIVERED_CYCLES_0_UOPS_DELIV_CORE_name51,3100
+	public static final int IDQ_UOPS_NOT_DELIVERED_CYCLES_LE_1_UOPS_DELIV_CORE Constants.IDQ_UOPS_NOT_DELIVERED_CYCLES_LE_1_UOPS_DELIV_CORE52,3234
+	public static final String IDQ_UOPS_NOT_DELIVERED_CYCLES_LE_1_UOPS_DELIV_CORE_name Constants.IDQ_UOPS_NOT_DELIVERED_CYCLES_LE_1_UOPS_DELIV_CORE_name53,3324
+	public static final int UOPS_EXECUTED_CORE_CYCLES_GE_1 Constants.UOPS_EXECUTED_CORE_CYCLES_GE_154,3464
+	public static final String UOPS_EXECUTED_CORE_CYCLES_GE_1_name Constants.UOPS_EXECUTED_CORE_CYCLES_GE_1_name55,3534
+	public static final int UOPS_EXECUTED_CORE_CYCLES_GE_4 Constants.UOPS_EXECUTED_CORE_CYCLES_GE_456,3634
+	public static final String UOPS_EXECUTED_CORE_CYCLES_GE_4_name Constants.UOPS_EXECUTED_CORE_CYCLES_GE_4_name57,3704
+	public static final int PAPI_L1_DCM Constants.PAPI_L1_DCM58,3804
+	public static final String PAPI_L1_DCM_name Constants.PAPI_L1_DCM_name59,3856
+	public static final int PAPI_L2_DCM Constants.PAPI_L2_DCM60,3918
+	public static final String PAPI_L2_DCM_name Constants.PAPI_L2_DCM_name61,3970
+    public static final int PAPI_L1_TCM Constants.PAPI_L1_TCM62,4032
+    public static final String PAPI_L1_TCM_name Constants.PAPI_L1_TCM_name63,4087
+    public static final int PAPI_L2_TCM Constants.PAPI_L2_TCM64,4152
+    public static final String PAPI_L2_TCM_name Constants.PAPI_L2_TCM_name65,4207
+	public static final int PAPI_L3_TCM Constants.PAPI_L3_TCM66,4272
+	public static final String PAPI_L3_TCM_name Constants.PAPI_L3_TCM_name67,4324
+	public static final int PAPI_L1_ICM Constants.PAPI_L1_ICM68,4386
+	public static final String PAPI_L1_ICM_name Constants.PAPI_L1_ICM_name69,4438
+	public static final int PAPI_L2_ICM Constants.PAPI_L2_ICM70,4500
+	public static final String PAPI_L2_ICM_name Constants.PAPI_L2_ICM_name71,4552
+	public static final int PAPI_TLB_IM Constants.PAPI_TLB_IM72,4614
+	public static final String PAPI_TLB_IM_name Constants.PAPI_TLB_IM_name73,4666
+	public static final int PAPI_TLB_DM Constants.PAPI_TLB_DM74,4728
+	public static final String PAPI_TLB_DM_name Constants.PAPI_TLB_DM_name75,4780
+    public static final int PAPI_BR_INS Constants.PAPI_BR_INS77,4843
+    public static final String PAPI_BR_INS_name Constants.PAPI_BR_INS_name78,4898
+	public static final int PAPI_BR_MSP Constants.PAPI_BR_MSP79,4963
+	public static final String PAPI_BR_MSP_name Constants.PAPI_BR_MSP_name80,5015
+	public static final int PAPI_BR_TKN Constants.PAPI_BR_TKN81,5077
+	public static final String PAPI_BR_TKN_name Constants.PAPI_BR_TKN_name82,5129
+	public static final int PAPI_BR_NTK Constants.PAPI_BR_NTK83,5191
+	public static final String PAPI_BR_NTK_name Constants.PAPI_BR_NTK_name84,5243
+	public static final int PAPI_MEM_WCY Constants.PAPI_MEM_WCY86,5306
+	public static final String PAPI_MEM_WCY_name Constants.PAPI_MEM_WCY_name87,5359
+	public static final int PAPI_STL_ICY Constants.PAPI_STL_ICY88,5423
+	public static final String PAPI_STL_ICY_name Constants.PAPI_STL_ICY_name89,5476
+	public static final int PAPI_FUL_ICY Constants.PAPI_FUL_ICY90,5540
+	public static final String PAPI_FUL_ICY_name Constants.PAPI_FUL_ICY_name91,5593
+	public static final int PAPI_STL_CCY Constants.PAPI_STL_CCY92,5657
+	public static final String PAPI_STL_CCY_name Constants.PAPI_STL_CCY_name93,5710
+	public static final int PAPI_FUL_CCY Constants.PAPI_FUL_CCY94,5774
+	public static final String PAPI_FUL_CCY_name Constants.PAPI_FUL_CCY_name95,5827
+    public static final int PAPI_TOT_INS Constants.PAPI_TOT_INS97,5892
+    public static final String PAPI_TOT_INS_name Constants.PAPI_TOT_INS_name98,5948
+	public static final int PAPI_TOT_CYC Constants.PAPI_TOT_CYC99,6015
+	public static final String PAPI_TOT_CYC_name Constants.PAPI_TOT_CYC_name100,6068
+	public static final int CYCLE_ACTIVITY_STALLS_TOTAL Constants.CYCLE_ACTIVITY_STALLS_TOTAL102,6133
+	public static final String CYCLE_ACTIVITY_STALLS_TOTAL_name Constants.CYCLE_ACTIVITY_STALLS_TOTAL_name103,6200
+	public static final int perf_PERF_COUNT_HW_CACHE_NODE_READ Constants.perf_PERF_COUNT_HW_CACHE_NODE_READ105,6295
+	public static final String perf_PERF_COUNT_HW_CACHE_NODE_READ_name Constants.perf_PERF_COUNT_HW_CACHE_NODE_READ_name106,6369
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/PerformanceMonitor.java,3243
+public class PerformanceMonitor 16,513
+	int counter PerformanceMonitor.counter18,568
+	private long time,PerformanceMonitor.time20,587
+	private long time, _time PerformanceMonitor._time20,587
+	private long dt;PerformanceMonitor.dt21,619
+	private boolean firstLatencyMeasurement PerformanceMonitor.firstLatencyMeasurement22,637
+	private QueryApplication application;PerformanceMonitor.application24,687
+	private int size;PerformanceMonitor.size25,726
+	private Measurement [] measurements;PerformanceMonitor.measurements27,746
+	static final Comparator<Query> ordering PerformanceMonitor.ordering29,785
+	public PerformanceMonitor PerformanceMonitor.PerformanceMonitor35,948
+	public void run PerformanceMonitor.run55,1496
+	class Measurement PerformanceMonitor.Measurement107,2821
+		int id;PerformanceMonitor.Measurement.id109,2843
+		IQueryBuffer firstBuffer,PerformanceMonitor.Measurement.firstBuffer111,2854
+		IQueryBuffer firstBuffer, secondBuffer;PerformanceMonitor.Measurement.secondBuffer111,2854
+		LatencyMonitor monitor;PerformanceMonitor.Measurement.monitor113,2897
+		ITaskDispatcher dispatcher;PerformanceMonitor.Measurement.dispatcher115,2924
+		double Dt;PerformanceMonitor.Measurement.Dt117,2955
+		long bytesProcessed,PerformanceMonitor.Measurement.bytesProcessed121,2998
+		long bytesGenerated,PerformanceMonitor.Measurement.bytesGenerated122,3042
+		double MBpsProcessed,PerformanceMonitor.Measurement.MBpsProcessed124,3087
+		double MBpsProcessed, MBpsGenerated;PerformanceMonitor.Measurement.MBpsGenerated124,3087
+		long time,PerformanceMonitor.Measurement.time126,3127
+		long timestampReference;PerformanceMonitor.Measurement.timestampReference127,3151
+		double latency,PerformanceMonitor.Measurement.latency128,3178
+		double latency, latencyMin,PerformanceMonitor.Measurement.latencyMin128,3178
+		double latency, latencyMin, latencyMax,PerformanceMonitor.Measurement.latencyMax128,3178
+		double latency, latencyMin, latencyMax, latencyAvg,PerformanceMonitor.Measurement.latencyAvg128,3178
+		double latency, latencyMin, latencyMax, latencyAvg, latencySum,PerformanceMonitor.Measurement.latencySum128,3178
+		double latency, latencyMin, latencyMax, latencyAvg, latencySum, latencyDelta,PerformanceMonitor.Measurement.latencyDelta128,3178
+		double latency, latencyMin, latencyMax, latencyAvg, latencySum, latencyDelta, deltaHelper,PerformanceMonitor.Measurement.deltaHelper128,3178
+		double latency, latencyMin, latencyMax, latencyAvg, latencySum, latencyDelta, deltaHelper, thoughputAvg,PerformanceMonitor.Measurement.thoughputAvg128,3178
+		double latency, latencyMin, latencyMax, latencyAvg, latencySum, latencyDelta, deltaHelper, thoughputAvg, throughputSum;PerformanceMonitor.Measurement.throughputSum128,3178
+		int latencyCounter,PerformanceMonitor.Measurement.latencyCounter129,3300
+		int latencyCounter, throughputCounter;PerformanceMonitor.Measurement.throughputCounter129,3300
+		public Measurement PerformanceMonitor.Measurement.Measurement131,3342
+		public void stop PerformanceMonitor.Measurement.stop151,3859
+		public String toString PerformanceMonitor.Measurement.toString156,3919
+		public String info PerformanceMonitor.Measurement.info160,3970
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/WindowBatch.java,5167
+public class WindowBatch 8,181
+	private int batchSize;WindowBatch.batchSize10,209
+	private int taskId;WindowBatch.taskId12,234
+	private int freePointer1;WindowBatch.freePointer114,256
+	private int freePointer2;WindowBatch.freePointer215,283
+	private Query query;WindowBatch.query17,311
+	private IQueryBuffer buffer;WindowBatch.buffer19,334
+	private WindowDefinition windowDefinition;WindowBatch.windowDefinition20,364
+	private ITupleSchema schema;WindowBatch.schema21,408
+	private int latencyMark;WindowBatch.latencyMark23,439
+	private int startPointer;WindowBatch.startPointer25,466
+	private int   endPointer;WindowBatch.endPointer26,493
+	private long streamStartPointer;WindowBatch.streamStartPointer28,521
+	private long   streamEndPointer;WindowBatch.streamEndPointer29,555
+	private long startTimestamp;WindowBatch.startTimestamp31,590
+	private long   endTimestamp;WindowBatch.endTimestamp32,620
+	private int [] windowStartPointers;WindowBatch.windowStartPointers34,651
+	private int []   windowEndPointers;WindowBatch.windowEndPointers35,688
+	private int lastWindowIndex;WindowBatch.lastWindowIndex37,726
+	private boolean fragmentedWindows WindowBatch.fragmentedWindows39,757
+	private boolean hasPendingWindows WindowBatch.hasPendingWindows40,801
+	PartialWindowResults openingWindows,WindowBatch.openingWindows42,846
+	PartialWindowResults openingWindows, closingWindows,WindowBatch.closingWindows42,846
+	PartialWindowResults openingWindows, closingWindows, pendingWindows,WindowBatch.pendingWindows42,846
+	PartialWindowResults openingWindows, closingWindows, pendingWindows, completeWindows;WindowBatch.completeWindows42,846
+	private boolean initialised WindowBatch.initialised44,934
+	public WindowBatch WindowBatch.WindowBatch46,973
+	public WindowBatch WindowBatch.WindowBatch51,1083
+	public void set WindowBatch.set96,2007
+	public int getBatchSize WindowBatch.getBatchSize147,3099
+	public int getTaskId WindowBatch.getTaskId151,3153
+	public void setTaskId WindowBatch.setTaskId155,3201
+	public Query getQuery WindowBatch.getQuery159,3267
+	public void setQuery WindowBatch.setQuery163,3315
+	public IQueryBuffer getBuffer WindowBatch.getBuffer167,3379
+	public void setBuffer WindowBatch.setBuffer171,3436
+	public ITupleSchema getSchema WindowBatch.getSchema175,3511
+	public void setSchema WindowBatch.setSchema179,3568
+	public WindowDefinition getWindowDefinition WindowBatch.getWindowDefinition183,3643
+	public int getFreePointer WindowBatch.getFreePointer187,3724
+	public int getFirstFreePointer WindowBatch.getFirstFreePointer191,3783
+	public int getSecondFreePointer WindowBatch.getSecondFreePointer195,3851
+	public int getBufferStartPointer WindowBatch.getBufferStartPointer199,3916
+	public int getBufferEndPointer WindowBatch.getBufferEndPointer203,3982
+	public void setBufferPointers WindowBatch.setBufferPointers207,4044
+	public long getStreamStartPointer WindowBatch.getStreamStartPointer212,4146
+	public long getStreamEndPointer WindowBatch.getStreamEndPointer216,4219
+	public void setStreamPointers WindowBatch.setStreamPointers220,4288
+	public long getBatchStartTimestamp WindowBatch.getBatchStartTimestamp225,4404
+	public long getBatchEndTimestamp WindowBatch.getBatchEndTimestamp229,4474
+	public void setBatchTimestamps WindowBatch.setBatchTimestamps233,4540
+	public int getLatencyMark WindowBatch.getLatencyMark238,4649
+	public void setLatencyMark WindowBatch.setLatencyMark242,4707
+	public int [] getWindowStartPointers WindowBatch.getWindowStartPointers246,4775
+	public int [] getWindowEndPointers WindowBatch.getWindowEndPointers250,4852
+	public boolean containsFragmentedWindows WindowBatch.containsFragmentedWindows254,4925
+	public boolean containsPendingWindows WindowBatch.containsPendingWindows258,5004
+	public PartialWindowResults getOpeningWindows WindowBatch.getOpeningWindows262,5080
+	public void setOpeningWindows WindowBatch.setOpeningWindows266,5161
+	public PartialWindowResults getClosingWindows WindowBatch.getClosingWindows271,5285
+	public void setClosingWindows WindowBatch.setClosingWindows275,5366
+	public PartialWindowResults getPendingWindows WindowBatch.getPendingWindows280,5490
+	public void setPendingWindows WindowBatch.setPendingWindows284,5571
+	public PartialWindowResults getCompleteWindows WindowBatch.getCompleteWindows289,5695
+	public void setCompleteWindows WindowBatch.setCompleteWindows293,5778
+	public int getLastWindowIndex WindowBatch.getLastWindowIndex298,5904
+	public int getInt WindowBatch.getInt302,5970
+	public float getFloat WindowBatch.getFloat307,6116
+	public long getLong WindowBatch.getLong312,6268
+	public void clear WindowBatch.clear317,6417
+	public int normalise WindowBatch.normalise327,6655
+	public long getTimestamp WindowBatch.getTimestamp331,6740
+	public void initPartialWindowPointers WindowBatch.initPartialWindowPointers339,6924
+	public void initPartialRangeBasedWindowPointers WindowBatch.initPartialRangeBasedWindowPointers352,7237
+	public void initPartialCountBasedWindowPointers WindowBatch.initPartialCountBasedWindowPointers505,12588
+
+/home/zongxiong/Saber/src/main/java/uk/ac/imperial/lsds/saber/QueryThroughputMonitor.java,678
+public class QueryThroughputMonitor 3,36
+	int counter QueryThroughputMonitor.counter5,96
+	private long time,QueryThroughputMonitor.time7,116
+	private long time, _time QueryThroughputMonitor._time7,116
+	private long dt;QueryThroughputMonitor.dt8,148
+	private QueryApplication application;QueryThroughputMonitor.application10,169
+	private int size;QueryThroughputMonitor.size11,208
+	private long [][] _tasksProcessed;QueryThroughputMonitor._tasksProcessed13,230
+	private int  [][] policy_;QueryThroughputMonitor.policy_14,266
+	public QueryThroughputMonitor QueryThroughputMonitor.QueryThroughputMonitor16,313
+	public void run QueryThroughputMonitor.run33,756
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/lrb/LinearRoadBenchmarkApp.java,108
+public class LinearRoadBenchmarkApp 17,551
+    public static void main LinearRoadBenchmarkApp.main19,590
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/lrb/InputStream.java,839
+public abstract class InputStream 11,341
+	ITupleSchema schema InputStream.schema13,414
+    ITupleSchema sinkSchema InputStream.sinkSchema14,443
+    ITupleSchema interSchema InputStream.interSchema15,479
+	QueryApplication application InputStream.application17,517
+	public InputStream InputStream.InputStream19,556
+	public QueryApplication getApplication InputStream.getApplication22,585
+	public ITupleSchema getSchema InputStream.getSchema28,740
+    public ITupleSchema getSinkSchema(InputStream.getSinkSchema34,853
+    public ITupleSchema getIntermediateSchema(InputStream.getIntermediateSchema39,992
+	public void createSchema InputStream.createSchema45,1177
+    public void createSinkSchema(InputStream.createSinkSchema85,2664
+    public void createIntermediateSchema(InputStream.createIntermediateSchema110,3640
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/lrb/LinearRoadBenchmark.java,1043
+public class LinearRoadBenchmark 46,2237
+    private PAPIHardwareSampler[] circularWorkerPapiSamplers;LinearRoadBenchmark.circularWorkerPapiSamplers51,2419
+    private PAPIHardwareSampler[] taskWorkerPapiSamplers;LinearRoadBenchmark.taskWorkerPapiSamplers52,2481
+    private LatencyMonitor latencyMonitor1;LinearRoadBenchmark.latencyMonitor154,2540
+    private LatencyMonitor latencyMonitor2;LinearRoadBenchmark.latencyMonitor255,2584
+    public LinearRoadBenchmark LinearRoadBenchmark.LinearRoadBenchmark58,2630
+	public void createApplication(LinearRoadBenchmark.createApplication79,3542
+    public void stopLatencyMonitor(LinearRoadBenchmark.stopLatencyMonitor150,6404
+    AggregationType [] aggregationTypes LinearRoadBenchmark.aggregationTypes160,6625
+    FloatColumnReference[] aggregationAttributes LinearRoadBenchmark.aggregationAttributes161,6673
+    Expression [] groupByAttributes LinearRoadBenchmark.groupByAttributes163,6731
+    private void prepareExpressions LinearRoadBenchmark.prepareExpressions165,6776
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/lrb/LinearRoadBenchmarkQuery.java,49
+public interface LinearRoadBenchmarkQuery 6,162
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/lrb/utils/GeneratedBuffer.java,818
+public class GeneratedBuffer 6,142
+	ByteBuffer buffer;GeneratedBuffer.buffer8,174
+	CountDownLatch latch;GeneratedBuffer.latch9,194
+	Latch bufferFilledLatch,GeneratedBuffer.bufferFilledLatch10,217
+	Latch bufferFilledLatch, bufferReadLatch;GeneratedBuffer.bufferReadLatch10,217
+	public GeneratedBuffer GeneratedBuffer.GeneratedBuffer12,261
+	public ByteBuffer getBuffer(GeneratedBuffer.getBuffer18,518
+	public boolean isDirect GeneratedBuffer.isDirect22,572
+	public boolean isFilled GeneratedBuffer.isFilled26,634
+	public GeneratedBuffer lock GeneratedBuffer.lock33,771
+	public void unlock(GeneratedBuffer.unlock38,856
+	public boolean isLocked(GeneratedBuffer.isLocked42,916
+	public void setLatch(GeneratedBuffer.setLatch46,993
+	public void decrementLatch GeneratedBuffer.decrementLatch52,1173
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/lrb/utils/Latch.java,297
+public class Latch 5,120
+	AtomicInteger latch;Latch.latch7,142
+	public Latch Latch.Latch9,165
+    public void setLatch Latch.setLatch13,237
+    public int incReaders Latch.incReaders20,438
+    public int decReaders Latch.decReaders33,828
+    public int getCount Latch.getCount40,1004
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/lrb/utils/Generator.java,1085
+public class Generator 8,160
+	GeneratedBuffer [] buffers;Generator.buffers10,186
+	volatile int next;Generator.next11,215
+	Executor executor;Generator.executor13,236
+	GeneratorWorker [] workers;Generator.workers14,256
+	long timestamp Generator.timestamp16,286
+	long timestampBase Generator.timestampBase17,307
+	long count,Generator.count18,332
+	long count, limit;Generator.limit18,332
+	private final int bufferSize;Generator.bufferSize20,353
+	private final int numberOfThreads;Generator.numberOfThreads21,384
+	private List<List<Integer>> positionsList;Generator.positionsList22,420
+    public long totalGeneratedTuples Generator.totalGeneratedTuples24,465
+    public Generator Generator.Generator25,507
+	public GeneratedBuffer getBuffer Generator.getBuffer54,1589
+	public int getPointer Generator.getPointer58,1660
+	public long getTimestamp Generator.getTimestamp62,1707
+	public GeneratedBuffer getNext Generator.getNext66,1762
+	public void fillNext Generator.fillNext76,2043
+	public void createPositionsList Generator.createPositionsList116,3213
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/lrb/utils/GeneratorWorker.java,1173
+public class GeneratorWorker 14,399
+	Generator generator;GeneratorWorker.generator16,451
+	volatile boolean started GeneratorWorker.started17,473
+	private int isFirstTime GeneratorWorker.isFirstTime19,509
+	private final int startPos;GeneratorWorker.startPos20,539
+	private final int endPos;GeneratorWorker.endPos21,568
+	private final int id;GeneratorWorker.id22,595
+    private String line GeneratorWorker.line24,619
+    private ArrayList<String> lines;GeneratorWorker.lines25,651
+    private int index GeneratorWorker.index27,689
+    public long consumedTuples GeneratorWorker.consumedTuples28,716
+    private final int tuplesPerBuffer;GeneratorWorker.tuplesPerBuffer29,752
+    public ByteBuffer tmpBuffer;GeneratorWorker.tmpBuffer30,791
+    private final static int TUPLE_SIZE GeneratorWorker.TUPLE_SIZE31,824
+    private int length GeneratorWorker.length33,872
+	public GeneratorWorker GeneratorWorker.GeneratorWorker34,901
+	public void configure GeneratorWorker.configure58,1660
+	public void run(GeneratorWorker.run63,1704
+	private void generate(GeneratorWorker.generate103,2885
+    private void _fill(GeneratorWorker._fill154,5096
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/yahoo/YahooBenchmark.java,1006
+public class YahooBenchmark 37,1893
+	private long[][] ads;YahooBenchmark.ads39,1944
+	private int adsPerCampaign;YahooBenchmark.adsPerCampaign40,1967
+	private boolean isV2 YahooBenchmark.isV241,1996
+    private PAPIHardwareSampler [] papiSamplers;YahooBenchmark.papiSamplers42,2027
+    private PAPIHardwareSampler [] taskWorkerPapiSamplers;YahooBenchmark.taskWorkerPapiSamplers43,2076
+    private PAPIHardwareSampler [] circularWorkerPapiSamplers;YahooBenchmark.circularWorkerPapiSamplers44,2135
+    private LatencyMonitor latencyMonitor1;YahooBenchmark.latencyMonitor146,2265
+    private LatencyMonitor latencyMonitor2;YahooBenchmark.latencyMonitor247,2309
+	public YahooBenchmark YahooBenchmark.YahooBenchmark49,2354
+	public YahooBenchmark YahooBenchmark.YahooBenchmark53,2469
+	public YahooBenchmark YahooBenchmark.YahooBenchmark57,2639
+	public void createApplication YahooBenchmark.createApplication78,3481
+	public void createApplication(YahooBenchmark.createApplication82,3615
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/yahoo/InputStream.java,563
+public abstract class InputStream 11,343
+	ITupleSchema schema InputStream.schema13,412
+	QueryApplication application InputStream.application14,441
+	private boolean isV2 InputStream.isV216,481
+	public InputStream InputStream.InputStream18,514
+	public InputStream InputStream.InputStream22,559
+	public QueryApplication getApplication InputStream.getApplication26,621
+	public ITupleSchema getSchema InputStream.getSchema33,883
+	public void createSchema InputStream.createSchema44,1066
+	public void createSchemaV2 InputStream.createSchemaV290,3261
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/yahoo/YahooBenchmarkApp.java,161
+public class YahooBenchmarkApp 15,567
+	public static final String usage YahooBenchmarkApp.usage16,600
+	public static void main YahooBenchmarkApp.main18,691
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/yahoo/utils/GeneratedBuffer.java,819
+public class GeneratedBuffer 6,144
+	ByteBuffer buffer;GeneratedBuffer.buffer8,177
+	CountDownLatch latch;GeneratedBuffer.latch9,197
+	Latch bufferFilledLatch,GeneratedBuffer.bufferFilledLatch10,220
+	Latch bufferFilledLatch, bufferReadLatch;GeneratedBuffer.bufferReadLatch10,220
+	public GeneratedBuffer GeneratedBuffer.GeneratedBuffer12,265
+	public ByteBuffer getBuffer(GeneratedBuffer.getBuffer18,523
+	public boolean isDirect GeneratedBuffer.isDirect22,578
+	public boolean isFilled GeneratedBuffer.isFilled26,640
+	public GeneratedBuffer lock GeneratedBuffer.lock33,777
+	public void unlock(GeneratedBuffer.unlock38,863
+	public boolean isLocked(GeneratedBuffer.isLocked42,923
+	public void setLatch(GeneratedBuffer.setLatch46,1000
+	public void decrementLatch GeneratedBuffer.decrementLatch52,1180
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/yahoo/utils/Latch.java,297
+public class Latch 5,122
+	AtomicInteger latch;Latch.latch7,144
+	public Latch Latch.Latch9,168
+    public void setLatch Latch.setLatch13,241
+    public int incReaders Latch.incReaders20,443
+    public int decReaders Latch.decReaders33,838
+    public int getCount Latch.getCount40,1018
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/yahoo/utils/Generator.java,1406
+public class Generator 7,161
+	GeneratedBuffer [] buffers;Generator.buffers9,187
+	volatile int next;Generator.next10,216
+	Executor executor;Generator.executor12,237
+	GeneratorWorker [] workers;Generator.workers13,257
+	long timestamp Generator.timestamp15,287
+	long timestampBase Generator.timestampBase16,308
+	long count,Generator.count17,333
+	long count, limit;Generator.limit17,333
+	private final int bufferSize;Generator.bufferSize19,354
+	private final int numberOfThreads;Generator.numberOfThreads20,385
+	private final int adsPerCampaign;Generator.adsPerCampaign21,421
+	private final long[][] ads;Generator.ads22,456
+	private List<List<Integer>> positionsList;Generator.positionsList23,485
+	private boolean isV2 Generator.isV225,530
+    public int totalGeneratedTuples Generator.totalGeneratedTuples26,561
+	public Generator Generator.Generator27,602
+	public Generator Generator.Generator31,791
+	public GeneratedBuffer getBuffer Generator.getBuffer69,1970
+	public int getPointer Generator.getPointer73,2041
+	public long getTimestamp Generator.getTimestamp77,2088
+	public int getAdsPerCampaign Generator.getAdsPerCampaign81,2143
+	public long [][] getAds Generator.getAds85,2213
+	public GeneratedBuffer getNext Generator.getNext89,2267
+	public void fillNext Generator.fillNext99,2548
+	public void createPositionsList Generator.createPositionsList135,3501
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/yahoo/utils/GeneratorWorker.java,1122
+public class GeneratorWorker 9,174
+	Generator generator;GeneratorWorker.generator11,226
+	volatile boolean started GeneratorWorker.started12,248
+	private int isFirstTime GeneratorWorker.isFirstTime14,284
+	private ByteBuffer bufferHelper;GeneratorWorker.bufferHelper15,314
+	private final int adsPerCampaign;GeneratorWorker.adsPerCampaign16,348
+	private final long [][] ads;GeneratorWorker.ads17,383
+	private final int startPos;GeneratorWorker.startPos18,413
+	private final int endPos;GeneratorWorker.endPos19,442
+	private final int id;GeneratorWorker.id20,469
+	private boolean isV2 GeneratorWorker.isV222,493
+    public int generatedTuples GeneratorWorker.generatedTuples23,524
+    private int tuplesPerBuffer GeneratorWorker.tuplesPerBuffer24,560
+	public GeneratorWorker GeneratorWorker.GeneratorWorker25,598
+	public GeneratorWorker GeneratorWorker.GeneratorWorker28,731
+	public void configure GeneratorWorker.configure50,1305
+	public void run(GeneratorWorker.run55,1349
+	private void generate(GeneratorWorker.generate92,2178
+	private void generateV2(GeneratorWorker.generateV2141,4045
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/yahoo/utils/CampaignGenerator.java,1587
+public class CampaignGenerator 21,844
+	public int adsPerCampaign CampaignGenerator.adsPerCampaign23,879
+	public ITupleSchema campaignsSchema CampaignGenerator.campaignsSchema24,911
+	public IQueryBuffer relationBuffer CampaignGenerator.relationBuffer25,957
+	public HashMap hashMap CampaignGenerator.hashMap26,1001
+	long [][] adsArray CampaignGenerator.adsArray27,1033
+	private boolean isV2 CampaignGenerator.isV229,1063
+	public CampaignGenerator CampaignGenerator.CampaignGenerator31,1095
+	public CampaignGenerator CampaignGenerator.CampaignGenerator35,1221
+	public CampaignGenerator CampaignGenerator.CampaignGenerator55,1933
+	public CampaignGenerator CampaignGenerator.CampaignGenerator59,2092
+	public static ITupleSchema createCampaignsSchema CampaignGenerator.createCampaignsSchema76,2820
+	public static ITupleSchema createCampaignsSchemaV2 CampaignGenerator.createCampaignsSchemaV298,3480
+	public void generateBuffer CampaignGenerator.generateBuffer110,3886
+	public void generateBufferV2 CampaignGenerator.generateBufferV2159,5313
+	private void fillAdsArray(CampaignGenerator.fillAdsArray197,6299
+	public void createHashMap(CampaignGenerator.createHashMap220,7053
+	public int getAdsPerCampaignNumber CampaignGenerator.getAdsPerCampaignNumber244,7653
+	public ITupleSchema getCampaignsSchema CampaignGenerator.getCampaignsSchema248,7729
+	public IQueryBuffer getRelationBuffer CampaignGenerator.getRelationBuffer252,7810
+	public HashMap getHashMap CampaignGenerator.getHashMap256,7889
+	public long [][] getAds CampaignGenerator.getAds260,7949
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/benchmarks/yahoo/YahooBenchmarkQuery.java,44
+public interface YahooBenchmarkQuery 6,164
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/microbenchmarks/TestProjection.java,155
+public class TestProjection 30,1451
+	public static final String usage TestProjection.usage32,1483
+	public static void main TestProjection.main42,1765
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/microbenchmarks/TestAggregation.java,158
+public class TestAggregation 29,1309
+	public static final String usage TestAggregation.usage31,1342
+	public static void main TestAggregation.main41,1626
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/microbenchmarks/TestNoop.java,135
+public class TestNoop 22,858
+	public static final String usage TestNoop.usage24,884
+	public static void main TestNoop.main32,1098
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/microbenchmarks/scheduling/W3.java,119
+public class W3 35,1649
+	public static final String usage W3.usage37,1669
+	public static void main W3.main39,1720
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/microbenchmarks/scheduling/W2.java,119
+public class W2 33,1651
+	public static final String usage W2.usage35,1671
+	public static void main W2.main46,2062
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/microbenchmarks/scheduling/W1.java,119
+public class W1 34,1727
+	public static final String usage W1.usage36,1747
+	public static void main W1.main38,1798
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/microbenchmarks/TestSelection.java,152
+public class TestSelection 27,1203
+	public static final String usage TestSelection.usage29,1234
+	public static void main TestSelection.main39,1501
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/experiments/microbenchmarks/TestThetaJoin.java,152
+public class TestThetaJoin 26,1136
+	public static final String usage TestThetaJoin.usage28,1167
+	public static void main TestThetaJoin.main42,1670
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/TestSelectionSelectivity.java,185
+public class TestSelectionSelectivity 25,1067
+	public static final String usage TestSelectionSelectivity.usage27,1109
+	public static void main(TestSelectionSelectivity.main29,1181
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/DemoWithGoogleClusterDataPreprocessor.java,221
+public class DemoWithGoogleClusterDataPreprocessor 18,419
+	public static final String usage DemoWithGoogleClusterDataPreprocessor.usage20,474
+	public static void main DemoWithGoogleClusterDataPreprocessor.main22,559
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/DemoWithGoogleClusterData.java,188
+public class DemoWithGoogleClusterData 31,1426
+	public static final String usage DemoWithGoogleClusterData.usage33,1469
+	public static void main DemoWithGoogleClusterData.main35,1542
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/TestAdaptivityWithGoogleClusterData.java,218
+public class TestAdaptivityWithGoogleClusterData 33,1502
+	public static final String usage TestAdaptivityWithGoogleClusterData.usage35,1555
+	public static void main TestAdaptivityWithGoogleClusterData.main37,1638
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/TestNoOp.java,134
+public class TestNoOp 21,784
+	public static final String usage TestNoOp.usage23,810
+	public static void main(TestNoOp.main25,866
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/TestThetaJoinSelectivity.java,185
+public class TestThetaJoinSelectivity 24,1000
+	public static final String usage TestThetaJoinSelectivity.usage26,1042
+	public static void main(TestThetaJoinSelectivity.main28,1114
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/TestProjection.java,155
+public class TestProjection 29,1377
+	public static final String usage TestProjection.usage31,1409
+	public static void main(TestProjection.main33,1471
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/SyntheticReduction.java,167
+public class SyntheticReduction 27,1171
+	public static final String usage SyntheticReduction.usage29,1206
+	public static void main(SyntheticReduction.main31,1269
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/TestAggregation.java,158
+public class TestAggregation 27,1171
+	public static final String usage TestAggregation.usage29,1203
+	public static void main(TestAggregation.main31,1266
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/hls/Test1.java,128
+public class Test1 33,1626
+	public static final String usage Test1.usage35,1649
+	public static void main(Test1.main37,1705
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/TestAdaptivity.java,155
+public class TestAdaptivity 27,1190
+	public static final String usage TestAdaptivity.usage29,1222
+	public static void main TestAdaptivity.main31,1284
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/TestSelectionPredicates.java,182
+public class TestSelectionPredicates 26,1129
+	public static final String usage TestSelectionPredicates.usage28,1170
+	public static void main(TestSelectionPredicates.main30,1241
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/TestThetaJoinPredicates.java,182
+public class TestThetaJoinPredicates 25,1062
+	public static final String usage TestThetaJoinPredicates.usage27,1103
+	public static void main(TestThetaJoinPredicates.main29,1174
+
+/home/zongxiong/Saber/src/test/java/uk/ac/imperial/lsds/saber/microbenchmarks/TestTwoNoOps.java,146
+public class TestTwoNoOps 21,784
+	public static final String usage TestTwoNoOps.usage23,814
+	public static void main(TestTwoNoOps.main25,870
