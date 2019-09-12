@@ -18,6 +18,7 @@ public class Generator {
 
 	private final int bufferSize;
 	private final int numberOfThreads;
+	public final int numberOfCampaigns;
 	private final int adsPerCampaign;
 	private final long[][] ads;
 	private List<List<Integer>> positionsList;
@@ -32,6 +33,7 @@ public class Generator {
 		this.bufferSize = bufferSize;
 		this.numberOfThreads = numberOfThreads;
 		this.adsPerCampaign = adsPerCampaign;
+        this.numberOfCampaigns = 10000;
 		this.ads = ads;
 
 		this.isV2 = isV2;

@@ -8,12 +8,15 @@ import uk.ac.imperial.lsds.saber.devices.TheCPU;
 
 public class GeneratorWorker implements Runnable {
 
+
 	Generator generator;
 	volatile boolean started = false;
 
 	private int isFirstTime = 2;
 	private ByteBuffer bufferHelper;
 	private final int adsPerCampaign;
+	public final int numberOfCampaigns;
+
 	private final long [][] ads;
 	private final int startPos;
 	private final int endPos;
@@ -28,6 +31,8 @@ public class GeneratorWorker implements Runnable {
 	public GeneratorWorker (Generator generator, int startPos, int endPos, int id, boolean isV2) {
 		this.generator = generator;
 		this.adsPerCampaign = generator.getAdsPerCampaign();
+        this.numberOfCampaigns = generator.numberOfCampaigns;
+
 		this.ads = generator.getAds();
 		this.startPos = startPos;
 		this.endPos = endPos;
@@ -111,8 +116,8 @@ public class GeneratorWorker implements Runnable {
 
 			    buffer.putLong (timestamp);
 			    buffer.put(bufferHelper.array());
-				buffer.putLong(this.ads[(value % 100000) % (100 * this.adsPerCampaign)][0]); // ad_id
-				buffer.putLong(this.ads[(value % 100000) % (100 * this.adsPerCampaign)][1]);
+				buffer.putLong(this.ads[(value % 100000) % (this.numberOfCampaigns * this.adsPerCampaign)][0]); // ad_id
+				buffer.putLong(this.ads[(value % 100000) % (this.numberOfCampaigns * this.adsPerCampaign)][1]);
 				buffer.putInt((value % 100000) % 5);                                         // ad_type: (0, 1, 2, 3, 4) =>
 				                                                                             // ("banner", "modal", "sponsored-search", "mail", "mobile")
 				buffer.putInt((value % 100000) % 3);                                         // event_type: (0, 1, 2) =>
@@ -150,7 +155,8 @@ public class GeneratorWorker implements Runnable {
 			while (buffer.position()  < endPos) {
 			    buffer.putLong (timestamp);
 				buffer.putLong(user_id);
-				buffer.putLong(page_id);				buffer.putLong(this.ads[(value % 100000) % (100 * this.adsPerCampaign)][1]);
+				buffer.putLong(page_id);
+				buffer.putLong(this.ads[(value % 100000) % (this.numberOfCampaigns * this.adsPerCampaign)][1]);
 				buffer.putInt((value % 100000) % 5);
 				buffer.putInt((value % 100000) % 3);
 				buffer.putInt(1);
