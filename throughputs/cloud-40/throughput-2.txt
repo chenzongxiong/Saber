@@ -1,18 +1,18 @@
-[DBG] q 0 32768 bytes
-[DBG]   start                    0 [                   0] end                32000 [               32000]       0 wraps                  768 bytes remaining
+[DBG] q 0 16777216 bytes
+[DBG]   start                    0 [                   0] end             16000000 [            16000000]       0 wraps               777216 bytes remaining
 [DBG] aggregation type is COUNT(*)
 [DBG] aggregation type is MAX(0)
 [DBG] 2 threads (hybrid mode false)
 [DBG] CPU-only execution
 [DBG] bind worker  0 to core  5
-[DBG] q 0 536870912 bytes
+[DBG] q 0 1073741824 bytes
 id: 1, hwPAPI: null
-[DBG] bind worker  1 to core  6
 id: 2, hwPAPI: null
 [DBG] bind Worker Generator thread  1 to core  1
-[DBG] bind Worker Generator thread  2 to core  2
+[DBG] bind worker  1 to core  6
 [DBG] 4194304 bytes/batch 1 panes/slide 1 panes/window
-[DBG] q 1 536870912 bytes
+[DBG] bind Worker Generator thread  2 to core  2
+[DBG] q 1 1073741824 bytes
 [DBG] 4194304 bytes/batch 1 panes/slide 1 panes/window
 [MON] [MultiOperator] S   0
 [MON] [MultiOperator] S   1
@@ -26,180 +26,355 @@ id: 2, hwPAPI: null
 [MON] q      0 ([[0][0]=    0 [0][1]=    0 [1][0]=    0 [1][1]=    0]) t      1 w      0 b      0 p      0 policy [[0][0]=    0 [0][1]=    0 [1][0]=    0 [1][1]=    0]
 [MON] q      0 ([[0][0]=    0 [0][1]=    0 [1][0]=    0 [1][1]=    0]) t      1 w      0 b      0 p      0 policy [[0][0]=    0 [0][1]=    0 [1][0]=    0 [1][1]=    0]
 [MON] q      0 ([[0][0]=    0 [0][1]=    0 [1][0]=    0 [1][1]=    0]) t      1 w      0 b      0 p      0 policy [[0][0]=    0 [0][1]=    0 [1][0]=    0 [1][1]=    0]
-[MON] q      0 ([[0][0]=    0 [0][1]=    0 [1][0]=    0 [1][1]=    0]) t      1 w      0 b      0 p      0 policy [[0][0]=    0 [0][1]=    0 [1][0]=    0 [1][1]=    0]
 [DBG] bind YSB Worker Generator thread  3 to core  3
 [DBG] bind YSB Worker Generator thread  4 to core  4
-[MON] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    2]) t    142 w    142 b     20 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  320 [1][1]=   21]
-Throughput Average(records/sec) 21,441,598.402
-Throughput Sum(records): 21,441,598.402
-[MON] S000   2617.383 MB/s output    288.193 MB/s [null] S001    287.712 MB/s output      0.000 MB/s [null] q    136 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    5]) t    142 w    142 b     20 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  652 [1][1]=   72]
-Throughput Average(records/sec) 22,972,045.462
-Throughput Sum(records): 45,944,090.924
-[MON] S000   2991.027 MB/s output    329.334 MB/s [null] S001    327.019 MB/s output      0.003 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    7]) t    142 w    142 b     20 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  744 [1][1]=   80]
-Throughput Average(records/sec) 23,738,571.767
-Throughput Sum(records): 71,215,715.3
-[MON] S000   3084.915 MB/s output    339.672 MB/s [null] S001    339.660 MB/s output      0.000 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    2]) t    142 w    142 b     20 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  772 [1][1]=   85]
-Throughput Average(records/sec) 24,146,386.367
-Throughput Sum(records): 96,585,545.469
-Latency(ms)   2002.502, Delta -1997.498, Min   2002.502, Max   2002.502, Avg   1001.251
-[MON] S000   3096.903 MB/s output    340.992 MB/s [null] S001    343.656 MB/s output      0.003 MB/s [null] q    138 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    7]) t    142 w    142 b     20 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  774 [1][1]=   85]
-Throughput Average(records/sec) 24,404,169.234
-Throughput Sum(records): 122,020,846.169
-[MON] S000   3104.895 MB/s output    341.872 MB/s [null] S001    339.660 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    3]) t    142 w    142 b     20 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  777 [1][1]=   85]
-Throughput Average(records/sec) 24,559,656.846
-Throughput Sum(records): 147,357,941.074
-Latency(ms)   2001.838, Delta   1.838, Min   2001.838, Max   2002.502, Avg   1334.780
-[MON] S000   3092.907 MB/s output    340.552 MB/s [null] S001    339.660 MB/s output      0.003 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    8]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  773 [1][1]=   86]
-Throughput Average(records/sec) 24,572,513.631
-Throughput Sum(records): 172,007,595.42
-[MON] S000   3008.991 MB/s output    331.312 MB/s [null] S001    331.668 MB/s output      0.000 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=    1]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  753 [1][1]=   82]
-Throughput Average(records/sec) 24,692,637.739
-Throughput Sum(records): 197,541,101.913
-Latency(ms)   2001.657, Delta   1.657, Min   2001.657, Max   2002.502, Avg   1501.499
-[MON] S000   3116.883 MB/s output    343.192 MB/s [null] S001    343.656 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    7]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  779 [1][1]=   86]
-Throughput Average(records/sec) 24,556,920.748
-Throughput Sum(records): 221,012,286.728
-[MON] S000   2865.135 MB/s output    315.473 MB/s [null] S001    315.684 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    6]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  717 [1][1]=   79]
-Throughput Average(records/sec) 24,447,417.473
-Throughput Sum(records): 244,474,174.728
-Latency(ms)   2001.367, Delta   1.367, Min   2001.367, Max   2002.502, Avg   1601.473
-[MON] S000   2864.000 MB/s output    315.348 MB/s [null] S001    316.000 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    1 [1][1]=    5]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  716 [1][1]=   79]
-Throughput Average(records/sec) 24,507,465.707
-Throughput Sum(records): 269,582,122.78
-[MON] S000   3064.935 MB/s output    337.472 MB/s [null] S001    335.664 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    9]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  766 [1][1]=   84]
-Throughput Average(records/sec) 24,571,145.596
-Throughput Sum(records): 294,853,747.156
-Latency(ms)   2001.842, Delta   1.842, Min   2001.367, Max   2002.502, Avg   1668.201
-[MON] S000   3084.915 MB/s output    339.672 MB/s [null] S001    339.660 MB/s output      0.003 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    4]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  770 [1][1]=   83]
-Throughput Average(records/sec) 24,637,619.066
-Throughput Sum(records): 320,289,047.855
-[MON] S000   3104.895 MB/s output    341.872 MB/s [null] S001    343.656 MB/s output      0.000 MB/s [null] q    138 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=   10]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  775 [1][1]=   86]
-Throughput Average(records/sec) 24,694,596.325
-Throughput Sum(records): 345,724,348.554
-Latency(ms)   2001.481, Delta   1.481, Min   2001.367, Max   2002.502, Avg   1715.812
-[MON] S000   3104.895 MB/s output    341.872 MB/s [null] S001    339.660 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    5]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  778 [1][1]=   85]
-Throughput Average(records/sec) 24,695,428.037
-Throughput Sum(records): 370,431,420.554
-[MON] S000   3016.000 MB/s output    332.084 MB/s [null] S001    336.000 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    8]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  753 [1][1]=   83]
-Throughput Average(records/sec) 24,737,578.17
-Throughput Sum(records): 395,801,250.724
-Latency(ms)   2001.555, Delta   1.555, Min   2001.367, Max   2002.502, Avg   1751.530
-[MON] S000   3096.903 MB/s output    340.992 MB/s [null] S001    339.660 MB/s output      0.003 MB/s [null] q    138 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    3]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  774 [1][1]=   86]
-Throughput Average(records/sec) 24,780,546.276
-Throughput Sum(records): 421,269,286.688
-[MON] S000   3108.891 MB/s output    342.312 MB/s [null] S001    339.660 MB/s output      0.000 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    9]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  777 [1][1]=   85]
-Throughput Average(records/sec) 24,767,362.149
-Throughput Sum(records): 445,812,518.688
-Latency(ms)   2001.184, Delta   1.184, Min   2001.184, Max   2002.502, Avg   1779.270
-[MON] S000   2996.000 MB/s output    329.882 MB/s [null] S001    332.000 MB/s output      0.003 MB/s [null] q    138 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    2]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  748 [1][1]=   82]
-Throughput Average(records/sec) 24,800,793.901
-Throughput Sum(records): 471,215,084.123
-[MON] S000   3100.899 MB/s output    341.432 MB/s [null] S001    343.656 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    7]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  777 [1][1]=   86]
-Throughput Average(records/sec) 24,824,335.425
-Throughput Sum(records): 496,486,708.498
-Latency(ms)   2001.493, Delta   1.493, Min   2001.184, Max   2002.502, Avg   1801.492
-[MON] S000   3084.915 MB/s output    339.672 MB/s [null] S001    335.664 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    2]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  771 [1][1]=   85]
-Throughput Average(records/sec) 24,845,634.899
-Throughput Sum(records): 521,758,332.874
-[MON] S000   3084.915 MB/s output    339.672 MB/s [null] S001    343.656 MB/s output      0.000 MB/s [null] q    138 ([[0][0]=    0 [0][1]=    0 [1][0]=    1 [1][1]=    7]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  772 [1][1]=   85]
-Throughput Average(records/sec) 24,876,572.949
-Throughput Sum(records): 547,284,604.874
-Latency(ms)   2001.207, Delta   1.207, Min   2001.184, Max   2002.502, Avg   1819.648
-[MON] S000   3116.000 MB/s output    343.095 MB/s [null] S001    340.000 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    3]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  778 [1][1]=   86]
-Throughput Average(records/sec) 24,858,167.288
-Throughput Sum(records): 571,737,847.631
-[MON] S000   2985.015 MB/s output    328.672 MB/s [null] S001    327.672 MB/s output      0.000 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    5]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  746 [1][1]=   82]
-Throughput Average(records/sec) 24,877,812.985
-Throughput Sum(records): 597,067,511.631
-Latency(ms)   2001.201, Delta   1.201, Min   2001.184, Max   2002.502, Avg   1834.777
-[MON] S000   3092.000 MB/s output    340.452 MB/s [null] S001    344.000 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=   10]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  771 [1][1]=   83]
-Throughput Average(records/sec) 24,873,924.281
-Throughput Sum(records): 621,848,107.036
-[MON] S000   3024.975 MB/s output    333.072 MB/s [null] S001    331.668 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    3]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  760 [1][1]=   83]
-Throughput Average(records/sec) 24,872,852.807
-Throughput Sum(records): 646,694,172.97
-Latency(ms)   2001.227, Delta   1.227, Min   2001.184, Max   2002.502, Avg   1847.581
-[MON] S000   3032.967 MB/s output    333.952 MB/s [null] S001    335.664 MB/s output      0.003 MB/s [null] q    138 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    7]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  756 [1][1]=   84]
-Throughput Average(records/sec) 24,887,344.48
-Throughput Sum(records): 671,958,300.97
-[MON] S000   3084.000 MB/s output    339.571 MB/s [null] S001    336.000 MB/s output      0.000 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    2]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  770 [1][1]=   85]
-Throughput Average(records/sec) 24,905,745.229
-Throughput Sum(records): 697,360,866.405
-Latency(ms)   2001.061, Delta   1.061, Min   2001.061, Max   2002.502, Avg   1858.544
-[MON] S000   3100.899 MB/s output    341.432 MB/s [null] S001    343.656 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    7]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  775 [1][1]=   85]
-Throughput Average(records/sec) 24,922,622.979
-Throughput Sum(records): 722,756,066.405
-[MON] S000   3100.000 MB/s output    341.333 MB/s [null] S001    340.000 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    3]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  775 [1][1]=   85]
-Throughput Average(records/sec) 24,920,071.078
-Throughput Sum(records): 747,602,132.339
-Latency(ms)   2001.965, Delta   1.965, Min   2001.061, Max   2002.502, Avg   1868.105
-[MON] S000   3032.967 MB/s output    333.952 MB/s [null] S001    335.664 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    6]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  759 [1][1]=   84]
-Throughput Average(records/sec) 24,836,373.642
-Throughput Sum(records): 769,927,582.888
-[MON] S000   2725.275 MB/s output    300.073 MB/s [null] S001    299.700 MB/s output      0.000 MB/s [null] q    138 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    1]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  687 [1][1]=   75]
-Throughput Average(records/sec) 24,737,447.754
-Throughput Sum(records): 791,598,328.143
-Latency(ms)   2001.546, Delta   1.546, Min   2001.061, Max   2002.502, Avg   1876.445
-[MON] S000   2645.355 MB/s output    291.273 MB/s [null] S001    291.708 MB/s output      0.003 MB/s [null] q    138 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    4]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  661 [1][1]=   73]
-Throughput Average(records/sec) 24,712,963.838
-Throughput Sum(records): 815,527,806.664
-[MON] S000   2921.079 MB/s output    321.632 MB/s [null] S001    319.680 MB/s output      0.000 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    5]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  725 [1][1]=   78]
-Throughput Average(records/sec) 24,716,645.608
-Throughput Sum(records): 840,365,950.664
-Latency(ms)   2001.187, Delta   1.187, Min   2001.061, Max   2002.502, Avg   1883.783
-[MON] S000   3032.000 MB/s output    333.846 MB/s [null] S001    336.000 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    8]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  757 [1][1]=   84]
-Throughput Average(records/sec) 24,689,478.653
-Throughput Sum(records): 864,131,752.862
-[MON] S000   2901.099 MB/s output    319.433 MB/s [null] S001    319.680 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    8]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  725 [1][1]=   79]
-Throughput Average(records/sec) 24,708,171.802
-Throughput Sum(records): 889,494,184.862
-Latency(ms)   2001.143, Delta   1.143, Min   2001.061, Max   2002.502, Avg   1890.303
-[MON] S000   3096.000 MB/s output    340.893 MB/s [null] S001    340.000 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    3]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  773 [1][1]=   86]
-Throughput Average(records/sec) 24,725,169.723
-Throughput Sum(records): 914,831,279.767
-[MON] S000   3092.907 MB/s output    340.552 MB/s [null] S001    339.660 MB/s output      0.000 MB/s [null] q    138 ([[0][0]=    0 [0][1]=    0 [1][0]=    3 [1][1]=    9]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  773 [1][1]=   85]
-Throughput Average(records/sec) 24,744,526.731
-Throughput Sum(records): 940,292,015.767
-Latency(ms)   2000.941, Delta   0.941, Min   2000.941, Max   2002.502, Avg   1896.126
-[MON] S000   3108.000 MB/s output    342.214 MB/s [null] S001    344.000 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    4]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  779 [1][1]=   85]
-Throughput Average(records/sec) 24,762,238.884
-Throughput Sum(records): 965,727,316.466
-[MON] S000   3104.895 MB/s output    341.872 MB/s [null] S001    339.660 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=   10]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  773 [1][1]=   86]
-Throughput Average(records/sec) 24,737,922.112
-Throughput Sum(records): 989,516,884.466
-Latency(ms)   2000.998, Delta   0.998, Min   2000.941, Max   2002.502, Avg   1901.370
-[MON] S000   2904.000 MB/s output    319.752 MB/s [null] S001    320.000 MB/s output      0.003 MB/s [null] q    137 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=   10]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  726 [1][1]=   79]
-Throughput Average(records/sec) 24,758,923.451
-Throughput Sum(records): 1,015,115,861.489
-[MON] S000   3124.875 MB/s output    344.072 MB/s [null] S001    343.656 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    6]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  783 [1][1]=   87]
-Throughput Average(records/sec) 24,753,983.572
-Throughput Sum(records): 1,039,667,310.041
-Latency(ms)   2001.179, Delta   1.179, Min   2000.941, Max   2002.502, Avg   1906.123
-[MON] S000   2997.003 MB/s output    329.992 MB/s [null] S001    331.668 MB/s output      0.003 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    8]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  753 [1][1]=   83]
-Throughput Average(records/sec) 24,765,847.396
-Throughput Sum(records): 1,064,931,438.041
-[MON] S000   3084.000 MB/s output    339.571 MB/s [null] S001    340.000 MB/s output      0.000 MB/s [null] q    137 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    3]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  769 [1][1]=   84]
-Throughput Average(records/sec) 24,781,062.244
-Throughput Sum(records): 1,090,366,738.74
-Latency(ms)   2001.227, Delta   1.227, Min   2000.941, Max   2002.502, Avg   1910.445
-[MON] S000   3104.895 MB/s output    341.872 MB/s [null] S001    339.660 MB/s output      0.003 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    9]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  773 [1][1]=   84]
-Throughput Average(records/sec) 24,793,418.525
-Throughput Sum(records): 1,115,703,833.645
-[MON] S000   3092.907 MB/s output    340.552 MB/s [null] S001    343.656 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=    4]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  773 [1][1]=   85]
-Throughput Average(records/sec) 24,807,925.427
-Throughput Sum(records): 1,141,164,569.645
-Latency(ms)   2001.612, Delta   1.612, Min   2000.941, Max   2002.502, Avg   1914.409
-[MON] S000   3108.000 MB/s output    342.214 MB/s [null] S001    340.000 MB/s output      0.003 MB/s [null] q    138 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=   10]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  778 [1][1]=   85]
-Throughput Average(records/sec) 24,818,487.857
-Throughput Sum(records): 1,166,468,929.286
-[MON] S000   3088.911 MB/s output    340.112 MB/s [null] S001    339.660 MB/s output      0.000 MB/s [null] q    139 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    5]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  772 [1][1]=   85]
-Throughput Average(records/sec) 24,805,926.693
-Throughput Sum(records): 1,190,684,481.286
-Latency(ms)   2001.039, Delta   1.039, Min   2000.941, Max   2002.502, Avg   1918.019
-[MON] S000   2956.000 MB/s output    325.478 MB/s [null] S001    324.000 MB/s output      0.003 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    6]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  738 [1][1]=   82]
-Throughput Average(records/sec) 24,821,443.327
-Throughput Sum(records): 1,216,250,723.044
-[MON] S000   3120.879 MB/s output    343.632 MB/s [null] S001    343.656 MB/s output      0.000 MB/s [null] q    140 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    2]) t    143 w    143 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  781 [1][1]=   86]
-error: open-adress hash table is full
+[MON] q      0 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    8]) t      8 w      8 b     16 p     12 policy [[0][0]=    0 [0][1]=    0 [1][0]=  108 [1][1]=    8]
+Throughput Average(records/sec) 11,162,725.275
+Throughput Sum(records): 11,162,725.275
+[MON] S000   1362.637 MB/s output    103.795 MB/s [null] S001     67.932 MB/s output      0.000 MB/s [null] q    260 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    4]) t    265 w    265 b     20 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  332 [1][1]=   15]
+Throughput Average(records/sec) 19,008,728.54
+Throughput Sum(records): 38,017,457.079
+[MON] S000   3278.166 MB/s output    249.704 MB/s [null] S001    211.366 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    7]) t    275 w    275 b     20 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  818 [1][1]=   53]
+Throughput Average(records/sec) 21,347,330.848
+Throughput Sum(records): 64,041,992.544
+[MON] S000   3176.823 MB/s output    241.985 MB/s [null] S001    243.756 MB/s output      0.000 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    1 [1][1]=    8]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  796 [1][1]=   61]
+Throughput Average(records/sec) 22,532,999.634
+Throughput Sum(records): 90,131,998.538
+Latency(ms)   2002.020, Delta -1997.980, Min   2002.020, Max   2002.020, Avg   1001.010
+[MON] S000   3184.815 MB/s output    242.593 MB/s [null] S001    239.760 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  795 [1][1]=   60]
+Throughput Average(records/sec) 23,257,495.012
+Throughput Sum(records): 116,287,475.061
+[MON] S000   3192.807 MB/s output    243.202 MB/s [null] S001    243.756 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  798 [1][1]=   61]
+Throughput Average(records/sec) 23,822,330.093
+Throughput Sum(records): 142,933,980.556
+Latency(ms)   2001.910, Delta   1.910, Min   2001.910, Max   2002.020, Avg   1334.643
+[MON] S000   3252.747 MB/s output    247.768 MB/s [null] S001    247.752 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    1 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  812 [1][1]=   62]
+Throughput Average(records/sec) 23,968,578.07
+Throughput Sum(records): 167,780,046.49
+[MON] S000   3032.967 MB/s output    231.027 MB/s [null] S001    231.768 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  759 [1][1]=   56]
+Throughput Average(records/sec) 24,266,491.825
+Throughput Sum(records): 194,131,934.602
+Latency(ms)   2002.271, Delta   2.271, Min   2001.910, Max   2002.271, Avg   1501.550
+[MON] S000   3216.783 MB/s output    245.028 MB/s [null] S001    243.756 MB/s output      0.001 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  802 [1][1]=   61]
+Throughput Average(records/sec) 24,552,761.298
+Throughput Sum(records): 220,974,851.685
+[MON] S000   3276.723 MB/s output    249.594 MB/s [null] S001    251.748 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  822 [1][1]=   62]
+Throughput Average(records/sec) 24,749,041.612
+Throughput Sum(records): 247,490,416.12
+Latency(ms)   2001.453, Delta   1.453, Min   2001.453, Max   2002.271, Avg   1601.531
+[MON] S000   3236.763 MB/s output    246.550 MB/s [null] S001    243.756 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    5]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  806 [1][1]=   62]
+Throughput Average(records/sec) 24,953,749.829
+Throughput Sum(records): 274,491,248.12
+[MON] S000   3296.000 MB/s output    251.063 MB/s [null] S001    252.000 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  824 [1][1]=   63]
+Throughput Average(records/sec) 25,116,636.311
+Throughput Sum(records): 301,399,635.733
+Latency(ms)   2001.323, Delta   1.323, Min   2001.323, Max   2002.271, Avg   1668.163
+[MON] S000   3284.715 MB/s output    250.203 MB/s [null] S001    251.748 MB/s output      0.001 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  824 [1][1]=   62]
+Throughput Average(records/sec) 25,256,981.432
+Throughput Sum(records): 328,340,758.61
+[MON] S000   3288.711 MB/s output    250.507 MB/s [null] S001    247.752 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  819 [1][1]=   63]
+Throughput Average(records/sec) 25,356,233.15
+Throughput Sum(records): 354,987,264.104
+Latency(ms)   2002.957, Delta   2.957, Min   2001.323, Max   2002.957, Avg   1715.991
+[MON] S000   3252.747 MB/s output    247.768 MB/s [null] S001    247.752 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    5]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  812 [1][1]=   60]
+Throughput Average(records/sec) 25,357,631.845
+Throughput Sum(records): 380,364,477.677
+[MON] S000   3097.804 MB/s output    235.966 MB/s [null] S001    239.521 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    3 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  776 [1][1]=   59]
+Throughput Average(records/sec) 25,399,313.321
+Throughput Sum(records): 406,389,013.142
+Latency(ms)   2001.711, Delta   1.711, Min   2001.323, Max   2002.957, Avg   1751.706
+[MON] S000   3176.823 MB/s output    241.985 MB/s [null] S001    239.760 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  794 [1][1]=   60]
+Throughput Average(records/sec) 25,493,520.302
+Throughput Sum(records): 433,389,845.142
+[MON] S000   3296.000 MB/s output    251.063 MB/s [null] S001    252.000 MB/s output      0.000 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  823 [1][1]=   63]
+Throughput Average(records/sec) 25,375,712.453
+Throughput Sum(records): 456,762,824.163
+Latency(ms)   2001.326, Delta   1.326, Min   2001.323, Max   2002.957, Avg   1779.441
+[MON] S000   2853.147 MB/s output    217.330 MB/s [null] S001    215.784 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    2]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  721 [1][1]=   55]
+Throughput Average(records/sec) 25,396,077.764
+Throughput Sum(records): 482,525,477.509
+[MON] S000   3144.855 MB/s output    239.550 MB/s [null] S001    239.760 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    3 [1][1]=    2]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  781 [1][1]=   59]
+Throughput Average(records/sec) 25,438,632.275
+Throughput Sum(records): 508,772,645.509
+Latency(ms)   2001.511, Delta   1.511, Min   2001.323, Max   2002.957, Avg   1801.648
+[MON] S000   3204.000 MB/s output    244.055 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  801 [1][1]=   61]
+Throughput Average(records/sec) 25,468,091.249
+Throughput Sum(records): 534,829,916.239
+[MON] S000   3180.819 MB/s output    242.289 MB/s [null] S001    243.756 MB/s output      0.000 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    1 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  795 [1][1]=   61]
+Throughput Average(records/sec) 25,499,336.035
+Throughput Sum(records): 560,985,392.762
+Latency(ms)   2001.420, Delta   1.420, Min   2001.323, Max   2002.957, Avg   1819.809
+[MON] S000   3192.807 MB/s output    243.202 MB/s [null] S001    243.756 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  797 [1][1]=   61]
+Throughput Average(records/sec) 25,515,054.431
+Throughput Sum(records): 586,846,251.903
+[MON] S000   3156.843 MB/s output    240.463 MB/s [null] S001    239.760 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  789 [1][1]=   60]
+Throughput Average(records/sec) 25,575,596.496
+Throughput Sum(records): 613,814,315.903
+Latency(ms)   2001.297, Delta   1.297, Min   2001.297, Max   2002.957, Avg   1834.933
+[MON] S000   3292.000 MB/s output    250.758 MB/s [null] S001    252.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  822 [1][1]=   61]
+Throughput Average(records/sec) 25,632,836.372
+Throughput Sum(records): 640,820,909.31
+[MON] S000   3296.703 MB/s output    251.116 MB/s [null] S001    247.752 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  824 [1][1]=   62]
+Throughput Average(records/sec) 25,642,601.127
+Throughput Sum(records): 666,707,629.31
+Latency(ms)   2001.230, Delta   1.230, Min   2001.230, Max   2002.957, Avg   1847.725
+[MON] S000   3160.000 MB/s output    240.703 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  791 [1][1]=   61]
+Throughput Average(records/sec) 25,689,482.108
+Throughput Sum(records): 693,616,016.922
+[MON] S000   3284.715 MB/s output    250.203 MB/s [null] S001    247.752 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  820 [1][1]=   62]
+Throughput Average(records/sec) 25,730,676.214
+Throughput Sum(records): 720,458,934.005
+Latency(ms)   2001.153, Delta   1.153, Min   2001.153, Max   2002.957, Avg   1858.684
+[MON] S000   3276.723 MB/s output    249.594 MB/s [null] S001    251.748 MB/s output      0.001 MB/s [null] q    270 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    5]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  821 [1][1]=   63]
+Throughput Average(records/sec) 25,766,565.173
+Throughput Sum(records): 747,230,390.005
+[MON] S000   3268.000 MB/s output    248.930 MB/s [null] S001    248.000 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  815 [1][1]=   62]
+Throughput Average(records/sec) 25,802,443.57
+Throughput Sum(records): 774,073,307.088
+Latency(ms)   2001.140, Delta   1.140, Min   2001.140, Max   2002.957, Avg   1868.181
+[MON] S000   3276.723 MB/s output    249.594 MB/s [null] S001    247.752 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  819 [1][1]=   62]
+Throughput Average(records/sec) 25,791,420.745
+Throughput Sum(records): 799,534,043.088
+[MON] S000   3108.000 MB/s output    236.742 MB/s [null] S001    236.000 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  780 [1][1]=   59]
+Throughput Average(records/sec) 25,824,280.005
+Throughput Sum(records): 826,376,960.171
+Latency(ms)   2001.343, Delta   1.343, Min   2001.140, Max   2002.957, Avg   1876.504
+[MON] S000   3276.723 MB/s output    249.594 MB/s [null] S001    251.748 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    3 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  816 [1][1]=   63]
+Throughput Average(records/sec) 25,855,147.796
+Throughput Sum(records): 853,219,877.254
+[MON] S000   3276.723 MB/s output    249.594 MB/s [null] S001    247.752 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    3 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  821 [1][1]=   62]
+Throughput Average(records/sec) 25,855,112.625
+Throughput Sum(records): 879,073,829.254
+Latency(ms)   2001.196, Delta   1.196, Min   2001.140, Max   2002.957, Avg   1883.839
+[MON] S000   3156.000 MB/s output    240.398 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  789 [1][1]=   60]
+Throughput Average(records/sec) 25,888,012.076
+Throughput Sum(records): 906,080,422.66
+[MON] S000   3296.703 MB/s output    251.116 MB/s [null] S001    247.752 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  820 [1][1]=   61]
+Throughput Average(records/sec) 25,919,833.963
+Throughput Sum(records): 933,114,022.66
+Latency(ms)   2001.148, Delta   1.148, Min   2001.140, Max   2002.957, Avg   1890.356
+[MON] S000   3300.000 MB/s output    251.367 MB/s [null] S001    252.000 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    1 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  825 [1][1]=   63]
+Throughput Average(records/sec) 25,943,012.681
+Throughput Sum(records): 959,891,469.214
+[MON] S000   3268.731 MB/s output    248.985 MB/s [null] S001    251.748 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    2]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  820 [1][1]=   62]
+Throughput Average(records/sec) 25,965,832.922
+Throughput Sum(records): 986,701,651.032
+Latency(ms)   2001.103, Delta   1.103, Min   2001.103, Max   2002.957, Avg   1896.185
+[MON] S000   3272.727 MB/s output    249.290 MB/s [null] S001    247.752 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  818 [1][1]=   63]
+Throughput Average(records/sec) 25,957,082.744
+Throughput Sum(records): 1,012,326,227.032
+[MON] S000   3128.000 MB/s output    238.266 MB/s [null] S001    236.000 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  780 [1][1]=   59]
+Throughput Average(records/sec) 25,982,502.129
+Throughput Sum(records): 1,039,300,085.174
+Latency(ms)   2001.106, Delta   1.106, Min   2001.103, Max   2002.957, Avg   1901.431
+[MON] S000   3292.707 MB/s output    250.812 MB/s [null] S001    251.748 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  824 [1][1]=   63]
+Throughput Average(records/sec) 25,975,370.663
+Throughput Sum(records): 1,064,990,197.174
+[MON] S000   3136.000 MB/s output    238.875 MB/s [null] S001    240.000 MB/s output      0.000 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    1 [1][1]=    6]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  800 [1][1]=   59]
+Throughput Average(records/sec) 25,996,167.322
+Throughput Sum(records): 1,091,839,027.513
+Latency(ms)   2002.328, Delta   2.328, Min   2001.103, Max   2002.957, Avg   1906.236
+[MON] S000   3277.445 MB/s output    249.649 MB/s [null] S001    247.505 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  803 [1][1]=   62]
+Throughput Average(records/sec) 26,014,336.606
+Throughput Sum(records): 1,118,616,474.066
+[MON] S000   3268.731 MB/s output    248.985 MB/s [null] S001    251.748 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  818 [1][1]=   62]
+Throughput Average(records/sec) 26,033,033.32
+Throughput Sum(records): 1,145,453,466.066
+Latency(ms)   2001.087, Delta   1.087, Min   2001.087, Max   2002.957, Avg   1910.547
+[MON] S000   3276.000 MB/s output    249.539 MB/s [null] S001    248.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  819 [1][1]=   62]
+Throughput Average(records/sec) 26,049,575.836
+Throughput Sum(records): 1,172,230,912.62
+[MON] S000   3268.731 MB/s output    248.985 MB/s [null] S001    247.752 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    6]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  817 [1][1]=   63]
+Throughput Average(records/sec) 26,009,891.49
+Throughput Sum(records): 1,196,455,008.524
+Latency(ms)   2001.502, Delta   1.502, Min   2001.087, Max   2002.957, Avg   1914.502
+[MON] S000   2957.043 MB/s output    225.244 MB/s [null] S001    227.772 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    2]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  739 [1][1]=   56]
+Throughput Average(records/sec) 25,984,263.501
+Throughput Sum(records): 1,221,260,384.524
+[MON] S000   3028.000 MB/s output    230.648 MB/s [null] S001    232.000 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  756 [1][1]=   56]
+Throughput Average(records/sec) 25,988,512.423
+Throughput Sum(records): 1,247,448,596.312
+Latency(ms)   2001.134, Delta   1.134, Min   2001.087, Max   2002.957, Avg   1918.111
+[MON] S000   3196.803 MB/s output    243.506 MB/s [null] S001    243.756 MB/s output      0.001 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    3 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  801 [1][1]=   61]
+Throughput Average(records/sec) 25,980,416.415
+Throughput Sum(records): 1,273,040,404.312
+[MON] S000   3124.000 MB/s output    237.961 MB/s [null] S001    236.000 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  787 [1][1]=   60]
+Throughput Average(records/sec) 25,965,082.098
+Throughput Sum(records): 1,298,254,104.911
+Latency(ms)   2001.853, Delta   1.853, Min   2001.087, Max   2002.957, Avg   1921.461
+[MON] S000   3077.844 MB/s output    234.445 MB/s [null] S001    235.529 MB/s output      0.001 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  763 [1][1]=   58]
+Throughput Average(records/sec) 25,964,188.096
+Throughput Sum(records): 1,324,173,592.911
+[MON] S000   3164.000 MB/s output    241.008 MB/s [null] S001    240.000 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  789 [1][1]=   60]
+Throughput Average(records/sec) 25,977,309.585
+Throughput Sum(records): 1,350,820,098.405
+Latency(ms)   2001.015, Delta   1.015, Min   2001.015, Max   2002.957, Avg   1924.521
+[MON] S000   3252.747 MB/s output    247.768 MB/s [null] S001    247.752 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  813 [1][1]=   62]
+Throughput Average(records/sec) 25,989,202.159
+Throughput Sum(records): 1,377,427,714.405
+[MON] S000   3248.000 MB/s output    247.406 MB/s [null] S001    248.000 MB/s output      0.000 MB/s [null] q    270 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  813 [1][1]=   62]
+Throughput Average(records/sec) 25,999,555.817
+Throughput Sum(records): 1,403,976,014.106
+Latency(ms)   2001.203, Delta   1.203, Min   2001.015, Max   2002.957, Avg   1927.361
+[MON] S000   3240.759 MB/s output    246.855 MB/s [null] S001    247.752 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    5]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  812 [1][1]=   62]
+Throughput Average(records/sec) 25,995,716.911
+Throughput Sum(records): 1,429,764,430.106
+[MON] S000   3148.000 MB/s output    239.789 MB/s [null] S001    240.000 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    5]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  787 [1][1]=   59]
+Throughput Average(records/sec) 26,007,922.694
+Throughput Sum(records): 1,456,443,670.865
+Latency(ms)   2001.033, Delta   1.033, Min   2001.015, Max   2002.957, Avg   1929.992
+[MON] S000   3256.743 MB/s output    248.072 MB/s [null] S001    247.752 MB/s output      0.001 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  815 [1][1]=   63]
+Throughput Average(records/sec) 26,019,593.384
+Throughput Sum(records): 1,483,116,822.865
+[MON] S000   3256.000 MB/s output    248.016 MB/s [null] S001    248.000 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  811 [1][1]=   59]
+Throughput Average(records/sec) 26,011,776.976
+Throughput Sum(records): 1,508,683,064.623
+Latency(ms)   2001.124, Delta   1.124, Min   2001.015, Max   2002.957, Avg   1932.445
+[MON] S000   3120.879 MB/s output    237.723 MB/s [null] S001    235.764 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    8]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  778 [1][1]=   60]
+Throughput Average(records/sec) 26,018,096.407
+Throughput Sum(records): 1,535,067,688
+[MON] S000   3220.779 MB/s output    245.333 MB/s [null] S001    243.756 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  808 [1][1]=   61]
+Throughput Average(records/sec) 26,026,283.333
+Throughput Sum(records): 1,561,577,000
+Latency(ms)   2000.982, Delta   0.982, Min   2000.982, Max   2002.957, Avg   1934.729
+[MON] S000   3236.000 MB/s output    246.492 MB/s [null] S001    248.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  806 [1][1]=   62]
+Throughput Average(records/sec) 26,031,621.117
+Throughput Sum(records): 1,587,928,888.112
+[MON] S000   3216.783 MB/s output    245.028 MB/s [null] S001    243.756 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  807 [1][1]=   61]
+Throughput Average(records/sec) 26,035,097.679
+Throughput Sum(records): 1,614,176,056.112
+Latency(ms)   2001.116, Delta   1.116, Min   2000.982, Max   2002.957, Avg   1936.871
+[MON] S000   3204.000 MB/s output    244.055 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  801 [1][1]=   61]
+Throughput Average(records/sec) 26,026,616.307
+Throughput Sum(records): 1,639,676,827.341
+[MON] S000   3112.887 MB/s output    237.114 MB/s [null] S001    239.760 MB/s output      0.000 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  779 [1][1]=   59]
+Throughput Average(records/sec) 26,032,110.427
+Throughput Sum(records): 1,666,055,067.341
+Latency(ms)   2001.021, Delta   1.021, Min   2000.982, Max   2002.957, Avg   1938.876
+[MON] S000   3220.000 MB/s output    245.273 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  802 [1][1]=   62]
+Throughput Average(records/sec) 26,026,454.075
+Throughput Sum(records): 1,691,719,514.893
+[MON] S000   3132.867 MB/s output    238.636 MB/s [null] S001    239.760 MB/s output      0.000 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  812 [1][1]=   61]
+Throughput Average(records/sec) 26,028,805.256
+Throughput Sum(records): 1,717,901,146.893
+Latency(ms)   2001.128, Delta   1.128, Min   2000.982, Max   2002.957, Avg   1940.762
+[MON] S000   3196.000 MB/s output    243.445 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=    5]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  773 [1][1]=   59]
+Throughput Average(records/sec) 26,033,627.388
+Throughput Sum(records): 1,744,253,035.005
+[MON] S000   3216.783 MB/s output    245.028 MB/s [null] S001    243.756 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    6]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  803 [1][1]=   62]
+Throughput Average(records/sec) 26,037,249.574
+Throughput Sum(records): 1,770,532,971.005
+Latency(ms)   2000.949, Delta   0.949, Min   2000.949, Max   2002.957, Avg   1942.532
+[MON] S000   3208.000 MB/s output    244.359 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  802 [1][1]=   61]
+Throughput Average(records/sec) 26,040,386.28
+Throughput Sum(records): 1,796,786,653.323
+[MON] S000   3204.795 MB/s output    244.115 MB/s [null] S001    243.756 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    8]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  798 [1][1]=   59]
+Throughput Average(records/sec) 26,044,744.647
+Throughput Sum(records): 1,823,132,125.323
+Latency(ms)   2001.006, Delta   1.006, Min   2000.949, Max   2002.957, Avg   1944.203
+[MON] S000   3216.000 MB/s output    244.969 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  804 [1][1]=   61]
+Throughput Average(records/sec) 26,036,621.99
+Throughput Sum(records): 1,848,600,161.287
+[MON] S000   3108.891 MB/s output    236.810 MB/s [null] S001    239.760 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  779 [1][1]=   59]
+Throughput Average(records/sec) 26,043,187.129
+Throughput Sum(records): 1,875,109,473.287
+Latency(ms)   2000.896, Delta   0.896, Min   2000.896, Max   2002.957, Avg   1945.778
+[MON] S000   3236.000 MB/s output    246.492 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  808 [1][1]=   62]
+Throughput Average(records/sec) 26,031,272.491
+Throughput Sum(records): 1,900,282,891.868
+[MON] S000   3072.927 MB/s output    234.071 MB/s [null] S001    235.764 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  785 [1][1]=   59]
+Throughput Average(records/sec) 26,023,119.728
+Throughput Sum(records): 1,925,710,859.868
+Latency(ms)   2000.919, Delta   0.919, Min   2000.896, Max   2002.957, Avg   1947.268
+[MON] S000   3104.000 MB/s output    236.438 MB/s [null] S001    236.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    8]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  760 [1][1]=   58]
+Throughput Average(records/sec) 26,027,503.306
+Throughput Sum(records): 1,952,062,747.98
+[MON] S000   3216.783 MB/s output    245.028 MB/s [null] S001    243.756 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  804 [1][1]=   62]
+Throughput Average(records/sec) 26,031,687.105
+Throughput Sum(records): 1,978,408,219.98
+Latency(ms)   2000.872, Delta   0.872, Min   2000.872, Max   2002.957, Avg   1948.679
+[MON] S000   3216.000 MB/s output    244.969 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  803 [1][1]=   61]
+Throughput Average(records/sec) 26,035,336.675
+Throughput Sum(records): 2,004,720,923.98
+[MON] S000   3212.000 MB/s output    244.664 MB/s [null] S001    248.000 MB/s output      0.000 MB/s [null] q    271 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    2]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  805 [1][1]=   61]
+Throughput Average(records/sec) 26,038,135.978
+Throughput Sum(records): 2,030,974,606.298
+Latency(ms)   2001.399, Delta   1.399, Min   2000.872, Max   2002.957, Avg   1950.030
+[MON] S000   3204.795 MB/s output    244.115 MB/s [null] S001    243.756 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  800 [1][1]=   61]
+Throughput Average(records/sec) 26,031,333.893
+Throughput Sum(records): 2,056,475,377.526
+[MON] S000   3112.887 MB/s output    237.114 MB/s [null] S001    235.764 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=    2]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  778 [1][1]=   59]
+Throughput Average(records/sec) 26,038,947.019
+Throughput Sum(records): 2,083,115,761.526
+Latency(ms)   2001.038, Delta   1.038, Min   2000.872, Max   2002.957, Avg   1951.306
+[MON] S000   3252.000 MB/s output    247.711 MB/s [null] S001    248.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  811 [1][1]=   60]
+Throughput Average(records/sec) 26,032,302.874
+Throughput Sum(records): 2,108,616,532.755
+[MON] S000   3112.887 MB/s output    237.114 MB/s [null] S001    235.764 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  784 [1][1]=   60]
+Throughput Average(records/sec) 26,016,541.131
+Throughput Sum(records): 2,133,356,372.755
+Latency(ms)   2001.082, Delta   1.082, Min   2000.872, Max   2002.957, Avg   1952.520
+[MON] S000   3020.000 MB/s output    230.039 MB/s [null] S001    232.000 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  750 [1][1]=   57]
+Throughput Average(records/sec) 26,021,764.659
+Throughput Sum(records): 2,159,806,466.661
+[MON] S000   3228.771 MB/s output    245.942 MB/s [null] S001    243.756 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  808 [1][1]=   62]
+Throughput Average(records/sec) 26,027,253.522
+Throughput Sum(records): 2,186,289,295.832
+Latency(ms)   2001.696, Delta   1.696, Min   2000.872, Max   2002.957, Avg   1953.690
+[MON] S000   3232.767 MB/s output    246.246 MB/s [null] S001    247.752 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    9 [1][1]=    4]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  807 [1][1]=   61]
+Throughput Average(records/sec) 26,031,842.994
+Throughput Sum(records): 2,212,706,654.473
+[MON] S000   3224.775 MB/s output    245.637 MB/s [null] S001    247.752 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    6]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  808 [1][1]=   62]
+Throughput Average(records/sec) 26,038,538.029
+Throughput Sum(records): 2,239,314,270.473
+Latency(ms)   2001.213, Delta   1.213, Min   2000.872, Max   2002.957, Avg   1954.796
+[MON] S000   3248.000 MB/s output    247.406 MB/s [null] S001    244.000 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=    8]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  811 [1][1]=   61]
+Throughput Average(records/sec) 26,012,414.628
+Throughput Sum(records): 2,263,080,072.671
+[MON] S000   2901.099 MB/s output    220.982 MB/s [null] S001    223.776 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    3]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  726 [1][1]=   56]
+Throughput Average(records/sec) 25,993,112.826
+Throughput Sum(records): 2,287,393,928.671
+Latency(ms)   2000.953, Delta   0.953, Min   2000.872, Max   2002.957, Avg   1955.845
+[MON] S000   2968.000 MB/s output    226.078 MB/s [null] S001    224.000 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    5 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  740 [1][1]=   56]
+Throughput Average(records/sec) 25,987,259.018
+Throughput Sum(records): 2,312,866,052.582
+[MON] S000   3109.390 MB/s output    236.848 MB/s [null] S001    236.205 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    8 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  805 [1][1]=   61]
+Throughput Average(records/sec) 25,969,486.942
+Throughput Sum(records): 2,337,253,824.81
+Latency(ms)   2033.507, Delta  33.507, Min   2000.872, Max   2033.507, Avg   1957.571
+[MON] S000   2977.023 MB/s output    226.765 MB/s [null] S001    227.772 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    8]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  719 [1][1]=   55]
+Throughput Average(records/sec) 25,966,056.8
+Throughput Sum(records): 2,362,911,168.81
+[MON] S000   3132.000 MB/s output    238.570 MB/s [null] S001    240.000 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  783 [1][1]=   60]
+Throughput Average(records/sec) 25,963,134.257
+Throughput Sum(records): 2,388,608,351.627
+Latency(ms)   2000.972, Delta   0.972, Min   2000.872, Max   2033.507, Avg   1958.514
+[MON] S000   3136.863 MB/s output    238.941 MB/s [null] S001    235.764 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    1 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  785 [1][1]=   60]
+Throughput Average(records/sec) 25,960,903.222
+Throughput Sum(records): 2,414,363,999.627
+[MON] S000   3144.000 MB/s output    239.484 MB/s [null] S001    240.000 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=    7]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  785 [1][1]=   57]
+Throughput Average(records/sec) 25,965,759.131
+Throughput Sum(records): 2,440,781,358.268
+Latency(ms)   2000.901, Delta   0.901, Min   2000.872, Max   2033.507, Avg   1959.416
+[MON] S000   3224.775 MB/s output    245.637 MB/s [null] S001    247.752 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    6 [1][1]=    8]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  802 [1][1]=   62]
+Throughput Average(records/sec) 25,963,202.508
+Throughput Sum(records): 2,466,504,238.268
+[MON] S000   3140.000 MB/s output    239.180 MB/s [null] S001    240.000 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=   10 [1][1]=    8]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  786 [1][1]=   59]
+Throughput Average(records/sec) 25,973,048.186
+Throughput Sum(records): 2,493,412,625.881
+Latency(ms)   2000.990, Delta   0.990, Min   2000.872, Max   2033.507, Avg   1960.282
+[MON] S000   3284.715 MB/s output    250.203 MB/s [null] S001    247.752 MB/s output      0.001 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    1 [1][1]=    1]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  817 [1][1]=   63]
+Throughput Average(records/sec) 25,962,361.586
+Throughput Sum(records): 2,518,349,073.881
+[MON] S000   3044.000 MB/s output    231.867 MB/s [null] S001    232.000 MB/s output      0.000 MB/s [null] q    273 ([[0][0]=    0 [0][1]=    0 [1][0]=    2 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  774 [1][1]=   59]
+Throughput Average(records/sec) 25,961,659.88
+Throughput Sum(records): 2,544,242,668.286
+Latency(ms)   2000.966, Delta   0.966, Min   2000.872, Max   2033.507, Avg   1961.112
+[MON] S000   3160.839 MB/s output    240.767 MB/s [null] S001    243.756 MB/s output      0.001 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    4 [1][1]=    9]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  783 [1][1]=   59]
+Throughput Average(records/sec) 25,965,205.781
+Throughput Sum(records): 2,570,555,372.286
+[MON] S000   3212.000 MB/s output    244.664 MB/s [null] S001    244.000 MB/s output      0.000 MB/s [null] q    272 ([[0][0]=    0 [0][1]=    0 [1][0]=    7 [1][1]=   10]) t    275 w    275 b     21 p     16 policy [[0][0]=    0 [0][1]=    0 [1][0]=  803 [1][1]=   61]
+Total Generated Tuples is: -1706590208
+Terminating execution...
 Done.
 Bye.

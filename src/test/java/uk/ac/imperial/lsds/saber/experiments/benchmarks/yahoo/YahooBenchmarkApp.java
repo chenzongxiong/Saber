@@ -21,7 +21,7 @@ public class YahooBenchmarkApp {
 		int numberOfThreads = 1;
 		int batchSize = 4 * 1048576;
 		String executionMode = "cpu";
-		int circularBufferSize = 128 * 1 * 1048576/2 * 8;
+		int circularBufferSize = 128 * 1 * 1048576/2 * 16;
 		int unboundedBufferSize = 4 * 1048576;
 		int hashTableSize = 2*64*128*8;
 		int partialWindows = 2;
