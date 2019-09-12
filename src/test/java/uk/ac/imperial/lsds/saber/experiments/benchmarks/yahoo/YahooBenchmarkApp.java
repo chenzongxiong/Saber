@@ -21,9 +21,9 @@ public class YahooBenchmarkApp {
 		int numberOfThreads = 1;
 		int batchSize = 4 * 1048576;
 		String executionMode = "cpu";
-		int circularBufferSize = 128 * 1 * 1048576/2;
+		int circularBufferSize = 128 * 1 * 1048576/2 * 8;
 		int unboundedBufferSize = 4 * 1048576;
-		int hashTableSize = 2*64*128;
+		int hashTableSize = 2*64*128*8;
 		int partialWindows = 2;
 		int slots = 1 * 128 * 1024*2;
 
@@ -93,8 +93,8 @@ public class YahooBenchmarkApp {
 			SystemConf.GPU = true;
 		SystemConf.HYBRID = SystemConf.CPU && SystemConf.GPU;
 		SystemConf.THREADS = numberOfThreads;
-		// SystemConf.LATENCY_ON = false;
-        SystemConf.LATENCY_ON = true;
+		SystemConf.LATENCY_ON = false;
+        // SystemConf.LATENCY_ON = true;
 		/* Initialize the Operators of the Benchmark */
         PAPIHardwareSampler [] papiSamplers = null;
         if (usePAPI) {
@@ -116,55 +116,55 @@ public class YahooBenchmarkApp {
 
 
 		Generator generator = new Generator (bufferSize, numberOfGeneratorThreads, adsPerCampaign, ads, coreToBind, isV2);
-        long timeLimit = System.currentTimeMillis() + 1 * 10000;
+        long timeLimit = System.currentTimeMillis() + 10 * 10000;
 
 		while (true) {
 			if (timeLimit <= System.currentTimeMillis() ||
                 (usePAPI && generator.totalGeneratedTuples >= TUPLES_TO_MEASURE)) {
                 System.out.println("Total Generated Tuples is: " + generator.totalGeneratedTuples);
+                printPapiSamplers(papiSamplers);
+                // if (papiSamplers != null) {
+                //     try {
+                //         for (int i = 0; i < papiSamplers.length; i ++) {
+                //             papiSamplers[i].stopSampling("PAPI");
+                //         }
 
-                if (papiSamplers != null) {
-                    try {
-                        for (int i = 0; i < papiSamplers.length; i ++) {
-                            papiSamplers[i].stopSampling("PAPI");
-                        }
+                //         boolean once = true;
+                //         String [] keys = null;
+                //         long [] overall = null;
+                //         for (int i = 0; i < papiSamplers.length; i ++) {
+                //             HashMap<String, Long> result = papiSamplers[i].getResults();
+                //             if (once) {
+                //                 keys = result.keySet().toArray(new String[result.keySet().size()]);
+                //                 overall = new long[keys.length];
 
-                        boolean once = true;
-                        String [] keys = null;
-                        long [] overall = null;
-                        for (int i = 0; i < papiSamplers.length; i ++) {
-                            HashMap<String, Long> result = papiSamplers[i].getResults();
-                            if (once) {
-                                keys = result.keySet().toArray(new String[result.keySet().size()]);
-                                overall = new long[keys.length];
+                //                 System.out.print("|  ");
+                //                 for (int j = 0; j < keys.length; j ++) {
+                //                     System.out.print("| " + keys[j]);
+                //                     overall[j] = 0;
+                //                 }
+                //                 System.out.println("|");
+                //                 once = false;
+                //             }
 
-                                System.out.print("|  ");
-                                for (int j = 0; j < keys.length; j ++) {
-                                    System.out.print("| " + keys[j]);
-                                    overall[j] = 0;
-                                }
-                                System.out.println("|");
-                                once = false;
-                            }
+                //             System.out.print("|  " + i);
+                //             for (int j = 0; j < keys.length; j ++) {
+                //                 long value = result.get(keys[j]);
+                //                 overall[j] += value;
+                //                 System.out.print(" | " + value);
+                //             }
+                //             System.out.println("|");
+                //         }
+                //         System.out.print("| overall ");
 
-                            System.out.print("|  " + i);
-                            for (int j = 0; j < keys.length; j ++) {
-                                long value = result.get(keys[j]);
-                                overall[j] += value;
-                                System.out.print(" | " + value);
-                            }
-                            System.out.println("|");
-                        }
-                        System.out.print("| overall ");
+                //         for (int i = 0; i < overall.length; i ++) {
+                //             System.out.print(" |  " + overall[i]);
+                //         }
+                //         System.out.println("|");
+                //     } catch (Exception ex) {
 
-                        for (int i = 0; i < overall.length; i ++) {
-                            System.out.print(" |  " + overall[i]);
-                        }
-                        System.out.println("|");
-                    } catch (Exception ex) {
-
-                    }
-                }
+                //     }
+                // }
                 if (SystemConf.LATENCY_ON) {
                     ((YahooBenchmark) benchmarkQuery).stopLatencyMonitor();
                 }
@@ -173,9 +173,55 @@ public class YahooBenchmarkApp {
 				System.exit(0);
 			}
 			GeneratedBuffer b = generator.getNext();
+            // System.out.println("[DBG] App.processData " + b.getBuffer().array().length + " bytes");
             benchmarkQuery.getApplication().processData (b.getBuffer().array());
-
+            // System.out.println("[DBG] Try to unlock buffer " + b);
 			b.unlock();
 		}
 	}
+
+    public static void printPapiSamplers(PAPIHardwareSampler [] papiSamplers) {
+        if (papiSamplers != null) {
+            try {
+                for (int i = 0; i < papiSamplers.length; i ++) {
+                    papiSamplers[i].stopSampling("PAPI");
+                }
+
+                boolean once = true;
+                String [] keys = null;
+                long [] overall = null;
+                for (int i = 0; i < papiSamplers.length; i ++) {
+                    HashMap<String, Long> result = papiSamplers[i].getResults();
+                    if (once) {
+                        keys = result.keySet().toArray(new String[result.keySet().size()]);
+                        overall = new long[keys.length];
+
+                        System.out.print("|  ");
+                        for (int j = 0; j < keys.length; j ++) {
+                            System.out.print("| " + keys[j]);
+                            overall[j] = 0;
+                        }
+                        System.out.println("|");
+                        once = false;
+                    }
+
+                    System.out.print("|  " + i);
+                    for (int j = 0; j < keys.length; j ++) {
+                        long value = result.get(keys[j]);
+                        overall[j] += value;
+                        System.out.print(" | " + value);
+                    }
+                    System.out.println("|");
+                }
+                System.out.print("| overall ");
+
+                for (int i = 0; i < overall.length; i ++) {
+                    System.out.print(" |  " + overall[i]);
+                }
+                System.out.println("|");
+            } catch (Exception ex) {
+
+            }
+        }
+    }
 }
