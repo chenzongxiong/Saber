@@ -287,7 +287,7 @@ public class NexmarkOp implements IOperatorCode, IAggregateOperator {
 
 		ITupleSchema schema = batch.getSchema();
 		int tupleSize = schema.getTupleSize();
-        System.out.println("tupleSize: " + tupleSize);
+        // System.out.println("tupleSize: " + tupleSize);
 
 		for (int pointer = batch.getBufferStartPointer(); pointer < batch.getBufferEndPointer(); pointer += tupleSize) {
             final long timestamp = inputBuffer.getLong(pointer);
@@ -304,74 +304,9 @@ public class NexmarkOp implements IOperatorCode, IAggregateOperator {
 		batch.setBuffer(outputBuffer);
         batch.setBufferPointers(0, outputBuffer.limit());
 
-		api.outputWindowBatchResult (batch);
+		api.outputWindowBatchResult(batch);
     }
 
-// 	@Override
-// 	public void processData(WindowBatch batch, IWindowAPI api) {
-
-// 		boolean useCalc = true;
-// 		if (useCalc && selectPredicate != null && expressions != null)
-// 			calc (batch, api);
-// 		else {
-// 			/* Select */
-// 			if (selectPredicate != null)
-// 				select (batch, api);
-
-
-// 			/* Project */
-// 			if (expressions != null)
-// 				project (batch, api);
-
-// 		}
-// 		/* Hash Join */
-// 		if (joinPredicate != null)
-// 			hashJoin (batch, api);
-
-
-// 		/* Aggregate */
-// /*		batch.initPartialWindowPointers();
-
-// 		if (debug) {
-// 			System.out.println(
-// 				String.format("[DBG] hash-join task %6d: batch starts at %10d (%10d) ends at %10d (%10d)", batch.getTaskId(),
-// 				batch.getBufferStartPointer(),
-// 				batch.getStreamStartPointer(),
-// 				batch.getBufferEndPointer(),
-// 				batch.getStreamEndPointer()
-// 				)
-// 			);
-// 		}
-
-// 		if (groupBy == false) {
-// 			System.err.println("You should group by campaign_id and ad_id!");
-// 			System.exit(-1);
-// 		} else {
-// 			if (incrementalProcessing) {
-// 				System.err.println("You should use a tumbling Window!");
-// 				System.exit(-1);
-// 				processDataPerWindowIncrementallyWithGroupBy (batch, api);
-// 			} else {
-// 				processDataPerWindowWithGroupBy (batch, api);
-// 			}
-// 		}
-
-// 		if (debug) {
-// 			System.out.println(
-// 				String.format("[DBG] aggregation task %6d: %4d closing %4d pending %4d complete and %4d opening windows]", batch.getTaskId(),
-// 					batch.getClosingWindows ().numberOfWindows(),
-// 					batch.getPendingWindows ().numberOfWindows(),
-// 					batch.getCompleteWindows().numberOfWindows(),
-// 					batch.getOpeningWindows ().numberOfWindows()
-// 				)
-// 			);
-// 		}*/
-
-// 		/*batch.getBuffer().release();
-// 		batch.setSchema(outputSchema);
-
-// 		api.outputWindowBatchResult(batch);*/
-// 	}
 
 	private void calc(WindowBatch batch, IWindowAPI api) {
 		IQueryBuffer inputBuffer = batch.getBuffer();

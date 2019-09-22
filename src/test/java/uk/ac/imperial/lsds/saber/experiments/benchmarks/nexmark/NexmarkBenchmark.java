@@ -88,6 +88,23 @@ public class NexmarkBenchmark {
                                  this.circularWorkerPapiSamplers);
         queries.add(query1);
 
+
+		AggregationType [] aggregationTypes = new AggregationType [1];
+		aggregationTypes[0] = AggregationType.CNT;
+
+		FloatColumnReference[] aggregationAttributes = new FloatColumnReference [1];
+		aggregationAttributes[0] = new FloatColumnReference(1); // COUNT(Auction)
+
+        Expression [] groupByAttributes = null;
+        groupByAttributes = new Expression [] { new LongColumnReference(1) };
+		cpuCode = new Aggregation(windowDefinition, aggregationTypes, aggregationAttributes, groupByAttributes);
+		operators = new HashSet<QueryOperator>();
+		operators.add(operator);
+        Query query2 = new Query (1, operators, inputSchema, windowDefinition, null, null, queryConf, timestampReference);
+        queries.add(query2);
+        query1.connectTo(query2);
+
+
         application = new QueryApplication(queries);
         application.setup();
 
