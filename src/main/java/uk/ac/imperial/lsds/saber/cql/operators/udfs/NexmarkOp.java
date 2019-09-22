@@ -296,10 +296,10 @@ public class NexmarkOp implements IOperatorCode, IAggregateOperator {
             final long price = inputBuffer.getLong(pointer+24);
             final long dateTime = inputBuffer.getLong(pointer+32);
             // System.out.println("[DBG] timestamp: " + timestamp + ", auction: " + auction + ", bidder: " + bidder + ", price: " + price);
+            inputBuffer.appendBytesTo(pointer, tupleSize, outputBuffer);
 		}
 
 		inputBuffer.release();
-		outputBuffer.close();
 
 		batch.setBuffer(outputBuffer);
         batch.setBufferPointers(0, outputBuffer.limit());

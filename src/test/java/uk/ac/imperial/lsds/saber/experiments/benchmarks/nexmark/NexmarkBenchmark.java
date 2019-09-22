@@ -88,28 +88,33 @@ public class NexmarkBenchmark {
                                  this.circularWorkerPapiSamplers);
         queries.add(query1);
 
-
 		AggregationType [] aggregationTypes = new AggregationType [1];
 		aggregationTypes[0] = AggregationType.CNT;
-
 		FloatColumnReference[] aggregationAttributes = new FloatColumnReference [1];
 		aggregationAttributes[0] = new FloatColumnReference(1); // COUNT(Auction)
 
         Expression [] groupByAttributes = null;
         groupByAttributes = new Expression [] { new LongColumnReference(1) };
 		cpuCode = new Aggregation(windowDefinition, aggregationTypes, aggregationAttributes, groupByAttributes);
+        operator = new QueryOperator(cpuCode, null);
 		operators = new HashSet<QueryOperator>();
 		operators.add(operator);
-        Query query2 = new Query (1, operators, inputSchema, windowDefinition, null, null, queryConf, timestampReference);
+        Query query2 = new Query(0,
+                                 operators,
+                                 inputSchema,
+                                 windowDefinition,
+                                 null,
+                                 null,
+                                 queryConf,
+                                 timestampReference);
         queries.add(query2);
         query1.connectTo(query2);
-
 
         application = new QueryApplication(queries);
         application.setup();
 
-        // if (SystemConf.CPU)
-        //     query2.setAggregateOperator((IAggregateOperator) cpuCode);
+        if (SystemConf.CPU)
+            query2.setAggregateOperator((IAggregateOperator) cpuCode);
 
         // this.latencyMonitor1 = query1.getLatencyMonitor();
         // this.latencyMonitor2 = query2.getLatencyMonitor();
