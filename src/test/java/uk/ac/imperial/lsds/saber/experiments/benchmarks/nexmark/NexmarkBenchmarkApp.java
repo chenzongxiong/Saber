@@ -32,7 +32,7 @@ public class NexmarkBenchmarkApp {
 		int unboundedBufferSize = 4 * 1048576;
 		int hashTableSize = 2*64*128*8;
 		int partialWindows = 2;
-		int slots = 1 * 128 * 1024*2;
+		int slots = 1 * 128 * 1024*32;
 
 		boolean isV2 = false; // change the tuple size to half if set true
 

@@ -42,7 +42,7 @@ public class GeneratorWorker implements Runnable {
 	public void run() {
 
 		TheCPU.getInstance().bind(id);
-		System.out.println(String.format("[DBG] bind YSB Worker Generator thread %2d to core %2d", id, id));
+		System.out.println(String.format("[DBG] bind Nexmark Worker Generator thread %2d to core %2d", id, id));
 
 		int curr;
 		GeneratedBuffer buffer;
@@ -83,15 +83,15 @@ public class GeneratorWorker implements Runnable {
 
 			buffer.position(startPos);
 			while (buffer.position()  < endPos) {
-                // long auction = generateAuction(0, 100000);
-                // long person = generatePerson(0, 10000);
-                // long price = generatePrice(0, 10000);
+                // long auction = generateAuction(0, 10);
+                long person = generatePerson(0, 1000000);
+                long price = generatePrice(0, 1000000);
 
                 long auction = 1;
-                long person = 2;
-                long price = 3;
+                // long person = 2;
+                // long price = 3;
 
-			    buffer.putLong (timestamp);
+			    buffer.putLong(timestamp);
                 buffer.putLong(auction);
                 buffer.putLong(person);
                 buffer.putLong(price);

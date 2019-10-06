@@ -25,6 +25,10 @@ import uk.ac.imperial.lsds.saber.cql.operators.IAggregateOperator;
 import uk.ac.imperial.lsds.saber.cql.operators.IOperatorCode;
 import uk.ac.imperial.lsds.saber.cql.operators.cpu.Aggregation;
 import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp;
+import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp1;
+import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp2;
+import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp3;
+import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp4;
 import uk.ac.imperial.lsds.saber.cql.predicates.IPredicate;
 import uk.ac.imperial.lsds.saber.cql.predicates.IntComparisonPredicate;
 import uk.ac.imperial.lsds.saber.cql.predicates.LongComparisonPredicate;
@@ -39,7 +43,9 @@ import uk.ac.imperial.lsds.saber.TupleSchema.PrimitiveType;
 
 public class NexmarkBenchmark {
 
-	ITupleSchema schema = null;
+	ITupleSchema inputSchema = null;
+    ITupleSchema outputSchema = null;
+
 	QueryApplication application = null;
     private PAPIHardwareSampler [] taskWorkerPapiSamplers;
     private PAPIHardwareSampler [] circularWorkerPapiSamplers;
@@ -60,7 +66,11 @@ public class NexmarkBenchmark {
         }
 
         createSchema();
-		createApplication(queryConf);
+        createOutputSchema();
+        createQ1(queryConf);
+        // createQ2(queryConf);
+        // createQ3(queryConf);
+        // createQ4(queryConf);
 	}
 
     public void createApplication(QueryConf queryConf) {
@@ -69,7 +79,7 @@ public class NexmarkBenchmark {
         int windowSize = 2000;
 		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
 
-        ITupleSchema inputSchema = schema;
+        // ITupleSchema inputSchema = schema;
 		Set<Query> queries = new HashSet<Query>();
 
 		IOperatorCode cpuCode = new NexmarkOp(inputSchema, windowDefinition);
@@ -120,6 +130,225 @@ public class NexmarkBenchmark {
         // this.latencyMonitor2 = query2.getLatencyMonitor();
     }
 
+    public void createQ1(QueryConf queryConf) {
+        System.out.println("[DBG] Create Application");
+        long timestampReference = System.nanoTime();
+        int windowSize = 2000;
+		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
+
+		Set<Query> queries = new HashSet<Query>();
+
+		IOperatorCode cpuCode = new NexmarkOp1(inputSchema, windowDefinition, outputSchema);
+		QueryOperator operator;
+		operator = new QueryOperator(cpuCode, null);
+		Set<QueryOperator> operators = new HashSet<QueryOperator>();
+		operators.add(operator);
+        Query query1 = new Query(0,
+                                 operators,
+                                 inputSchema,
+                                 windowDefinition,
+                                 null,
+                                 null,
+                                 queryConf,
+                                 timestampReference,
+                                 this.circularWorkerPapiSamplers);
+        queries.add(query1);
+        application = new QueryApplication(queries);
+        application.setup();
+    }
+
+    public void createQ2(QueryConf queryConf) {
+        System.out.println("[DBG] Create Application");
+        long timestampReference = System.nanoTime();
+        int windowSize = 2000;
+		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
+
+		Set<Query> queries = new HashSet<Query>();
+
+		IOperatorCode cpuCode = new NexmarkOp2(inputSchema, windowDefinition, outputSchema);
+		QueryOperator operator;
+		operator = new QueryOperator(cpuCode, null);
+		Set<QueryOperator> operators = new HashSet<QueryOperator>();
+		operators.add(operator);
+        Query query1 = new Query(0,
+                                 operators,
+                                 inputSchema,
+                                 windowDefinition,
+                                 null,
+                                 null,
+                                 queryConf,
+                                 timestampReference,
+                                 this.circularWorkerPapiSamplers);
+        queries.add(query1);
+        application = new QueryApplication(queries);
+        application.setup();
+    }
+
+    public void createQ3(QueryConf queryConf) {
+
+        System.out.println("[DBG] Create Application");
+        long timestampReference = System.nanoTime();
+        int windowSize = 2000;
+		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
+
+		Set<Query> queries = new HashSet<Query>();
+
+
+		IOperatorCode cpuCode0 = new NexmarkOp3(inputSchema, windowDefinition);
+		QueryOperator operator0 = new QueryOperator(cpuCode0, null);
+		Set<QueryOperator> operators0 = new HashSet<QueryOperator>();
+
+		operators0.add(operator0);
+        Query query0 = new Query(0,
+                                 operators0,
+                                 inputSchema,
+                                 windowDefinition,
+                                 null,
+                                 null,
+                                 queryConf,
+                                 timestampReference,
+                                 this.circularWorkerPapiSamplers);
+        ////////////////////////////////////////////////////////////////////////////////
+		AggregationType [] aggregationTypes = new AggregationType [1];
+		aggregationTypes[0] = AggregationType.CNT;
+		FloatColumnReference[] aggregationAttributes = new FloatColumnReference [1];
+		aggregationAttributes[0] = new FloatColumnReference(1); // COUNT(Auction)
+        Expression [] groupByAttributes = null;
+        groupByAttributes = new Expression [] { new LongColumnReference(1) }; // Group(Auction)
+        IOperatorCode cpuCode = new Aggregation(windowDefinition,
+                                                aggregationTypes,
+                                                aggregationAttributes,
+                                                groupByAttributes);
+        QueryOperator operator = new QueryOperator(cpuCode, null);
+		Set<QueryOperator> operators = new HashSet<QueryOperator>();
+		operators.add(operator);
+        Query query1 = new Query(0,
+                                 operators,
+                                 inputSchema,
+                                 windowDefinition,
+                                 null,
+                                 null,
+                                 queryConf,
+                                 timestampReference);
+        ////////////////////////////////////////////////////////////////////////////////
+		AggregationType [] aggregationTypes2 = new AggregationType [1];
+		aggregationTypes2[0] = AggregationType.MAX;
+		FloatColumnReference[] aggregationAttributes2 = new FloatColumnReference [1];
+		aggregationAttributes2[0] = new FloatColumnReference(1); // MAX(Auction)
+        // Expression [] groupByAttributes2 = new Expression [] { new LongColumnReference(1) }; // Group(Auction)
+        IOperatorCode cpuCode2 = new Aggregation(windowDefinition,
+                                                 aggregationTypes2,
+                                                 aggregationAttributes2,
+                                                 null);
+        QueryOperator operator2 = new QueryOperator(cpuCode2, null);
+		Set<QueryOperator> operators2 = new HashSet<QueryOperator>();
+		operators2.add(operator2);
+        Query query2 = new Query(1,
+                                 operators2,
+                                 inputSchema,
+                                 windowDefinition,
+                                 null,
+                                 null,
+                                 queryConf,
+                                 timestampReference);
+
+        // queries.add(query0);
+        queries.add(query1);
+        queries.add(query2);
+        query1.connectTo(query2);
+        // query0.connectTo(query1);
+
+        application = new QueryApplication(queries);
+        application.setup();
+
+        if (SystemConf.CPU) {
+            query1.setAggregateOperator((IAggregateOperator) cpuCode);
+            query2.setAggregateOperator((IAggregateOperator) cpuCode2);
+        }
+    }
+
+    public void createQ4(QueryConf queryConf) {
+
+        System.out.println("[DBG] Create Application");
+        long timestampReference = System.nanoTime();
+        int windowSize = 2000;
+		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
+
+		Set<Query> queries = new HashSet<Query>();
+
+        ////////////////////////////////////////////////////////////////////////////////
+		// IOperatorCode cpuCode0 = new NexmarkOp3(inputSchema, windowDefinition);
+		// QueryOperator operator0 = new QueryOperator(cpuCode0, null);
+		// Set<QueryOperator> operators0 = new HashSet<QueryOperator>();
+
+		// operators0.add(operator0);
+        // Query query0 = new Query(0,
+        //                          operators0,
+        //                          inputSchema,
+        //                          windowDefinition,
+        //                          null,
+        //                          null,
+        //                          queryConf,
+        //                          timestampReference,
+        //                          this.circularWorkerPapiSamplers);
+        ////////////////////////////////////////////////////////////////////////////////
+		AggregationType [] aggregationTypes = new AggregationType [1];
+		aggregationTypes[0] = AggregationType.CNT;
+		FloatColumnReference[] aggregationAttributes = new FloatColumnReference [1];
+		aggregationAttributes[0] = new FloatColumnReference(3); // COUNT(Auction)
+        Expression [] groupByAttributes = null;
+        groupByAttributes = new Expression [] { new LongColumnReference(1) }; // Group(Auction)
+        IOperatorCode cpuCode = new Aggregation(windowDefinition,
+                                                aggregationTypes,
+                                                aggregationAttributes,
+                                                groupByAttributes);
+        QueryOperator operator = new QueryOperator(cpuCode, null);
+		Set<QueryOperator> operators = new HashSet<QueryOperator>();
+		operators.add(operator);
+        Query query1 = new Query(0,
+                                 operators,
+                                 inputSchema,
+                                 windowDefinition,
+                                 null,
+                                 null,
+                                 queryConf,
+                                 timestampReference);
+        ////////////////////////////////////////////////////////////////////////////////
+		// AggregationType [] aggregationTypes2 = new AggregationType [1];
+		// aggregationTypes2[0] = AggregationType.MAX;
+		// FloatColumnReference[] aggregationAttributes2 = new FloatColumnReference [1];
+		// aggregationAttributes2[0] = new FloatColumnReference(3); // MAX(price)
+        // IOperatorCode cpuCode2 = new Aggregation(windowDefinition,
+        //                                          aggregationTypes2,
+        //                                          aggregationAttributes2,
+        //                                          null);
+        // QueryOperator operator2 = new QueryOperator(cpuCode2, null);
+		// Set<QueryOperator> operators2 = new HashSet<QueryOperator>();
+		// operators2.add(operator2);
+        // Query query2 = new Query(0,
+        //                          operators2,
+        //                          inputSchema,
+        //                          windowDefinition,
+        //                          null,
+        //                          null,
+        //                          queryConf,
+        //                          timestampReference);
+
+        // queries.add(query0);
+        queries.add(query1);
+        // queries.add(query2);
+        // query1.connectTo(query2);
+        // query0.connectTo(query1);
+
+        application = new QueryApplication(queries);
+        application.setup();
+
+        if (SystemConf.CPU) {
+            query1.setAggregateOperator((IAggregateOperator) cpuCode);
+            // query2.setAggregateOperator((IAggregateOperator) cpuCode2);
+        }
+    }
+
     public void stopLatencyMonitor() {
         // this.latencyMonitor1.stop();
         // this.latencyMonitor2.stop();
@@ -134,20 +363,36 @@ public class NexmarkBenchmark {
 		offsets[2] = 16;
 		offsets[3] = 24;
 		offsets[4] = 32;
-		schema = new TupleSchema (offsets, 40);
+		inputSchema = new TupleSchema (offsets, 40);
 
-		schema.setAttributeType(0, PrimitiveType.LONG);
-		schema.setAttributeType(1, PrimitiveType.LONG);
-		schema.setAttributeType(2, PrimitiveType.LONG);
-		schema.setAttributeType(3, PrimitiveType.LONG);
-		schema.setAttributeType(4, PrimitiveType.LONG);
+		inputSchema.setAttributeType(0, PrimitiveType.LONG);
+		inputSchema.setAttributeType(1, PrimitiveType.LONG);
+		inputSchema.setAttributeType(2, PrimitiveType.LONG);
+		inputSchema.setAttributeType(3, PrimitiveType.LONG);
+		inputSchema.setAttributeType(4, PrimitiveType.LONG);
 
-		schema.setAttributeName(0, "timestamp"); // timestamp
-		schema.setAttributeName(1, "auction");
-		schema.setAttributeName(2, "bidder");
-		schema.setAttributeName(3, "price");
-		schema.setAttributeName(4, "dateTime");
+		inputSchema.setAttributeName(0, "timestamp"); // timestamp
+		inputSchema.setAttributeName(1, "auction");
+		inputSchema.setAttributeName(2, "bidder");
+		inputSchema.setAttributeName(3, "price");
+		inputSchema.setAttributeName(4, "dateTime");
 	}
+    public void createOutputSchema() {
+        int [] offsets = new int[3];
+		offsets[0] =  0;
+		offsets[1] =  8;
+		offsets[2] = 16;
+		outputSchema = new TupleSchema (offsets, 24);
+
+		outputSchema.setAttributeType(0, PrimitiveType.LONG);
+		outputSchema.setAttributeType(1, PrimitiveType.LONG);
+		outputSchema.setAttributeType(2, PrimitiveType.LONG);
+
+		outputSchema.setAttributeName(0, "timestamp"); // timestamp
+		outputSchema.setAttributeName(1, "auction");
+		outputSchema.setAttributeName(2, "price");
+
+    }
     public QueryApplication getApplication() {
         // System.out.println("[DBG] Get Application: " + application);
         return application;
