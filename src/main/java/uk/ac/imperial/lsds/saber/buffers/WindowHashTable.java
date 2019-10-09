@@ -93,8 +93,8 @@ public class WindowHashTable {
 		tupleLength =
 			1 << (32 - Integer.numberOfLeadingZeros((keyLength + valueLength + 20) - 1));
 		slots = N / tupleLength;
-		System.out.println(String.format("[DBG] [WindowHashTable] tuple is %d bytes long; %d slots",
-                                         tupleLength, slots));
+		// System.out.println(String.format("[DBG] [WindowHashTable] tuple is %d bytes long; %d slots",
+        //                                  tupleLength, slots));
 	}
 
 	/* Linear scan of the hash table */

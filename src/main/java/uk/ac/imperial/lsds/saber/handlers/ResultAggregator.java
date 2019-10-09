@@ -92,13 +92,13 @@ public class ResultAggregator {
 		PartialResultSlot node = nodes[idx];
 		node.init (batch);
 
-        System.out.println("[DBG] partial-result-slot-node: " + node + ", nextToAggregate: " + nextToAggregate);
+        // System.out.println("[DBG] partial-result-slot-node: " + node + ", nextToAggregate: " + nextToAggregate);
 
 		slots.set(idx, AGGR);
 
 		/* Try aggregate slots pair-wise */
 		if (lock.tryAcquire()) {
-            System.out.println("[DBG] Try to aggregate slots pair-wise");
+            // System.out.println("[DBG] Try to aggregate slots pair-wise");
 
 			PartialResultSlot p;
 			PartialResultSlot q;
@@ -114,14 +114,14 @@ public class ResultAggregator {
 					break;
 
 				int stateQ = slots.get(q.index);
-                System.out.println("[DBG] stateP: " + stateP + ", stateQ: " + stateQ + ", q.index: " + q.index + ", nextToAggregate: " + nextToAggregate);
+                // System.out.println("[DBG] stateP: " + stateP + ", stateQ: " + stateQ + ", q.index: " + q.index + ", nextToAggregate: " + nextToAggregate);
 
 				if (stateQ > AGGR)
 					throw new IllegalStateException("error: inconsistent state in next result slot to aggregate");
 				if (stateQ < AGGR)
 					break;
 
-                System.out.println("[DBG] ResultAggregator, p: " + p + ", q: " + q);
+                // System.out.println("[DBG] ResultAggregator, p: " + p + ", q: " + q);
 
 				/* Both p and q nodes are ready to aggregate. */
 				p.aggregate(q, operator);
@@ -143,20 +143,20 @@ public class ResultAggregator {
 		/* Forward and free */
 
 		if (! semaphore.tryAcquire()) {
-            System.out.println("[DBG] Forward and Free");
+            // System.out.println("[DBG] Forward and Free");
 			return;
         }
 		/* No other thread can enter this section */
 
 		/* Is slot `nextToForward` occupied? */
 		if (! slots.compareAndSet(nextToForward, READY, BUSY)) {
-            System.out.println("[DBG] Is slot `nextToForward` occupied");
+            // System.out.println("[DBG] Is slot `nextToForward` occupied");
 
 			semaphore.release();
 			return ;
 		}
 
-        System.out.println("[DBG] nextToForward: " + nextToForward);
+        // System.out.println("[DBG] nextToForward: " + nextToForward);
 
 		boolean busy = true;
 		while (busy) {
@@ -168,7 +168,7 @@ public class ResultAggregator {
 			IQueryBuffer buffer = p.completeWindows.getBuffer();
 			byte [] arr = buffer.array();
 			int length = buffer.position();
-            System.out.println("[DBG] initial completeWindows for p: " + p);
+            // System.out.println("[DBG] initial completeWindows for p: " + p);
 
 
 			/* Forward results */
@@ -200,7 +200,7 @@ public class ResultAggregator {
 							p.latch = q;
 							slots.set(nextToForward, READY);
 							semaphore.release();
-                            System.out.println("[DBG] latch this query: " + q);
+                            // System.out.println("[DBG] latch this query: " + q);
 							return;
 						}
 					}

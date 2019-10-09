@@ -69,7 +69,7 @@ public class Task extends AbstractTask {
 			return 0;
 
 		ResultHandler handler = batch1.getQuery().getTaskDispatcher().getHandler();
-        System.out.println("[DBG] taskid: " + this.taskid + ", query: " + query.getName() + ", queryOperator: " + next.toString() + ", handler: " + handler);
+        // System.out.println("[DBG] taskid: " + this.taskid + ", query: " + query.getName() + ", queryOperator: " + next.toString() + ", handler: " + handler);
 		ResultCollector.forwardAndFree (handler, batch1);
 
 		WindowBatchFactory.free(batch1);

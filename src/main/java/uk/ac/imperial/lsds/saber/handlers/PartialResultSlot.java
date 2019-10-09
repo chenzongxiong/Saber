@@ -13,7 +13,7 @@ import uk.ac.imperial.lsds.saber.cql.operators.IAggregateOperator;
 
 public class PartialResultSlot {
 
-	private static final boolean debug = true;
+	private static final boolean debug = false;
 
 	int index;
 
@@ -147,7 +147,7 @@ public class PartialResultSlot {
 
 		int wid; /* Window index */
 		IQueryBuffer b1 = openingWindows.getBuffer();
-        System.out.println("[DBG] aggregateSingleKey, b1: " + b1);
+        // System.out.println("[DBG] aggregateSingleKey, b1: " + b1);
 
 		IQueryBuffer b2;
 

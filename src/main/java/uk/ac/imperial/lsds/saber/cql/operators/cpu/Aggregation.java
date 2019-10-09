@@ -28,7 +28,7 @@ import uk.ac.imperial.lsds.saber.tasks.IWindowAPI;
 
 public class Aggregation implements IOperatorCode, IAggregateOperator {
 
-	private static final boolean debug = true;
+	private static final boolean debug = false;
 	WindowDefinition windowDefinition;
 
 	private AggregationType [] aggregationTypes;
@@ -350,7 +350,7 @@ public class Aggregation implements IOperatorCode, IAggregateOperator {
 	}
 
 	public void processData (WindowBatch batch, IWindowAPI api) {
-        System.out.println("[DBG] Aggregation processData");
+        // System.out.println("[DBG] Aggregation processData");
 
 		batch.initPartialWindowPointers();
 

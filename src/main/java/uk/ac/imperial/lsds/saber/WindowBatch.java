@@ -384,7 +384,7 @@ public class WindowBatch {
 		if (this.streamStartPointer == 0)
 			offset = 0;
 
-        System.out.println("[DBG] Init Partial Range Based Window Pointers, tupleSize: " + tupleSize + ", paneSize: " + paneSize + ", streamStartPointer: " + streamStartPointer + ", startPointer: " + startPointer + ", streamEndPointer: " + streamEndPointer + ", endPointer: " + endPointer + ", _pid: " + _pid + ", pid: " + pid + ", numberOfPanes: " + windowDefinition.numberOfPanes() + ", offset: " + offset);
+        // System.out.println("[DBG] Init Partial Range Based Window Pointers, tupleSize: " + tupleSize + ", paneSize: " + paneSize + ", streamStartPointer: " + streamStartPointer + ", startPointer: " + startPointer + ", streamEndPointer: " + streamEndPointer + ", endPointer: " + endPointer + ", _pid: " + _pid + ", pid: " + pid + ", numberOfPanes: " + windowDefinition.numberOfPanes() + ", offset: " + offset);
 
 		for (streamPtr = streamStartPointer, bufferPtr = startPointer; streamPtr < streamEndPointer && bufferPtr < endPointer;
 			streamPtr += tupleSize, bufferPtr += tupleSize) {
@@ -405,7 +405,7 @@ public class WindowBatch {
 					if (pane >= 0 && pane % windowDefinition.panesPerSlide() == 0) {
 
 						wid = pane / windowDefinition.panesPerSlide();
-                        System.out.println("[DBG-1] _pid: " + _pid + ", pid: " + pid + ", pid_: " + pid_ + ", pane: " + pane + ", panesPerSlide: " + windowDefinition.panesPerSlide() + ", offset: " + offset + ", wid: " + wid + ", numberOfClosingWindows: " + numberOfClosingWindows + ", streamStartPointer: " + streamStartPointer + ", lastWindowIndex: " + lastWindowIndex);
+                        // System.out.println("[DBG-1] _pid: " + _pid + ", pid: " + pid + ", pid_: " + pid_ + ", pane: " + pane + ", panesPerSlide: " + windowDefinition.panesPerSlide() + ", offset: " + offset + ", wid: " + wid + ", numberOfClosingWindows: " + numberOfClosingWindows + ", streamStartPointer: " + streamStartPointer + ", lastWindowIndex: " + lastWindowIndex);
 						if (wid >= 0) {
 
 							/* Calculate offset */
@@ -433,7 +433,7 @@ public class WindowBatch {
 
 							int index = (int) (wid - offset);
 							if (index < 0) {
-								System.err.println("error: failed to close window " + wid);
+                                System.err.println("error: failed to close window " + wid);
 								System.exit(1);
 							}
 							/* Store end pointer */
@@ -459,7 +459,7 @@ public class WindowBatch {
 					if (pid_ % windowDefinition.panesPerSlide() == 0) {
 
 						wid = pid_ / windowDefinition.panesPerSlide();
-                        System.out.println("[DBG-2] _pid: " + _pid + ", pid: " + pid + ", pid_: " + pid_ + ", pane: " + pane + ", panesPerSlide: " + windowDefinition.panesPerSlide() + ", offset: " + offset + ", wid: " + wid);
+                        // System.out.println("[DBG-2] _pid: " + _pid + ", pid: " + pid + ", pid_: " + pid_ + ", pane: " + pane + ", panesPerSlide: " + windowDefinition.panesPerSlide() + ", offset: " + offset + ", wid: " + wid);
 						/* Calculate offset */
 						if (offset < 0) {
 							offset = wid;
@@ -496,7 +496,7 @@ public class WindowBatch {
 			/* Increment last window index */
 			lastWindowIndex ++;
 		} else if (numberOfOpeningWindows == 0 && numberOfClosingWindows == 0) {
-            System.out.println("[DBG] There are only pending windows in the batch");
+            // System.out.println("[DBG] There are only pending windows in the batch");
 			/* There are only pending windows in the batch */
 			lastWindowIndex = 0;
 		}

@@ -51,7 +51,7 @@ public class ResultCollector {
 			int freePtr2,
 			int mark
 		) {
-        System.out.println("[DBG] forward and free task: " + taskid);
+        // System.out.println("[DBG] forward and free task: " + taskid);
 		if (taskid < 0) { /* Invalid task id */
 			return;
 		}
