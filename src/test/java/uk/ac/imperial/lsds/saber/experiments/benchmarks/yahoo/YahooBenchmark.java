@@ -55,7 +55,7 @@ public class YahooBenchmark extends InputStream {
     }
 
 	public YahooBenchmark (QueryConf queryConf, boolean isExecuted, ByteBuffer campaigns, boolean isV2, PAPIHardwareSampler [] papiSamplers) {
-		adsPerCampaign = 10;
+		adsPerCampaign = 1;
 		this.isV2 = isV2;
         if (papiSamplers != null) {
             this.taskWorkerPapiSamplers = new PAPIHardwareSampler[SystemConf.THREADS];

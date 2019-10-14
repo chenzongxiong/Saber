@@ -93,8 +93,8 @@ public class YahooBenchmarkApp {
 			SystemConf.GPU = true;
 		SystemConf.HYBRID = SystemConf.CPU && SystemConf.GPU;
 		SystemConf.THREADS = numberOfThreads;
-		// SystemConf.LATENCY_ON = false;
-        SystemConf.LATENCY_ON = true;
+        SystemConf.LATENCY_ON = false;
+        // SystemConf.LATENCY_ON = true;
 		/* Initialize the Operators of the Benchmark */
         PAPIHardwareSampler [] papiSamplers = null;
         if (usePAPI) {
@@ -116,7 +116,7 @@ public class YahooBenchmarkApp {
 
 
 		Generator generator = new Generator (bufferSize, numberOfGeneratorThreads, adsPerCampaign, ads, coreToBind, isV2);
-        long timeLimit = System.currentTimeMillis() + 1 * 10000;
+        long timeLimit = System.currentTimeMillis() + 1 * 100000;
 
 		while (true) {
 			if (timeLimit <= System.currentTimeMillis() ||
