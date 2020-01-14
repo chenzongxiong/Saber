@@ -16,14 +16,16 @@ import uk.ac.imperial.lsds.saber.TupleSchema.PrimitiveType;
 import uk.ac.imperial.lsds.saber.WindowDefinition;
 import uk.ac.imperial.lsds.saber.WindowDefinition.WindowType;
 import uk.ac.imperial.lsds.saber.cql.expressions.ints.IntColumnReference;
+import uk.ac.imperial.lsds.saber.cql.expressions.longs.LongColumnReference;
 import uk.ac.imperial.lsds.saber.cql.operators.IOperatorCode;
 import uk.ac.imperial.lsds.saber.cql.operators.cpu.ThetaJoin;
 import uk.ac.imperial.lsds.saber.cql.operators.gpu.ThetaJoinKernel;
 import uk.ac.imperial.lsds.saber.cql.predicates.ANDPredicate;
 import uk.ac.imperial.lsds.saber.cql.predicates.IPredicate;
 import uk.ac.imperial.lsds.saber.cql.predicates.IntComparisonPredicate;
+import uk.ac.imperial.lsds.saber.cql.predicates.LongComparisonPredicate;
 
-public class TestThetaJoin {
+public class TestThetaJoin2 {
 
 	public static final String usage = "usage: TestThetaJoin"
 	+ " [ --batch-size ]"
@@ -50,18 +52,18 @@ public class TestThetaJoin {
 		/* First stream */
 		WindowType windowType1 = WindowType.ROW_BASED;
 
-		int windowSize1 = 1024;
-		int windowSlide1 = 1024;
+		int windowSize1 = 1000;
+		int windowSlide1 = 1000;
 
-		int numberOfAttributes1 = 6;
+		int numberOfAttributes1 = 3;
 
 		/* Second stream */
 		WindowType windowType2 = WindowType.ROW_BASED;
 
-		int windowSize2 = 1024;
-		int windowSlide2 = 1024;
+		int windowSize2 = 1000;
+		int windowSlide2 = 1000;
 
-		int numberOfAttributes2 = 6;
+		int numberOfAttributes2 = 3;
 
 		int selectivity = 1;
 		int numberOfComparisons = 0;
@@ -134,7 +136,7 @@ public class TestThetaJoin {
 
 		for (i = 1; i < numberOfAttributes1 + 1; i++) {
 			offsets1[i] = tupleSize1;
-			tupleSize1 += 4;
+			tupleSize1 += 8;
 		}
 
 		ITupleSchema schema1 = new TupleSchema (offsets1, tupleSize1);
@@ -142,7 +144,7 @@ public class TestThetaJoin {
 		schema1.setAttributeType(0,  PrimitiveType.LONG);
 
 		for (i = 1; i < numberOfAttributes1 + 1; i++) {
-			schema1.setAttributeType(i, PrimitiveType.INT);
+			schema1.setAttributeType(i, PrimitiveType.LONG);
 		}
 
 		/* tupleSize1 equals schema1.getTupleSize() */
@@ -161,7 +163,7 @@ public class TestThetaJoin {
 
 		for (i = 1; i < numberOfAttributes2 + 1; i++) {
 			offsets2[i] = tupleSize2;
-			tupleSize2 += 4;
+			tupleSize2 += 8;
 		}
 
 		ITupleSchema schema2 = new TupleSchema (offsets2, tupleSize2);
@@ -169,7 +171,7 @@ public class TestThetaJoin {
 		schema2.setAttributeType(0,  PrimitiveType.LONG);
 
 		for (i = 1; i < numberOfAttributes2 + 1; i++) {
-			schema2.setAttributeType(i, PrimitiveType.INT);
+			schema2.setAttributeType(i, PrimitiveType.LONG);
 		}
 
 		/* tupleSize2 equals schema2.getTupleSize() */
@@ -183,7 +185,7 @@ public class TestThetaJoin {
 		if (selectivity > 0 && numberOfComparisons == 0) {
 
 			predicate =
-				new IntComparisonPredicate(IntComparisonPredicate.LESS_OP, new IntColumnReference(1), new IntColumnReference(1));
+				new LongComparisonPredicate(LongComparisonPredicate.EQUAL_OP, new LongColumnReference(2), new LongColumnReference(2));
 
 		} else
 		if (selectivity == 0 && numberOfComparisons > 0) {
@@ -230,30 +232,35 @@ public class TestThetaJoin {
 		ByteBuffer b2 = ByteBuffer.wrap (data2);
 
 		/* Fill the first buffer buffer */
-		int value = 0;
+		long value = 0;
+        long min = 0;
+        long maxAuction = 100;
+        long maxPerson = 100000;
+        long maxPrice = 100000;
+
 		while (b1.hasRemaining()) {
 			b1.putLong (1);
 			if (selectivity > 0) {
-				b1.putInt(value);
-				value = (value + 1) % 100;
-				for (i = 1; i < numberOfAttributes1; i ++)
-					b1.putInt(1);
-			} else {
-				for (i = 0; i < numberOfAttributes1; i ++)
-					b1.putInt(1);
-			}
+
+                long auction = (long)((Math.random() * ((maxAuction - min) + 1)) + min);
+                long person = (long)((Math.random() * ((maxPerson - min) + 1)) + min);
+                long price = (long)((Math.random() * ((maxPrice - min) + 1)) + min);
+                b1.putLong(auction);
+                b1.putLong(person);
+                b1.putLong(price);
+            }
 		}
 
 		/* Fill the second buffer */
 		while (b2.hasRemaining()) {
-			b2.putLong (1);
+            b2.putLong (1);
 			if (selectivity > 0) {
-				b2.putInt(selectivity);
-				for (i = 1; i < numberOfAttributes2; i ++)
-					b2.putInt(1);
-			} else {
-				for (i = 0; i < numberOfAttributes2; i ++)
-					b2.putInt(1);
+                long auction = (long)((Math.random() * ((maxAuction - min) + 1)) + min);
+                long person = (long)((Math.random() * ((maxPerson - min) + 1)) + min);
+                long price = (long)((Math.random() * ((maxPrice - min) + 1)) + min);
+                b2.putLong(auction);
+                b2.putLong(person);
+                b2.putLong(price);
 			}
 		}
 
@@ -278,4 +285,5 @@ public class TestThetaJoin {
 			System.exit(1);
 		}
 	}
+
 }

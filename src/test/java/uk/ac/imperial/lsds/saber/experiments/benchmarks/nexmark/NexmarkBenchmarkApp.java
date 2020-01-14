@@ -23,18 +23,18 @@ public class NexmarkBenchmarkApp {
 	public static final String usage = "usage: NexmarkBenchmarkApp with in-memory generation";
 
 	public static void main (String [] args) throws InterruptedException {
-
+        boolean streamJoin = false;
         NexmarkBenchmark benchmarkQuery = null;
 		int numberOfThreads = 1;
-		int batchSize = 4 * 1048576;
+		// int batchSize = 4 * 1048576;
+        int batchSize = 1048576;
 		String executionMode = "cpu";
-		int circularBufferSize = 128 * 1 * 1048576/2 * 16;
-		int unboundedBufferSize = 4 * 1048576;
+		int circularBufferSize = 128 * 1 * 1048576/2;
+		int unboundedBufferSize = 4 * 1048576 * 16 * 8 * 2;
 		int hashTableSize = 2*64*128*8;
 		int partialWindows = 2;
-		int slots = 1 * 128 * 1024*32;
-
-		boolean isV2 = false; // change the tuple size to half if set true
+		int slots = 1 * 128 * 1024;
+        // int slots = 128;
 
         boolean usePAPI = false;
         String ICACHE_MISS_PRESET = "PAPI_L1_ICM,PAPI_L2_ICM";
@@ -86,19 +86,19 @@ public class NexmarkBenchmarkApp {
 
 		// Set SABER's configuration
 		QueryConf queryConf = new QueryConf (batchSize);
-		SystemConf.CIRCULAR_BUFFER_SIZE = circularBufferSize;
-		SystemConf.UNBOUNDED_BUFFER_SIZE = 	unboundedBufferSize;
-		SystemConf.HASH_TABLE_SIZE = hashTableSize;
-		SystemConf.PARTIAL_WINDOWS = partialWindows;
-		SystemConf.SLOTS = slots;
-		SystemConf.SWITCH_THRESHOLD = 10;
-		SystemConf.THROUGHPUT_MONITOR_INTERVAL = 1000L;
-		SystemConf.SCHEDULING_POLICY = SystemConf.SchedulingPolicy.HLS;
-		if (executionMode.toLowerCase().contains("cpu") || executionMode.toLowerCase().contains("hybrid"))
-			SystemConf.CPU = true;
-		if (executionMode.toLowerCase().contains("gpu") || executionMode.toLowerCase().contains("hybrid"))
-			SystemConf.GPU = true;
-		SystemConf.HYBRID = SystemConf.CPU && SystemConf.GPU;
+		// SystemConf.CIRCULAR_BUFFER_SIZE = circularBufferSize;
+		// SystemConf.UNBOUNDED_BUFFER_SIZE = 	unboundedBufferSize;
+		// SystemConf.HASH_TABLE_SIZE = hashTableSize;
+		// SystemConf.PARTIAL_WINDOWS = partialWindows;
+		// SystemConf.SLOTS = slots;
+		// SystemConf.SWITCH_THRESHOLD = 10;
+		// SystemConf.THROUGHPUT_MONITOR_INTERVAL = 1000L;
+		// SystemConf.SCHEDULING_POLICY = SystemConf.SchedulingPolicy.HLS;
+		// if (executionMode.toLowerCase().contains("cpu") || executionMode.toLowerCase().contains("hybrid"))
+		// 	SystemConf.CPU = true;
+		// if (executionMode.toLowerCase().contains("gpu") || executionMode.toLowerCase().contains("hybrid"))
+		// 	SystemConf.GPU = true;
+		// SystemConf.HYBRID = SystemConf.CPU && SystemConf.GPU;
 		SystemConf.THREADS = numberOfThreads;
 		SystemConf.LATENCY_ON = false;
         // SystemConf.LATENCY_ON = true;
@@ -115,18 +115,22 @@ public class NexmarkBenchmarkApp {
 		/* Generate input stream */
 		int numberOfGeneratorThreads = 2;
 
-		int bufferSize = 4 * 131072;
+		// int bufferSize = 4 * 131072;
+        int bufferSize = 8196;
 		int coreToBind = 3; //numberOfThreads + 1;
 
-
-        Generator generator = new Generator (bufferSize, numberOfGeneratorThreads, coreToBind);
+        Generator stream1 = new Generator (bufferSize, numberOfGeneratorThreads, coreToBind);
+        Generator stream2 = null;
+        if (streamJoin == true) {
+            stream2 = new Generator (bufferSize, numberOfGeneratorThreads, coreToBind + 2);
+        }
 
         long timeLimit = System.currentTimeMillis() + 10 * 10000;
 
 		while (true) {
 			if (timeLimit <= System.currentTimeMillis() ||
-                (usePAPI && generator.totalGeneratedTuples >= TUPLES_TO_MEASURE)) {
-                System.out.println("Total Generated Tuples is: " + generator.totalGeneratedTuples);
+                (usePAPI && stream1.totalGeneratedTuples >= TUPLES_TO_MEASURE)) {
+                System.out.println("Total Generated Tuples is: " + stream1.totalGeneratedTuples);
                 printPapiSamplers(papiSamplers);
                 if (SystemConf.LATENCY_ON) {
                     ((NexmarkBenchmark) benchmarkQuery).stopLatencyMonitor();
@@ -135,9 +139,19 @@ public class NexmarkBenchmarkApp {
 
 				System.exit(0);
 			}
-			GeneratedBuffer b = generator.getNext();
-            benchmarkQuery.getApplication().processData(b.getBuffer().array());
-			b.unlock();
+            if (streamJoin == false) {
+                GeneratedBuffer s1 = stream1.getNext();
+                benchmarkQuery.getApplication().processData(s1.getBuffer().array());
+                s1.unlock();
+            } else {
+                // Stream Join
+                GeneratedBuffer s1 = stream1.getNext();
+                GeneratedBuffer s2 = stream2.getNext();
+                benchmarkQuery.getApplication().processFirstStream(s1.getBuffer().array());
+                benchmarkQuery.getApplication().processSecondStream(s2.getBuffer().array());
+                s1.unlock();
+                s2.unlock();
+            }
 		}
 	}
 

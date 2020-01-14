@@ -24,16 +24,17 @@ import uk.ac.imperial.lsds.saber.cql.operators.AggregationType;
 import uk.ac.imperial.lsds.saber.cql.operators.IAggregateOperator;
 import uk.ac.imperial.lsds.saber.cql.operators.IOperatorCode;
 import uk.ac.imperial.lsds.saber.cql.operators.cpu.Aggregation;
+import uk.ac.imperial.lsds.saber.cql.operators.cpu.ThetaJoin;
 import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp;
 import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp1;
 import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp2;
 import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp3;
 import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp4;
+import uk.ac.imperial.lsds.saber.cql.operators.udfs.NexmarkOp8;
 import uk.ac.imperial.lsds.saber.cql.predicates.IPredicate;
 import uk.ac.imperial.lsds.saber.cql.predicates.IntComparisonPredicate;
 import uk.ac.imperial.lsds.saber.cql.predicates.LongComparisonPredicate;
 import uk.ac.imperial.lsds.saber.cql.predicates.LongLongComparisonPredicate;
-import uk.ac.imperial.lsds.saber.experiments.benchmarks.yahoo.utils.CampaignGenerator;
 import uk.ac.imperial.lsds.saber.processors.HashMap;
 import uk.ac.imperial.lsds.saber.hardware.papi.PAPIHardwareSampler;
 import uk.ac.imperial.lsds.saber.LatencyMonitor;
@@ -67,17 +68,18 @@ public class NexmarkBenchmark {
 
         createSchema();
         createOutputSchema();
-        createQ1(queryConf);
+        // createQ1(queryConf);
         // createQ2(queryConf);
-        // createQ3(queryConf);
+        createQ3(queryConf);
         // createQ4(queryConf);
+        // createQ8(queryConf);
 	}
 
     public void createApplication(QueryConf queryConf) {
         System.out.println("[DBG] Create Application");
         long timestampReference = System.nanoTime();
-        int windowSize = 2000;
-		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
+        int windowSize = 500;
+		WindowDefinition windowDefinition = new WindowDefinition (WindowType.ROW_BASED, windowSize, windowSize);
 
         // ITupleSchema inputSchema = schema;
 		Set<Query> queries = new HashSet<Query>();
@@ -131,6 +133,11 @@ public class NexmarkBenchmark {
     }
 
     public void createQ1(QueryConf queryConf) {
+// stream
+//     .map("record.price = (record.price * 89) / 100;")
+//     .select({"auction", "price"})
+//     .execute();
+
         System.out.println("[DBG] Create Application");
         long timestampReference = System.nanoTime();
         int windowSize = 2000;
@@ -158,6 +165,11 @@ public class NexmarkBenchmark {
     }
 
     public void createQ2(QueryConf queryConf) {
+// stream
+//     .filter("auction" == 1007L || "auction" == 2001L || "auction" == 2019L || "auction" == 2087L)
+//     .select({"auction", "price"})
+//     .execute();
+
         System.out.println("[DBG] Create Application");
         long timestampReference = System.nanoTime();
         int windowSize = 2000;
@@ -185,10 +197,16 @@ public class NexmarkBenchmark {
     }
 
     public void createQ3(QueryConf queryConf) {
-
+// Stream
+//     .groupBy("auction")
+//     .window(SlidingProcessingTimeWindow(windowSizeSec, windowPeriodSec))
+//     .aggregate(Count())
+//     .window(SlidingProcessingTimeWindow(windowSizeSec, windowPeriodSec))
+//     .aggregate(Max("count"))
+//     .execute();
         System.out.println("[DBG] Create Application");
         long timestampReference = System.nanoTime();
-        int windowSize = 2000;
+        int windowSize = 100;
 		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
 
 		Set<Query> queries = new HashSet<Query>();
@@ -268,6 +286,10 @@ public class NexmarkBenchmark {
     }
 
     public void createQ4(QueryConf queryConf) {
+// Stream
+//     .window(SlidingProcessingTimeWindow(windowSizeSec, windowPeriodSec))
+//     .aggregate(Max("price"))
+//     .execute();
 
         System.out.println("[DBG] Create Application");
         long timestampReference = System.nanoTime();
@@ -349,6 +371,78 @@ public class NexmarkBenchmark {
         }
     }
 
+    public void createQ8(QueryConf queryConf) {
+        // SELECT Rstream(P.id, P.name, A.reserve)
+        //     FROM Person [RANGE 12 HOUR] P, Auction [RANGE 12 HOUR] A
+        //     WHERE P.id = A.seller;
+
+        System.out.println("[DBG] Create Application");
+        long timestampReference = System.nanoTime();
+        // int windowSize = 2000;
+        int windowSize = 50;
+		WindowDefinition windowDefinition = new WindowDefinition (WindowType.RANGE_BASED, windowSize, windowSize);
+
+
+        // predicates[i] =
+		// 			new IntComparisonPredicate(IntComparisonPredicate.EQUAL_OP, new IntColumnReference(1), new IntColumnReference(1));
+
+		Set<Query> queries = new HashSet<Query>();
+
+        IPredicate predicate = null;
+		// IPredicate predicate = new LongComparisonPredicate
+        //     (IntComparisonPredicate.EQUAL_OP, new LongColumnReference(2), new LongColumnReference(1));
+
+
+		IOperatorCode cpuCode = new ThetaJoin (inputSchema, inputSchema, predicate);
+		// IOperatorCode cpuCode = new NexmarkOp8(inputSchema, windowDefinition, outputSchema);
+		QueryOperator operator;
+		operator = new QueryOperator(cpuCode, null);
+		Set<QueryOperator> operators = new HashSet<QueryOperator>();
+		operators.add(operator);
+        Query query1 = new Query(0,
+                                 operators,
+                                 inputSchema, // first schema
+                                 windowDefinition, // first window
+                                 inputSchema,      // second stream
+                                 windowDefinition, // second window
+                                 queryConf,
+                                 timestampReference);
+        ////////////////////////////////////////////////////////////////////////////////
+		// AggregationType [] aggregationTypes2 = new AggregationType [1];
+		// aggregationTypes2[0] = AggregationType.MAX;
+		// FloatColumnReference[] aggregationAttributes2 = new FloatColumnReference [1];
+		// aggregationAttributes2[0] = new FloatColumnReference(3); // MAX(price)
+        // IOperatorCode cpuCode2 = new Aggregation(windowDefinition,
+        //                                          aggregationTypes2,
+        //                                          aggregationAttributes2,
+        //                                          null);
+        // QueryOperator operator2 = new QueryOperator(cpuCode2, null);
+		// Set<QueryOperator> operators2 = new HashSet<QueryOperator>();
+		// operators2.add(operator2);
+        // Query query2 = new Query(0,
+        //                          operators2,
+        //                          inputSchema,
+        //                          windowDefinition,
+        //                          null,
+        //                          null,
+        //                          queryConf,
+        //                          timestampReference);
+
+        // queries.add(query0);
+        queries.add(query1);
+        // queries.add(query2);
+        // query1.connectTo(query2);
+        // query0.connectTo(query1);
+
+        application = new QueryApplication(queries);
+        application.setup();
+
+        if (SystemConf.CPU) {
+            // query1.setAggregateOperator((IAggregateOperator) cpuCode);
+            // query2.setAggregateOperator((IAggregateOperator) cpuCode2);
+        }
+
+    }
     public void stopLatencyMonitor() {
         // this.latencyMonitor1.stop();
         // this.latencyMonitor2.stop();

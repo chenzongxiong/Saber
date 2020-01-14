@@ -29,6 +29,7 @@ public class GeneratorWorker implements Runnable {
 		this.id = id;
 
         this.tuplesPerBuffer = (endPos + 1 - startPos) / 64;
+        System.out.println("[DBG] this.tuplesPerBuffer: " + this.tuplesPerBuffer + ", startPos: " + startPos + ", endPos: " + endPos);
 	}
 
 	/*
@@ -79,17 +80,17 @@ public class GeneratorWorker implements Runnable {
 		ByteBuffer buffer = generatedBuffer.getBuffer().duplicate();
 		/* Fill the buffer */
 
-		if (isFirstTime!=0 ) {
+		if (isFirstTime != 0) {
 
 			buffer.position(startPos);
 			while (buffer.position()  < endPos) {
                 // long auction = generateAuction(0, 10);
-                long person = generatePerson(0, 1000000);
-                long price = generatePrice(0, 1000000);
+                // long person = generatePerson(0, 1000000);
+                // long price = generatePrice(0, 1000000);
 
-                long auction = 1;
-                // long person = 2;
-                // long price = 3;
+                long auction = 1007L;
+                long person = 2;
+                long price = 3;
 
 			    buffer.putLong(timestamp);
                 buffer.putLong(auction);
@@ -97,7 +98,10 @@ public class GeneratorWorker implements Runnable {
                 buffer.putLong(price);
                 buffer.putLong(timestamp);
 
+                // System.out.println("[DBG] buffer.position: " + buffer.position());
+
                 buffer.position(buffer.position() + 24);
+                // System.out.println("[DBG] buffer.position: " + buffer.position());
 			}
 			isFirstTime --;
 		} else {

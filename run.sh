@@ -46,7 +46,8 @@ JCP="${JCP}:${GUAVA}"
 JCP="${JCP}:${TESTS}"
 
 # OPTS="-Xloggc:test-gc.out"
-OPTS="-server -XX:+UseConcMarkSweepGC -XX:NewRatio=2 -XX:SurvivorRatio=16 -Xms16g -Xmx1024g"
+# OPTS="-server -XX:+UseConcMarkSweepGC -XX:NewRatio=2 -XX:SurvivorRatio=16 -Xms16g -Xmx1024g"
+OPTS="-server -XX:+UseConcMarkSweepGC -XX:NewRatio=2 -XX:SurvivorRatio=16 -Xms16g -Xmx16g"
 
 if [ $# -lt 1 ]; then
         echo "error: unspecified application class"

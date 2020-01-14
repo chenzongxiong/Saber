@@ -39,7 +39,7 @@ public class SystemConf {
 
 	public static int RELATIONAL_TABLE_BUFFER_SIZE = 1048576;
 
-	public static int UNBOUNDED_BUFFER_SIZE = 1048576;
+	public static int UNBOUNDED_BUFFER_SIZE = 1048576 * 16;
 
 	public static int THREADS = 1;
 

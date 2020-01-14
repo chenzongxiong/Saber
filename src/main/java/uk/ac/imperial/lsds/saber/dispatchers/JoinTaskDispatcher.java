@@ -202,10 +202,10 @@ public class JoinTaskDispatcher implements ITaskDispatcher {
 
 			} else
 			if (firstWindow.isRangeBased()) {
-
+                // only consider range based window
 				firstNextTime = getTimestamp (firstBuffer, firstNextIndex);
 				firstEndTime  = getTimestamp (firstBuffer,  firstEndIndex);
-
+                // System.out.println("FirstNextTime: " + firstNextTime + ", firstEndTime: " + firstEndTime);
 				while ((firstNextTime + firstWindow.getSize()) < firstEndTime) {
 
 					firstNextIndex += firstTupleSize;
@@ -220,6 +220,8 @@ public class JoinTaskDispatcher implements ITaskDispatcher {
 			int size =
 					( firstToProcessCount *  firstTupleSize) +
 					(secondToProcessCount * secondTupleSize);
+
+            // System.out.println("FirstToProcessCount: " + firstToProcessCount + ", SecondToProcessCount: " + secondToProcessCount + ", firstTupleSize: " + firstTupleSize + ", secondTupleSize: " + secondTupleSize + ", size: " + size + ", firstStartIndex: " + firstStartIndex + ", firstEndIndex: " + firstEndIndex + ", firstNextIndex: " + firstNextIndex);
 
 			if (size >= batchSize)
 				createTask (true);
@@ -268,6 +270,7 @@ public class JoinTaskDispatcher implements ITaskDispatcher {
 					( firstToProcessCount *  firstTupleSize) +
 					(secondToProcessCount * secondTupleSize);
 
+            // System.out.println("FirstToProcessCount: " + firstToProcessCount + ", SecondToProcessCount: " + secondToProcessCount + ", firstTupleSize: " + firstTupleSize + ", secondTupleSize: " + secondTupleSize + ", size: " + size);
 			if (size >= this.batchSize)
 				createTask (false);
 		}
@@ -291,7 +294,7 @@ public class JoinTaskDispatcher implements ITaskDispatcher {
 		}
 		*/
 		// if (taskid > 6)
-		//	return;
+		// 	return;
 
 		int  firstFreePointer = Integer.MIN_VALUE;
 		int secondFreePointer = Integer.MIN_VALUE;
